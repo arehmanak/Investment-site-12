@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethical Investing · Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-deep:    #080d16;
+      --bg-card:    #0e1624;
+      --bg-card-2:  #131d2e;
+      --gold:       #c9a84c;
+      --gold-light: #e2c87a;
+      --green:      #1a7a4a;
+      --green-light:#22a363;
+      --text-main:  #eae6da;
+      --text-muted: #8a9bb4;
+      --border:     rgba(201,168,76,0.18);
+      --border-soft:rgba(255,255,255,0.07);
+      --radius:     14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.7;
+      font-size: 16px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ambient background glows + dot grid */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% -5%, rgba(201,168,76,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 90% 100%, rgba(26,122,74,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 40% at 5% 90%, rgba(201,168,76,0.05) 0%, transparent 60%);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none; z-index: 0;
+      mask-image: radial-gradient(ellipse 75% 75% at 50% 40%, black 10%, transparent 85%);
+    }
+
+    .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 5%; }
+
+    /* ── HEADER ──────────────────────────── */
+    header { text-align: center; padding: 74px 5% 18px; position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--green-light);
+      background: rgba(26,122,74,0.15);
+      border: 1px solid rgba(26,122,74,0.3);
+      padding: 5px 16px; border-radius: 50px; margin-bottom: 22px;
+    }
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.3rem, 6vw, 4rem);
+      font-weight: 600; line-height: 1.12; color: var(--text-main);
+      margin-bottom: 16px;
+    }
+    header h1 em { font-style: normal; color: var(--gold); }
+    header p {
+      max-width: 600px; margin: 0 auto;
+      color: var(--text-muted); font-size: 1.02rem;
+    }
+
+    /* ── TILE GRID ───────────────────────── */
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 20px;
+      padding: 40px 0 24px;
+    }
+
+    .tile {
+      position: relative;
+      display: flex; flex-direction: column;
+      background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-card-2) 100%);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 28px 24px 24px;
+      text-decoration: none; color: inherit;
+      overflow: hidden;
+      transform: translateY(0) scale(1);
+      transition: transform 0.32s cubic-bezier(.2,.8,.2,1), box-shadow 0.32s ease, border-color 0.32s ease;
+      will-change: transform;
+      animation: rise 0.6s cubic-bezier(.2,.8,.2,1) both;
+    }
+    /* top accent bar */
+    .tile::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0; transition: opacity 0.32s ease;
+    }
+
+    .tile:hover, .tile.is-popped {
+      transform: translateY(-12px) scale(1.045);
+      box-shadow: 0 26px 55px -14px rgba(0,0,0,0.75), 0 0 0 1px rgba(201,168,76,0.55);
+      border-color: var(--gold);
+      z-index: 3;
+    }
+    .tile:hover::before, .tile.is-popped::before { opacity: 1; }
+
+    .tile-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; margin-bottom: 18px;
+      transition: transform 0.32s cubic-bezier(.2,.8,.2,1), background 0.32s;
+    }
+    .tile:hover .tile-icon, .tile.is-popped .tile-icon {
+      transform: scale(1.08) rotate(-3deg);
+      background: rgba(201,168,76,0.18);
+    }
+
+    .tile h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--text-main); line-height: 1.2; margin-bottom: 10px;
+    }
+
+    /* description: revealed (expands) on pop */
+    .tile-desc {
+      font-size: 0.88rem; color: var(--text-muted);
+      max-height: 0; opacity: 0; overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.35s ease, margin 0.35s ease;
+      margin-bottom: 0;
+    }
+    .tile:hover .tile-desc, .tile.is-popped .tile-desc {
+      max-height: 130px; opacity: 1; margin-bottom: 16px;
+    }
+
+    .tile-cta {
+      margin-top: auto;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tile-cta.go    { color: var(--gold); }
+    .tile-cta.soon  { color: var(--text-muted); }
+    .tile-cta .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; flex-shrink: 0;
+    }
+
+    /* primary (live) tile accent */
+    .tile.primary {
+      border-color: rgba(201,168,76,0.4);
+      background: linear-gradient(160deg, #12182a 0%, #161f33 100%);
+    }
+    .tile.primary::before { opacity: 1; }
+    .tile.primary .tile-icon { background: rgba(201,168,76,0.16); }
+
+    /* always show a hint line under title for the live tile even before pop */
+    .tile-hint {
+      font-size: 0.82rem; color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    /* stagger entrance */
+    .tile:nth-child(1) { animation-delay: 0.02s; }
+    .tile:nth-child(2) { animation-delay: 0.07s; }
+    .tile:nth-child(3) { animation-delay: 0.12s; }
+    .tile:nth-child(4) { animation-delay: 0.17s; }
+    .tile:nth-child(5) { animation-delay: 0.22s; }
+    .tile:nth-child(6) { animation-delay: 0.27s; }
+    .tile:nth-child(7) { animation-delay: 0.32s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── FOOTER ──────────────────────────── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border-soft);
+      margin-top: 36px; padding: 26px 5% 40px;
+      text-align: center;
+    }
+    footer p { font-size: 0.78rem; color: var(--text-muted); max-width: 720px; margin: 0 auto 6px; line-height: 1.7; }
+    footer .tip { font-size: 0.74rem; color: rgba(138,155,180,0.7); }
+    .site-disclaimer { max-width: 760px; margin: 0 auto 18px; padding: 16px 20px; background: rgba(201,168,76,0.05); border: 1px solid var(--border); border-radius: 10px; font-size: 0.76rem; color: var(--text-muted); line-height: 1.7; text-align: left; }
+    .site-disclaimer .d-head { display: block; color: var(--gold); font-weight: 700; font-size: 0.82rem; margin-bottom: 6px; }
+    .site-disclaimer strong { color: var(--text-main); }
+
+    @media (max-width: 600px) {
+      header { padding: 52px 5% 8px; }
+      .tiles { gap: 16px; padding: 30px 0 18px; }
+      .tile { padding: 24px 20px 20px; }
+      /* on small screens reveal descriptions by default for readability */
+      .tile-desc { max-height: 130px; opacity: 1; margin-bottom: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tile { animation: none; }
+      .tile, .tile-icon, .tile-desc { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="index-ml.html" aria-label="മലയാളം" style="position:absolute;top:16px;right:18px;z-index:20;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;font-size:0.8rem;font-weight:700;color:var(--gold);border:1px solid var(--border);border-radius:50px;background:rgba(8,13,22,0.6);backdrop-filter:blur(6px);text-decoration:none;">🌐 മലയാളം</a>
+
+  <header>
+    <div class="eyebrow">For Gulf-based NRI Investors</div>
+    <h1>Ethical Investing — <em>Made Clear</em></h1>
+    <p>Explore Shariah-conscious ways to invest, learn the principles behind ethical investing, and find answers — all in one place. Pick a tile to begin.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="tiles">
+
+      <!-- 1. India (LIVE) -->
+      <a href="main.html" class="tile primary">
+        <div class="tile-icon">🇮🇳</div>
+        <h3>Ethical Investing in India</h3>
+        <div class="tile-hint">Stocks, mutual funds, ETFs, GIFT City &amp; more — the full India guide.</div>
+        <div class="tile-desc">A complete walkthrough of Shariah-conscious investment options in India: direct equities, ethical mutual funds, other funds, business investments, platforms, risks, and a sample portfolio.</div>
+        <span class="tile-cta go"><span class="dot"></span>Explore →</span>
+      </a>
+
+      <!-- 2. Other Markets -->
+      <a href="#" class="tile">
+        <div class="tile-icon">🌍</div>
+        <h3>Ethical Investing in Other Markets</h3>
+        <div class="tile-desc">Shariah-conscious investing beyond India — global equities, US-listed Islamic ETFs, GCC markets, and international funds.</div>
+        <span class="tile-cta soon"><span class="dot"></span>Coming soon</span>
+      </a>
+
+      <!-- 3. Learn -->
+      <a href="learn.html" class="tile">
+        <div class="tile-icon">📚</div>
+        <h3>Learn</h3>
+        <div class="tile-desc">Foundational guides and explainers — from how mutual funds work to SIPs, risk, diversification, and building a long-term plan.</div>
+        <span class="tile-cta go"><span class="dot"></span>Watch &amp; learn →</span>
+      </a>
+
+      <!-- 4. Ask Your Questions -->
+      <a href="ask.html" class="tile">
+        <div class="tile-icon">💬</div>
+        <h3>Ask Your Questions</h3>
+        <div class="tile-desc">Have a specific question about ethical or Shariah-compliant investing? Submit it and get a clear, plain-language answer.</div>
+        <span class="tile-cta go"><span class="dot"></span>Ask a question →</span>
+      </a>
+
+      <!-- 5. What is Shariah-Based Investing -->
+      <a href="what-is-shariah-investing.html" class="tile">
+        <div class="tile-icon">☪️</div>
+        <h3>What is Shariah-Based Investing</h3>
+        <div class="tile-desc">A plain-language primer on Shariah investing in the capital markets — its core principles, how screening works, and the instruments involved.</div>
+        <span class="tile-cta go"><span class="dot"></span>Learn the basics →</span>
+      </a>
+
+      <!-- 6. FAQs -->
+      <a href="faqs.html" class="tile">
+        <div class="tile-icon">❓</div>
+        <h3>FAQs</h3>
+        <div class="tile-desc">Quick answers to the most common questions from Gulf-based NRI investors — accounts, KYC, taxes, repatriation, and more.</div>
+        <span class="tile-cta go"><span class="dot"></span>Browse FAQs →</span>
+      </a>
+
+      <!-- 7. Curated Articles -->
+      <a href="curated-articles.html" class="tile">
+        <div class="tile-icon">📰</div>
+        <h3>Curated Articles</h3>
+        <div class="tile-desc">A hand-picked reading list on ethical investing, fund reviews, market notes, and Islamic finance — refreshed regularly.</div>
+        <span class="tile-cta go"><span class="dot"></span>Read articles →</span>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="site-disclaimer">
+      <strong class="d-head">⚠️ Important Disclaimer</strong>
+      This website is intended <strong>primarily for educational and informational purposes</strong>. We are <strong>not</strong> SEBI-registered Investment Advisers (RIA) or Research Analysts (RA), and nothing on this site constitutes investment, financial, legal, tax, or Shariah advice, or a recommendation to buy or sell any security. Investments in securities and mutual funds are subject to market risks — read all scheme-related documents carefully, and consult a SEBI-registered adviser and a qualified Shariah authority before making any investment decision. NRI investors should verify the tax and regulatory rules applicable in their country of residence.
+    </div>
+    <p>Ethical Investing · Built for Gulf-based NRI Investors.</p>
+    <p class="tip">Tip: hover or tap a tile to pop it open and read more.</p>
+  </footer>
+
+  <script>
+    // Pop-out on click/tap. Placeholder tiles (href="#") toggle open instead of navigating.
+    document.querySelectorAll('.tile').forEach(function (tile) {
+      tile.addEventListener('click', function (e) {
+        var href = tile.getAttribute('href');
+        if (!href || href === '#') {
+          e.preventDefault();
+          // close others for a clean single-open feel on touch
+          document.querySelectorAll('.tile.is-popped').forEach(function (t) {
+            if (t !== tile) t.classList.remove('is-popped');
+          });
+          tile.classList.toggle('is-popped');
+        }
+        // real links (e.g., India → main.html) navigate normally
+      });
+    });
+  </script>
+
+</body>
+</html>

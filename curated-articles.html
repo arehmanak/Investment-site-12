@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curated Articles · Ethical Investing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg-deep:#080d16; --bg-card:#0e1624; --bg-card-2:#131d2e;
+      --gold:#c9a84c; --gold-light:#e2c87a; --green:#1a7a4a; --green-light:#22a363;
+      --text-main:#eae6da; --text-muted:#8a9bb4;
+      --border:rgba(201,168,76,0.18); --border-soft:rgba(255,255,255,0.07); --radius:14px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg-deep);color:var(--text-main);line-height:1.7;font-size:16px;min-height:100vh;position:relative;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background:
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(201,168,76,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 90% 100%, rgba(26,122,74,0.07) 0%, transparent 60%);
+      pointer-events:none;z-index:0;}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,13,22,0.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:16px;}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);text-decoration:none;white-space:nowrap;}
+    .nav-links{display:flex;gap:4px;list-style:none;}
+    .nav-links a{display:block;padding:8px 12px;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-radius:6px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06);}
+
+    header{text-align:center;padding:66px 5% 14px;position:relative;z-index:1;}
+    .breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .breadcrumb span{opacity:.5;}
+    .eyebrow{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--green-light);background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.3);padding:5px 16px;border-radius:50px;margin-bottom:18px;}
+    header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:600;line-height:1.15;margin-bottom:14px;}
+    header h1 em{font-style:normal;color:var(--gold);}
+    header p{max-width:620px;margin:0 auto;color:var(--text-muted);font-size:1rem;}
+
+    .wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 5%;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding:36px 0 24px;}
+
+    .card{position:relative;display:flex;flex-direction:column;background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);
+      border:1px solid var(--border-soft);border-radius:var(--radius);padding:26px 24px 22px;text-decoration:none;color:inherit;overflow:hidden;
+      transform:translateY(0);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s;}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+    .card:hover{transform:translateY(-10px);box-shadow:0 24px 50px -14px rgba(0,0,0,.72),0 0 0 1px rgba(201,168,76,0.5);border-color:var(--gold);}
+    .card:hover::before{opacity:1;}
+
+    .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+    .card-num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:rgba(201,168,76,0.4);line-height:1;}
+    .tag{font-size:0.64rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:4px;}
+    .tag-general{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.22);}
+    .tag-india{background:rgba(26,122,74,0.15);color:var(--green-light);border:1px solid rgba(26,122,74,0.28);}
+    .tag-avenue{background:rgba(168,85,247,0.12);color:#c4b5fd;border:1px solid rgba(168,85,247,0.25);}
+    .tag-funds{background:rgba(59,130,246,0.12);color:#93c5fd;border:1px solid rgba(59,130,246,0.25);}
+    .tag-stocks{background:rgba(249,115,22,0.12);color:#fdba74;border:1px solid rgba(249,115,22,0.25);}
+
+    .card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;line-height:1.22;color:var(--text-main);margin-bottom:8px;}
+    .card .src{font-size:0.76rem;font-weight:700;color:var(--gold);letter-spacing:0.02em;margin-bottom:10px;}
+    .card p{font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:16px;}
+    .card .cta{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-size:0.76rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--gold);}
+
+    footer{position:relative;z-index:1;border-top:1px solid var(--border-soft);margin-top:30px;padding:24px 5% 40px;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--text-muted);max-width:760px;margin:0 auto;line-height:1.7;}
+
+    @media(max-width:600px){header{padding:46px 5% 8px;}.grid{gap:16px;}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-brand">Ethical Investing</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="main.html">India</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="faqs.html">FAQs</a></li>
+      <li><a href="curated-articles-ml.html" style="color:var(--gold);border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);">🌐 മലയാളം</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Curated Articles</span></div>
+    <div class="eyebrow">Reading List</div>
+    <h1>Curated <em>Articles</em></h1>
+    <p>A hand-picked set of articles on Shariah-based investing — the principles in general, how it works in India, and the different avenues available. Each opens on the publisher's site in a new tab.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+
+      <a class="card" href="https://paperfree.com/en/magazine/shariah-compliant-investment" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">01</span><span class="tag tag-general">General</span></div>
+        <h3>The Complete Guide to Shariah-Compliant Investing</h3>
+        <div class="src">Paperfree</div>
+        <p>A broad overview of halal investing — the core principles of avoiding interest and prohibited sectors, how screening works, and why the compliant-product landscape keeps growing.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://blog.zoya.finance/halal-investing-101/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">02</span><span class="tag tag-general">Beginner</span></div>
+        <h3>Halal Investing 101: The Complete Beginner's Guide</h3>
+        <div class="src">Zoya</div>
+        <p>Foundations for newcomers: what makes a stock halal, the 5% rule, screening on business activity and financial ratios, and which options exist beyond stocks.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://www.policybazaar.com/funds/articles/shariah-compliant-mutual-funds/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">03</span><span class="tag tag-general">Principles</span></div>
+        <h3>What Are Sharia-Compliant Mutual Fund Schemes?</h3>
+        <div class="src">Policybazaar</div>
+        <p>Background on how Shariah investing entered India through the S&amp;P Shariah indices in 2010, and the core rules — no riba, no gharar, no maisir — that shape compliant funds.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://upstox.com/learning-center/mutual-funds/shariah-compliant-mutual-funds-in-india-advantages-disadvantages-process/article-836/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">04</span><span class="tag tag-funds">India · Funds</span></div>
+        <h3>Shariah-Compliant Mutual Funds in India: How They Work</h3>
+        <div class="src">Upstox</div>
+        <p>An India-focused explainer covering how halal funds screen holdings, who is eligible to invest, the main risks involved, and how to get started.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://www.fundsindia.com/academy/shariah-compliant-mutual-funds-available-schemes-in-india/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">05</span><span class="tag tag-funds">India · Funds</span></div>
+        <h3>Shariah-Compliant Mutual Funds &amp; Schemes in India</h3>
+        <div class="src">FundsIndia</div>
+        <p>Looks at schemes such as the Tata Ethical Fund, asks whether a SIP can be halal, and explains how to verify that a fund genuinely follows Shariah guidelines.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://greenportfolio.co/invest/smallcase/halal-investing-guide-shariah" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">06</span><span class="tag tag-india">India</span></div>
+        <h3>Complete Guide to Shariah Investing in India</h3>
+        <div class="src">Green Portfolio</div>
+        <p>Covers the sectors that tend to be compliant, the screening tools to use, common myths, and the range of halal products available in India — including smallcases.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://tradersunion.com/islamic-investing/halal-investment-options/in-india/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">07</span><span class="tag tag-avenue">Avenues</span></div>
+        <h3>Best Halal Investment Options in India</h3>
+        <div class="src">Traders Union</div>
+        <p>A survey of the avenues open to Indian investors — Islamic mutual funds, Shariah stocks, sukuk, gold, real estate and Islamic ETFs — and what each is suited to.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://barakahinsider.com/the-definitive-guide-to-halal-investing-in-india/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">08</span><span class="tag tag-avenue">India · NRI</span></div>
+        <h3>The Definitive Guide to Halal Investing in India</h3>
+        <div class="src">Barakah Insider</div>
+        <p>A practical guide for residents and NRIs across real estate, gold and equities, with sample allocations and clear warnings about so-called "halal" scams.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://blog.islamicly.com/halal-investing-guide/beginners-guide-to-halal-etfs-and-islamic-finance/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">09</span><span class="tag tag-avenue">Avenues · ETFs</span></div>
+        <h3>A Beginner's Guide to Halal ETFs and Islamic Finance</h3>
+        <div class="src">Islamicly</div>
+        <p>Explains Shariah-compliant ETFs, how their costs compare with mutual funds, and what to look for when picking one for a halal portfolio.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+      <a class="card" href="https://academy.musaffa.com/15-halal-stocks-in-india-by-market-capitalization/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">10</span><span class="tag tag-stocks">India · Stocks</span></div>
+        <h3>Top Halal Stocks in India (by Market Cap)</h3>
+        <div class="src">Musaffa Academy</div>
+        <p>A worked example of how halal stock selection looks in practice in India, with a refresher on which instruments to avoid and the reasoning behind it.</p>
+        <span class="cta">Read article →</span>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>Curated Articles · Ethical Investing. Links lead to third-party publishers; we don't control or endorse their content. For educational purposes only — not financial, legal, or Shariah advice.</p>
+  </footer>
+</body>
+</html>

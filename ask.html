@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask Your Questions · Ethical Investing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg-deep:#080d16; --bg-card:#0e1624; --bg-card-2:#131d2e;
+      --gold:#c9a84c; --gold-light:#e2c87a; --green:#1a7a4a; --green-light:#22a363;
+      --text-main:#eae6da; --text-muted:#8a9bb4;
+      --border:rgba(201,168,76,0.18); --border-soft:rgba(255,255,255,0.07); --radius:14px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg-deep);color:var(--text-main);line-height:1.7;font-size:16px;min-height:100vh;position:relative;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:radial-gradient(ellipse 70% 55% at 50% -5%,rgba(201,168,76,0.10) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 90% 100%,rgba(26,122,74,0.07) 0%,transparent 60%);}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,13,22,0.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:16px;}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);text-decoration:none;white-space:nowrap;}
+    .nav-links{display:flex;gap:4px;list-style:none;}
+    .nav-links a{display:block;padding:8px 12px;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-radius:6px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06);}
+
+    header{text-align:center;padding:64px 5% 10px;position:relative;z-index:1;}
+    .breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .breadcrumb span{opacity:0.5;}
+    .eyebrow{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--green-light);background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.3);padding:5px 16px;border-radius:50px;margin-bottom:18px;}
+    header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.3rem);font-weight:600;line-height:1.15;margin-bottom:14px;}
+    header h1 em{font-style:normal;color:var(--gold);}
+    header p{max-width:600px;margin:0 auto;color:var(--text-muted);font-size:1rem;}
+
+    .form-wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:26px 5% 10px;}
+    .form-card{background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);border:1px solid var(--border);border-radius:var(--radius);padding:34px 32px;}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;}
+    .field{display:flex;flex-direction:column;gap:7px;}
+    .field.full{grid-column:1 / -1;}
+    .field label{font-size:0.8rem;font-weight:700;letter-spacing:0.02em;color:var(--text-main);}
+    .field label .req{color:var(--gold);margin-left:2px;}
+    .field .hint{font-size:0.72rem;color:var(--text-muted);font-weight:400;margin-top:-2px;}
+
+    input,select,textarea{font-family:inherit;font-size:0.92rem;color:var(--text-main);background:var(--bg-deep);
+      border:1px solid var(--border-soft);border-radius:9px;padding:11px 13px;width:100%;transition:border-color .2s,box-shadow .2s;}
+    input::placeholder,textarea::placeholder{color:rgba(138,155,180,0.55);}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.12);}
+    select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:34px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c9a84c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 13px center;background-size:12px;}
+    select:invalid{color:rgba(138,155,180,0.7);}
+    select option{background:var(--bg-card-2);color:var(--text-main);}
+    textarea{min-height:132px;resize:vertical;line-height:1.6;}
+
+    .submit-row{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+    .btn-submit{font-family:inherit;font-size:0.9rem;font-weight:700;letter-spacing:0.03em;color:#080d16;
+      background:linear-gradient(135deg,var(--gold-light),var(--gold));border:none;border-radius:9px;padding:13px 30px;cursor:pointer;
+      transition:transform .2s,box-shadow .2s,opacity .2s;}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(201,168,76,0.55);}
+    .btn-submit:disabled{opacity:0.55;cursor:not-allowed;transform:none;box-shadow:none;}
+    .form-status{font-size:0.82rem;color:var(--text-muted);line-height:1.5;}
+    .form-status.err{color:#f0a2a2;}
+
+    .privacy-note{position:relative;z-index:1;max-width:760px;margin:16px auto 0;padding:0 5%;font-size:0.74rem;color:var(--text-muted);line-height:1.65;}
+    .privacy-note strong{color:var(--gold);}
+
+    .success{display:none;text-align:center;padding:46px 32px;background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);
+      border:1px solid rgba(34,163,99,0.4);border-radius:var(--radius);}
+    .success.show{display:block;}
+    .success .tick{width:62px;height:62px;border-radius:50%;background:rgba(34,163,99,0.14);border:1.5px solid var(--green-light);
+      color:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 18px;}
+    .success h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--text-main);margin-bottom:10px;}
+    .success p{color:var(--text-muted);font-size:0.92rem;max-width:440px;margin:0 auto 22px;}
+    .btn-ghost{font-family:inherit;font-size:0.82rem;font-weight:700;color:var(--gold);background:transparent;border:1px solid var(--border);
+      border-radius:9px;padding:11px 24px;cursor:pointer;transition:background .2s,border-color .2s;}
+    .btn-ghost:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);}
+
+    footer{position:relative;z-index:1;border-top:1px solid var(--border-soft);margin-top:40px;padding:24px 5% 40px;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--text-muted);max-width:760px;margin:0 auto;line-height:1.7;}
+    footer a{color:var(--gold);text-decoration:none;}
+
+    @media(max-width:640px){
+      header{padding:46px 5% 6px;}
+      .form-card{padding:26px 20px;}
+      .form-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+  ============================================================================
+   SETUP — CONNECT THIS FORM TO GOOGLE FORMS (one-time, ~10 min)
+  ============================================================================
+   1. Sign in to Google as ethicalinvestorsforum@gmail.com and open
+      https://forms.google.com  ->  create a Blank form.
+   2. Add these 6 questions IN THIS ORDER, with these exact types & options:
+        - "Name"      -> Short answer  (mark Required)
+        - "Email"     -> Short answer  (Required; under the 3-dot menu ->
+                                        Response validation -> Text -> Email)
+        - "Location"  -> Short answer  (Required)
+        - "Age Group" -> Dropdown      (Required) options, exactly:
+                            Below 25 | 26 to 35 | 36 to 45 | 46 to 55 | 55+
+        - "Topic"     -> Dropdown      (Required) options, exactly:
+                            Shariah compliance basics | Stocks |
+                            Mutual funds & ETFs | NRI / Gulf-specific |
+                            Getting started | Taxation & repatriation | Other
+        - "Question"  -> Paragraph     (Required)
+   3. Responses tab -> green Sheets icon -> "Create new spreadsheet" so every
+      submission lands in a Google Sheet in the same account.
+   4. Get the field IDs: form editor -> 3-dot menu (top right) ->
+      "Get pre-filled link", type any dummy text in every field ->
+      "Get link" -> copy the generated URL. It contains entry.1234567=...
+      pairs, one per field, in the order above.
+   5. In the <script> at the bottom of THIS file, replace the PASTE_ values:
+        - action: your live form URL up to /viewform, with /viewform swapped
+                  for /formResponse
+        - each entry.PASTE_ID with the matching entry.number from step 4.
+   Until it's filled in, the form shows a "not connected yet" note instead
+   of submitting. Nothing else needs changing.
+  ============================================================================
+  -->
+
+  <nav>
+    <a href="index.html" class="nav-brand">Ethical Investing</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="main.html">India</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="faqs.html">FAQs</a></li>
+      <li><a href="ask-ml.html" style="color:var(--gold);border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);">🌐 മലയാളം</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Ask Your Questions</span></div>
+    <div class="eyebrow">Ask Us</div>
+    <h1>Ask Your <em>Questions</em></h1>
+    <p>Have a specific question about ethical or Shariah-compliant investing? Send it across and we'll get back to you with a clear, plain-language answer.</p>
+  </header>
+
+  <div class="form-wrap">
+    <div class="form-card" id="formCard">
+      <form id="askForm" novalidate>
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="qName">Name <span class="req">*</span></label>
+            <input type="text" id="qName" name="q_name" placeholder="Your full name" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="qEmail">Email <span class="req">*</span></label>
+            <input type="email" id="qEmail" name="q_email" placeholder="you@example.com" required autocomplete="email" />
+            <span class="hint">Where we'll send our reply — kept private.</span>
+          </div>
+
+          <div class="field">
+            <label for="qLocation">Location <span class="req">*</span></label>
+            <input type="text" id="qLocation" name="q_location" placeholder="City, Country (e.g. Dubai, UAE)" required />
+          </div>
+
+          <div class="field">
+            <label for="qAge">Age Group <span class="req">*</span></label>
+            <select id="qAge" name="q_age" required>
+              <option value="" disabled selected>Select an age group</option>
+              <option value="Below 25">Below 25</option>
+              <option value="26 to 35">26 to 35</option>
+              <option value="36 to 45">36 to 45</option>
+              <option value="46 to 55">46 to 55</option>
+              <option value="55+">55+</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="qTopic">Topic <span class="req">*</span></label>
+            <select id="qTopic" name="q_topic" required>
+              <option value="" disabled selected>Choose the closest topic</option>
+              <option value="Shariah compliance basics">Shariah compliance basics</option>
+              <option value="Stocks">Stocks</option>
+              <option value="Mutual funds &amp; ETFs">Mutual funds &amp; ETFs</option>
+              <option value="NRI / Gulf-specific">NRI / Gulf-specific</option>
+              <option value="Getting started">Getting started</option>
+              <option value="Taxation &amp; repatriation">Taxation &amp; repatriation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="qQuestion">Your Question / Message <span class="req">*</span></label>
+            <textarea id="qQuestion" name="q_question" placeholder="Type your question here — the more context you give, the more useful our answer will be." required></textarea>
+          </div>
+
+          <!-- anti-spam honeypot: hidden from people, tempting to bots -->
+          <input type="text" id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn-submit" id="submitBtn">Send question</button>
+          <span class="form-status" id="formStatus"></span>
+        </div>
+      </form>
+    </div>
+
+    <div class="success" id="successBox">
+      <div class="tick">✓</div>
+      <h2>Question received</h2>
+      <p>Thank you — your question has been sent to our team. We'll reply by email as soon as we can.</p>
+      <button type="button" class="btn-ghost" id="askAnother">Ask another question</button>
+    </div>
+  </div>
+
+  <p class="privacy-note">
+    <strong>Privacy:</strong> your details are used only to answer your question and are not shared with third parties.
+    This page is for general educational Q&amp;A and is not personalised financial, legal, or Shariah advice.
+  </p>
+
+  <footer>
+    <p>Ethical Investing · <a href="index.html">Back to Home</a></p>
+  </footer>
+
+  <script>
+    /* ====================================================================
+       GOOGLE FORM CONNECTION — replace the 7 PASTE_ values (see the
+       SETUP comment near the top of this file for exactly how).
+       ==================================================================== */
+    const GOOGLE_FORM = {
+      action: "https://docs.google.com/forms/d/e/1FAIpQLScOe0jCDKKX_V1YxGe9w9oDCcRZQt62Qm7lyELfrA2KkkBfHA/formResponse",
+      entries: {
+        name:     "entry.1324249251",
+        email:    "entry.1368748712",
+        location: "entry.218262171",
+        ageGroup: "entry.1107141541",
+        topic:    "entry.1982730701",
+        question: "entry.969086838"
+      }
+    };
+    /* ==================================================================== */
+
+    (function () {
+      var form = document.getElementById('askForm');
+      var statusEl = document.getElementById('formStatus');
+      var btn = document.getElementById('submitBtn');
+      var card = document.getElementById('formCard');
+      var success = document.getElementById('successBox');
+      var val = function (id) { return document.getElementById(id).value.trim(); };
+
+      function isConfigured() {
+        if (GOOGLE_FORM.action.indexOf('PASTE_') !== -1) return false;
+        for (var k in GOOGLE_FORM.entries) {
+          if (GOOGLE_FORM.entries[k].indexOf('PASTE_') !== -1) return false;
+        }
+        return true;
+      }
+
+      function showSuccess() {
+        card.style.display = 'none';
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // honeypot: if filled, silently pretend success (likely a bot)
+        if (document.getElementById('hp').value) { showSuccess(); return; }
+
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+
+        if (!isConfigured()) {
+          statusEl.textContent = 'This form isn\u2019t connected to Google Forms yet — see the setup note in the page source.';
+          statusEl.classList.add('err');
+          return;
+        }
+
+        statusEl.textContent = '';
+        statusEl.classList.remove('err');
+        btn.disabled = true;
+        btn.textContent = 'Sending\u2026';
+
+        var data = new FormData();
+        data.append(GOOGLE_FORM.entries.name, val('qName'));
+        data.append(GOOGLE_FORM.entries.email, val('qEmail'));
+        data.append(GOOGLE_FORM.entries.location, val('qLocation'));
+        data.append(GOOGLE_FORM.entries.ageGroup, document.getElementById('qAge').value);
+        data.append(GOOGLE_FORM.entries.topic, document.getElementById('qTopic').value);
+        data.append(GOOGLE_FORM.entries.question, val('qQuestion'));
+
+        fetch(GOOGLE_FORM.action, { method: 'POST', mode: 'no-cors', body: data })
+          .then(showSuccess)
+          .catch(showSuccess); // opaque (no-cors) response — treat as delivered
+      });
+
+      document.getElementById('askAnother').addEventListener('click', function () {
+        form.reset();
+        success.classList.remove('show');
+        card.style.display = '';
+        btn.disabled = false;
+        btn.textContent = 'Send question';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>

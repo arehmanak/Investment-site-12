@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs · Ethical Investing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg-deep:#080d16; --bg-card:#0e1624; --bg-card-2:#131d2e;
+      --gold:#c9a84c; --gold-light:#e2c87a; --green:#1a7a4a; --green-light:#22a363;
+      --text-main:#eae6da; --text-muted:#8a9bb4;
+      --border:rgba(201,168,76,0.18); --border-soft:rgba(255,255,255,0.07); --radius:12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg-deep);color:var(--text-main);line-height:1.75;font-size:16px;min-height:100vh;position:relative;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background:
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(201,168,76,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 90% 100%, rgba(26,122,74,0.07) 0%, transparent 60%);
+      pointer-events:none;z-index:0;}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,13,22,0.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:16px;}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);text-decoration:none;white-space:nowrap;}
+    .nav-links{display:flex;gap:4px;list-style:none;}
+    .nav-links a{display:block;padding:8px 12px;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-radius:6px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06);}
+
+    header{text-align:center;padding:66px 5% 14px;position:relative;z-index:1;}
+    .breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .breadcrumb span{opacity:.5;}
+    .eyebrow{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--green-light);background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.3);padding:5px 16px;border-radius:50px;margin-bottom:18px;}
+    header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:600;line-height:1.15;margin-bottom:14px;}
+    header h1 em{font-style:normal;color:var(--gold);}
+    header p{max-width:620px;margin:0 auto;color:var(--text-muted);font-size:1rem;}
+
+    .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 5%;}
+
+    .cat{padding:34px 0 6px;}
+    .cat-label{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+
+    .faq{border:1px solid var(--border-soft);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);transition:border-color .25s;}
+    .faq.open{border-color:var(--border);}
+    .faq-q{display:flex;align-items:flex-start;gap:14px;cursor:pointer;padding:16px 20px;user-select:none;outline:none;}
+    .faq-q:focus-visible{outline:1px solid var(--gold);outline-offset:-2px;}
+    .faq-q .qmark{flex-shrink:0;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--gold);line-height:1.5;}
+    .faq-q h3{flex:1;font-size:0.98rem;font-weight:600;color:var(--text-main);line-height:1.5;}
+    .faq-ind{flex-shrink:0;position:relative;width:22px;height:22px;border:1px solid var(--border);border-radius:50%;margin-top:2px;transition:background .25s,border-color .25s;}
+    .faq-ind::before,.faq-ind::after{content:'';position:absolute;top:50%;left:50%;background:var(--gold);transition:opacity .25s,transform .25s;}
+    .faq-ind::before{width:9px;height:2px;transform:translate(-50%,-50%);}
+    .faq-ind::after{width:2px;height:9px;transform:translate(-50%,-50%);}
+    .faq.open .faq-ind{background:rgba(201,168,76,0.14);border-color:var(--gold);}
+    .faq.open .faq-ind::after{opacity:0;transform:translate(-50%,-50%) rotate(90deg);}
+
+    .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;}
+    .faq-a-in{overflow:hidden;min-height:0;}
+    .faq.open .faq-a{grid-template-rows:1fr;}
+    .faq-a p{padding:0 20px 18px 48px;font-size:0.9rem;color:var(--text-muted);line-height:1.8;}
+
+    .disclaimer{position:relative;z-index:1;max-width:820px;margin:26px auto 0;padding:0 5%;}
+    .disclaimer-box{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius);padding:18px 22px;font-size:0.82rem;color:var(--text-muted);line-height:1.8;}
+    .disclaimer-box strong{color:var(--gold);display:block;margin-bottom:5px;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;}
+
+    footer{position:relative;z-index:1;border-top:1px solid var(--border-soft);margin-top:30px;padding:24px 5% 40px;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--text-muted);max-width:760px;margin:0 auto;line-height:1.7;}
+
+    @media(max-width:600px){header{padding:46px 5% 8px;}.faq-a p{padding-left:20px;}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-brand">Ethical Investing</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="main.html">India</a></li>
+      <li><a href="curated-articles.html">Articles</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="faqs-ml.html" style="color:var(--gold);border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);">🌐 മലയാളം</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>FAQs</span></div>
+    <div class="eyebrow">Questions &amp; Answers</div>
+    <h1>Frequently Asked <em>Questions</em></h1>
+    <p>Thirty common questions from new investors on Shariah compliance, halal investing in India, and the Indian stock market. Tap any question to reveal the answer.</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- CATEGORY A -->
+    <div class="cat"><div class="cat-label">Shariah / Halal Investing — Basics</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is Shariah-compliant (halal) investing?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>It means investing only in ways permitted under Islamic law: avoiding interest (riba), excessive uncertainty (gharar) and gambling (maisir), and steering clear of businesses in prohibited sectors. Returns are expected to come from real, productive economic activity and shared risk rather than from money itself.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Is investing in the stock market halal?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>It can be. A share is part-ownership of a real business, which is permissible — provided the company's core activity is permissible and it passes the financial screens. The market itself is just a venue; each company must be assessed individually.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is riba, and why is it prohibited?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Riba is interest — a guaranteed increase on money lent, earned without sharing real risk or adding value. Islam regards it as unjust, which rules out interest-bearing bonds, conventional fixed deposits and ordinary savings-account interest.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What do gharar and maisir mean?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Gharar is excessive uncertainty or ambiguity in a contract; maisir is gambling or pure speculation. Both are avoided, which is why complex derivatives, betting products and conventional insurance structures are generally excluded.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Which business sectors are screened out?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Commonly excluded: conventional banking and lending, insurance, alcohol, tobacco, pork, gambling and casinos, adult entertainment, and weapons — and sometimes cinema and music. The exact list depends on the screening standard used.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What financial ratios are used to screen a stock?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Beyond the business test, scholars apply financial limits. Typical AAOIFI-style thresholds are: interest-bearing debt below about 30–33% of market cap (some standards use 25% of assets), cash plus interest-bearing securities below roughly a third, and impermissible income below 5% of total revenue.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is "purification" of income?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>If a company earns a small amount of incidental impermissible income (for example, interest on its cash), the matching slice of your return is considered impure. Purification means giving that portion away to charity without expecting reward. Screening apps and some funds estimate the per-share amount.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Do I have to be Muslim to invest this way?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>No. Anyone can use Shariah-compliant products. Many non-Muslims choose them as a form of ethical or socially responsible investing, since the screens naturally avoid debt-heavy companies and harmful sectors.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY B -->
+    <div class="cat"><div class="cat-label">Shariah-Based Investing in India</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What halal investment options exist in India?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Shariah-compliant equity mutual funds, screened direct stocks, a Shariah index-fund route, smallcases, gold, real estate, and — mostly via global platforms — sukuk. Each option needs its own compliance check before you commit.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Which Shariah-compliant mutual funds are available in India?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>The main ones include the Tata Ethical Fund (active, since 1996), Taurus Ethical Fund (active, since 2009), Quantum Ethical Fund (since 2024) and the UTI Nifty500 Shariah Index Fund (passive). Availability and details change, so verify current status before investing.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What's the difference between an active ethical fund and a Shariah index fund?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>An active ethical fund has a manager picking screened stocks aiming to beat a benchmark — higher cost and some manager risk. A Shariah index fund passively tracks a screened index such as the Nifty 500 Shariah, with lower cost and no stock-selection risk.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Are there Shariah-compliant ETFs in India?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>India has had Shariah index and ETF-style options over the years, and newer passive index funds track Shariah indices. Always confirm a specific product is currently live and check its liquidity and tracking before relying on it.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What are smallcases, and are there halal ones?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>A smallcase is a ready-made basket of stocks built around a theme. Some are screened for Shariah compliance — avoiding prohibited sectors and high-debt firms. Check who screens the basket, against what standard, and how often it is reviewed.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Can I invest in gold the halal way in India?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Yes. Physical gold and gold held in screened, asset-backed forms are generally permissible, and some apps offer digital gold backed by physical metal. Avoid interest-based or purely speculative gold products, and follow the rules on taking possession.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Is real estate — or are REITs — halal in India?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Direct ownership of property for rent or appreciation is generally permissible if it isn't financed with interest. REITs and some property platforms may qualify if they avoid interest-heavy structures and impermissible tenants — these need a case-by-case review.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Are sukuk (Islamic bonds) available in India?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Sukuk are asset-backed certificates that pay returns from real assets rather than interest. They aren't widely issued domestically in India yet, so Indian investors usually access them through global funds or platforms — often USD-denominated, which adds currency considerations.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>How do I verify that a stock is Shariah-compliant?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Use a screening tool such as Islamicly, Zoya or Musaffa. They check business activity and financial ratios and give a compliant or non-compliant status that's updated regularly. Borderline cases are worth a closer manual look at the company's filings.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY C -->
+    <div class="cat"><div class="cat-label">Indian Stock Market — Basics for New Investors</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What do NSE, BSE, Sensex and Nifty mean?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>The NSE and BSE are India's two main stock exchanges. The Sensex (30 BSE companies) and the Nifty 50 (50 NSE companies) are benchmark indices that track the overall direction of the market.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is a demat and trading account, and do I need one?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>A demat account holds your shares electronically, and a trading account is used to place buy and sell orders — they're usually opened together with a broker. For mutual funds you can invest directly through the fund house or a platform without needing a demat.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is SEBI, and how does it protect investors?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>SEBI (the Securities and Exchange Board of India) is the market regulator. It sets rules for exchanges, brokers and mutual funds, enforces disclosure, and runs grievance mechanisms — all aimed at keeping the market fair and protecting investors.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is a SIP, and how does it work?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>A Systematic Investment Plan invests a fixed amount at regular intervals — usually monthly — into a fund. It spreads your entry across market highs and lows (rupee-cost averaging) and builds discipline. Many funds allow SIPs from as little as ₹100–₹500.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What's the difference between large-, mid- and small-cap?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Large-cap means the biggest, most established companies, which tend to be steadier. Mid- and small-caps are smaller firms with higher growth potential but more volatility. Many investors hold a mix to balance stability and growth.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>How are equity investments taxed in India?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>As a general guide only: gains on listed equity or equity funds held beyond a year are treated as long-term and taxed at a lower rate, while gains within a year are short-term and taxed higher. Exact rates, exemptions and NRI treatment change over time — confirm current rules with a tax professional.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>How much money do I need to start?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Very little. Many SIPs begin at ₹100–₹500 per month, and fractional or curated baskets lower the entry further. Starting small and staying consistent matters far more than the initial amount.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY D -->
+    <div class="cat"><div class="cat-label">For Gulf-Based NRI Investors</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Can Gulf-based NRIs invest in Indian mutual funds?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Yes. NRIs in the UAE, Saudi Arabia, Kuwait, Qatar, Oman and Bahrain can invest in Indian mutual funds, typically after opening an NRE or NRO account and completing KYC. Routes include fund houses, discount brokers, full-service brokers and distributors.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is the difference between an NRE and NRO account?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>An NRE account holds foreign earnings converted into rupees and is fully repatriable. An NRO account is mainly for income earned within India and has repatriation limits. Either can fund investments, with different tax and repatriation treatment.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Why do USA/Canada NRIs face restrictions but Gulf NRIs usually don't?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>NRIs in the USA and Canada trigger FATCA reporting obligations that many Indian fund houses choose not to support, so they often restrict those investors. Gulf-based NRIs generally don't face this barrier.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What is GIFT City, and why does it matter for NRIs?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>GIFT City is India's International Financial Services Centre. It lets global and NRI investors access India-linked products through a USD-denominated, often tax-efficient framework with simplified compliance — an alternative to the direct domestic route.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY E -->
+    <div class="cat"><div class="cat-label">Getting Started &amp; Risk</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>How do I actually start, step by step?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>A simple path: (1) open an NRE/NRO account if you're an NRI; (2) complete mutual-fund KYC; (3) pick a route — fund house, discount broker, full-service broker or distributor; (4) choose one or two screened or ethical funds; (5) start a small monthly SIP; and (6) stay invested for the long term, reviewing once or twice a year.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>Active fund, index fund, or direct stocks — where should a beginner start?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Many beginners start with one or two screened mutual funds or a Shariah index fund, where a manager or the index handles compliance and diversification. Direct stocks and curated baskets can be added later, once you're comfortable using a screening tool and reading the basics of a company.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>How often should I check or rebalance my portfolio?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>For long-term investors, once or twice a year is usually enough — to confirm holdings are still compliant and your mix still fits your goals. Reacting to every short-term market move tends to hurt more than it helps.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What happens if a stock I hold stops being compliant?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Compliance isn't permanent — a company's debt or income mix can change. If a holding fails the screen, the usual guidance is to exit it within a reasonable window and purify any impermissible portion of the gains. In a fund, the manager or index handles this for you.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>What are the main risks I should understand?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>The key ones: market volatility (equities can fall 20–30% in the short term), currency risk (returns are in INR while you may spend in AED or USD), concentration and liquidity risk in smaller funds or stocks, and compliance risk if a holding loses Shariah status. A long horizon and good diversification help manage all of them.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>How do I avoid "halal" investment scams?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Be very wary of schemes promising fixed or unusually high "guaranteed" returns in the name of being halal — genuine investing shares real risk. Prefer SEBI-registered products and platforms, avoid anything you don't fully understand, and when in doubt consult a SEBI-registered adviser or a qualified scholar.</p></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="disclaimer">
+    <div class="disclaimer-box">
+      <strong>⚠️ Disclaimer</strong>
+      These answers are general and for educational purposes only — they are not financial, legal, tax, or Shariah advice. Rules, products, and figures change over time. For your specific situation, consult a qualified financial adviser, a tax professional, and a knowledgeable Shariah scholar.
+    </div>
+  </div>
+
+  <footer>
+    <p>FAQs · Ethical Investing · Built for Gulf-based NRI investors.</p>
+  </footer>
+
+  <script>
+    (function () {
+      document.querySelectorAll('.faq-q').forEach(function (q) {
+        var item = q.parentElement;
+        function toggle() {
+          var open = item.classList.toggle('open');
+          q.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        q.addEventListener('click', toggle);
+        q.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); toggle(); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

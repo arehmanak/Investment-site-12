@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn · Ethical Investing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg-deep:#080d16; --bg-card:#0e1624; --bg-card-2:#131d2e;
+      --gold:#c9a84c; --gold-light:#e2c87a; --green:#1a7a4a; --green-light:#22a363;
+      --text-main:#eae6da; --text-muted:#8a9bb4;
+      --border:rgba(201,168,76,0.18); --border-soft:rgba(255,255,255,0.07); --radius:14px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg-deep);color:var(--text-main);line-height:1.7;font-size:16px;position:relative;overflow-x:hidden;min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:radial-gradient(ellipse 70% 55% at 50% -5%,rgba(201,168,76,0.09) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 90% 100%,rgba(26,122,74,0.07) 0%,transparent 60%);}
+    .z{position:relative;z-index:1;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,13,22,0.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:16px;}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);text-decoration:none;white-space:nowrap;}
+    .nav-links{display:flex;gap:4px;list-style:none;}
+    .nav-links a{display:block;padding:8px 12px;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-radius:6px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06);}
+    header{text-align:center;padding:64px 5% 26px;}
+    .breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);margin-bottom:20px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .breadcrumb span{opacity:0.5;}
+    .eyebrow{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--green-light);background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.3);padding:5px 16px;border-radius:50px;margin-bottom:18px;}
+    header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.3rem);font-weight:600;line-height:1.15;margin-bottom:14px;}
+    header h1 em{font-style:normal;color:var(--gold);}
+    header p{max-width:620px;margin:0 auto;color:var(--text-muted);font-size:1rem;}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px 5% 10px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;}
+    .vtile{display:flex;flex-direction:column;background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);
+      border:1px solid var(--border-soft);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;
+      transform:translateY(0);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease;}
+    .vtile:hover{transform:translateY(-8px);box-shadow:0 24px 48px -16px rgba(0,0,0,0.7),0 0 0 1px rgba(201,168,76,0.4);border-color:var(--gold);}
+    .thumb{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#16203a,#0c1422);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease,opacity .3s ease;}
+    .vtile:hover .thumb img{transform:scale(1.05);}
+    .thumb.noimg::after{content:'▶';color:var(--gold);font-size:2rem;opacity:0.4;}
+    .play{position:absolute;width:54px;height:54px;border-radius:50%;background:rgba(8,13,22,0.72);border:1.5px solid rgba(255,255,255,0.85);
+      display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;padding-left:4px;transition:background .25s ease,transform .25s ease;}
+    .vtile:hover .play{background:var(--gold);border-color:var(--gold);color:#080d16;transform:scale(1.08);}
+    .vbody{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;}
+    .vtag{display:inline-block;align-self:flex-start;font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:4px 10px;border-radius:5px;margin-bottom:11px;}
+    .g1{background:rgba(26,122,74,0.15);color:var(--green-light);border:1px solid rgba(26,122,74,0.28);}
+    .g2{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.25);}
+    .g3{background:rgba(59,130,246,0.12);color:#93c5fd;border:1px solid rgba(59,130,246,0.25);}
+    .g4{background:rgba(168,85,247,0.12);color:#c4b5fd;border:1px solid rgba(168,85,247,0.25);}
+    .vbody h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;line-height:1.22;margin-bottom:8px;color:var(--text-main);}
+    .vbody p{font-size:0.86rem;color:var(--text-muted);line-height:1.6;margin-bottom:14px;flex:1;}
+    .vsrc{font-size:0.74rem;font-weight:700;letter-spacing:0.04em;color:var(--gold);text-transform:uppercase;}
+    .disclaimer{max-width:1120px;margin:32px auto 0;padding:0 5%;}
+    .disclaimer-box{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius);padding:18px 22px;font-size:0.8rem;color:var(--text-muted);line-height:1.75;}
+    .disclaimer-box strong{color:var(--gold);display:block;margin-bottom:5px;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;}
+    footer{border-top:1px solid var(--border-soft);margin-top:30px;padding:24px 5% 40px;text-align:center;}
+    footer p{font-size:0.78rem;color:var(--text-muted);}
+    footer a{color:var(--gold);text-decoration:none;}
+    @media(max-width:600px){header{padding:46px 5% 18px;}.grid{gap:18px;}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">Ethical Investing</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="main.html">India</a></li>
+      <li><a href="curated-articles.html">Articles</a></li>
+      <li><a href="faqs.html">FAQs</a></li>
+      <li><a href="learn-ml.html" style="color:var(--gold);border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);">🌐 മലയാളം</a></li>
+    </ul>
+  </nav>
+
+  <header class="z">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Learn</span></div>
+    <div class="eyebrow">Watch &amp; Learn</div>
+    <h1><em>Learn</em> the Concepts</h1>
+    <p>Ten short videos on the ideas that matter most — long-term investing, diversification, and how Shariah screening works for stocks. Each tile opens the video on YouTube.</p>
+  </header>
+
+  <div class="wrap z">
+    <div class="grid">
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=XDV8VuCYwLQ" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/XDV8VuCYwLQ/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g2">Long-Term Investing</span>
+          <h3>The Power of Compounding</h3>
+          <p>A short, vivid illustration of compounding — why staying invested for the long term lets wealth grow exponentially rather than in a straight line.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=mstCtDxrWkw" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/mstCtDxrWkw/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g3">Diversification</span>
+          <h3>Diversification Explained: Don't Put All Eggs in One Basket</h3>
+          <p>Why spreading money across investments lowers risk — the classic idea behind diversification, explained simply for beginners.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=5_98Tdpz7gc" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/5_98Tdpz7gc/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g3">Diversification</span>
+          <h3>Why We Invest in Global ETFs — Diversification Explained</h3>
+          <p>How a single low-effort ETF can give you instant diversification across many companies and countries at once.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=TiHynlBEMVc" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/TiHynlBEMVc/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g4">Stock Screening</span>
+          <h3>How to Screen Stocks for Shariah Compliance</h3>
+          <p>An AAOIFI-certified scholar walks through the business and financial screens used to judge whether a stock is Shariah-compliant.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=ae2Fk1332kQ" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/ae2Fk1332kQ/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g4">Stock Screening</span>
+          <h3>How to Find Out If a Stock Is Halal in 3 Steps</h3>
+          <p>A quick three-step method to check whether a stock is halal before you buy — a handy mental checklist.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=jqY2URdUDso" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/jqY2URdUDso/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">Halal Investing</span>
+          <h3>Step-by-Step Halal Investing Guide for Beginners</h3>
+          <p>A condensed crash course covering the essentials of halal investing — principles, the main asset types, and how to actually get started.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=ezJR2ZBgE8c" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/ezJR2ZBgE8c/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">Principles</span>
+          <h3>Halal Investing for Beginners</h3>
+          <p>A clear introduction to the foundations of halal investing for newcomers — what's permitted, what's avoided, and the reasoning behind it.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=0P66-5VM--o" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/0P66-5VM--o/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g2">Portfolio Building</span>
+          <h3>How to Build a Halal Portfolio</h3>
+          <p>A step-by-step session on building a halal portfolio: setting savings goals, choosing assets, and structuring disciplined monthly investing.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=vwlHRKlHNjI" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/vwlHRKlHNjI/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">Getting Started</span>
+          <h3>How to Invest as a Muslim (Beginner's Guide)</h3>
+          <p>A beginner's walkthrough of investing as a Muslim — why to invest, what to invest in, and how Shariah-compliant ETFs simplify the journey.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=5_X5sENoe4E" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/5_X5sENoe4E/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">Getting Started</span>
+          <h3>How to Invest Your First Sum — the Halal Way</h3>
+          <p>A practical look at putting a first lump sum to work the halal way, from picking the right products to actually placing the investment.</p>
+          <span class="vsrc">▶ Watch on YouTube</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="disclaimer z">
+    <div class="disclaimer-box">
+      <strong>⚠️ Note</strong>
+      These videos are hosted on YouTube by their respective creators and are linked here for educational convenience. We don't own or endorse them, and they aren't financial or Shariah advice. Many are general (or non-India) explainers — always confirm how each concept applies to your own situation and to Indian rules before acting.
+    </div>
+  </div>
+
+  <footer class="z">
+    <p>Ethical Investing · <a href="index.html">Back to Home</a></p>
+  </footer>
+
+</body>
+</html>

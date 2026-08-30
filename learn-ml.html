@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>പഠിക്കുക · ധാർമിക നിക്ഷേപം</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Serif+Malayalam:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg-deep:#080d16; --bg-card:#0e1624; --bg-card-2:#131d2e;
+      --gold:#c9a84c; --gold-light:#e2c87a; --green:#1a7a4a; --green-light:#22a363;
+      --text-main:#eae6da; --text-muted:#8a9bb4;
+      --border:rgba(201,168,76,0.18); --border-soft:rgba(255,255,255,0.07); --radius:14px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Nunito','Noto Sans Malayalam',sans-serif;background:var(--bg-deep);color:var(--text-main);line-height:1.8;font-size:16px;position:relative;overflow-x:hidden;min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:radial-gradient(ellipse 70% 55% at 50% -5%,rgba(201,168,76,0.09) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 90% 100%,rgba(26,122,74,0.07) 0%,transparent 60%);}
+    .z{position:relative;z-index:1;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,13,22,0.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:16px;}
+    .nav-brand{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:1.15rem;color:var(--gold);text-decoration:none;white-space:nowrap;}
+    .nav-links{display:flex;gap:4px;list-style:none;flex-wrap:wrap;justify-content:flex-end;}
+    .nav-links a{display:block;padding:8px 12px;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-radius:6px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06);}
+    .lang-toggle{color:var(--gold) !important;border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);}
+    .lang-toggle:hover{background:rgba(201,168,76,0.16) !important;}
+    header{text-align:center;padding:64px 5% 26px;}
+    .breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);margin-bottom:20px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .breadcrumb span{opacity:0.5;}
+    .eyebrow{display:inline-block;font-size:0.74rem;font-weight:700;letter-spacing:0.08em;color:var(--green-light);background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.3);padding:5px 16px;border-radius:50px;margin-bottom:18px;}
+    header h1{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:clamp(1.9rem,5vw,3.1rem);font-weight:600;line-height:1.3;margin-bottom:14px;}
+    header h1 em{font-style:normal;color:var(--gold);}
+    header p{max-width:660px;margin:0 auto;color:var(--text-muted);font-size:1rem;}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px 5% 10px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;}
+    .vtile{display:flex;flex-direction:column;background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);
+      border:1px solid var(--border-soft);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;
+      transform:translateY(0);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease;}
+    .vtile:hover{transform:translateY(-8px);box-shadow:0 24px 48px -16px rgba(0,0,0,0.7),0 0 0 1px rgba(201,168,76,0.4);border-color:var(--gold);}
+    .thumb{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#16203a,#0c1422);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease,opacity .3s ease;}
+    .vtile:hover .thumb img{transform:scale(1.05);}
+    .thumb.noimg::after{content:'▶';color:var(--gold);font-size:2rem;opacity:0.4;}
+    .play{position:absolute;width:54px;height:54px;border-radius:50%;background:rgba(8,13,22,0.72);border:1.5px solid rgba(255,255,255,0.85);
+      display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;padding-left:4px;transition:background .25s ease,transform .25s ease;}
+    .vtile:hover .play{background:var(--gold);border-color:var(--gold);color:#080d16;transform:scale(1.08);}
+    .vbody{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;}
+    .vtag{display:inline-block;align-self:flex-start;font-size:0.66rem;font-weight:700;letter-spacing:0.03em;padding:4px 10px;border-radius:5px;margin-bottom:11px;}
+    .g1{background:rgba(26,122,74,0.15);color:var(--green-light);border:1px solid rgba(26,122,74,0.28);}
+    .g2{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.25);}
+    .g3{background:rgba(59,130,246,0.12);color:#93c5fd;border:1px solid rgba(59,130,246,0.25);}
+    .g4{background:rgba(168,85,247,0.12);color:#c4b5fd;border:1px solid rgba(168,85,247,0.25);}
+    .vbody h3{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:1.15rem;font-weight:600;line-height:1.4;margin-bottom:8px;color:var(--text-main);}
+    .vbody p{font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:14px;flex:1;}
+    .vsrc{font-size:0.76rem;font-weight:700;letter-spacing:0.02em;color:var(--gold);}
+    .disclaimer{max-width:1120px;margin:32px auto 0;padding:0 5%;}
+    .disclaimer-box{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius);padding:18px 22px;font-size:0.82rem;color:var(--text-muted);line-height:1.85;}
+    .disclaimer-box strong{color:var(--gold);display:block;margin-bottom:5px;font-size:0.78rem;letter-spacing:0.03em;}
+    footer{border-top:1px solid var(--border-soft);margin-top:30px;padding:24px 5% 40px;text-align:center;}
+    footer p{font-size:0.8rem;color:var(--text-muted);}
+    footer a{color:var(--gold);text-decoration:none;}
+    @media(max-width:600px){header{padding:46px 5% 18px;}.grid{gap:18px;}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index-ml.html" class="nav-brand">ധാർമിക നിക്ഷേപം</a>
+    <ul class="nav-links">
+      <li><a href="index-ml.html">ഹോം</a></li>
+      <li><a href="main-ml.html">ഇന്ത്യ</a></li>
+      <li><a href="curated-articles-ml.html">ലേഖനങ്ങൾ</a></li>
+      <li><a href="faqs-ml.html">പതിവ് ചോദ്യങ്ങൾ</a></li>
+      <li><a href="learn.html" class="lang-toggle">🌐 English</a></li>
+    </ul>
+  </nav>
+
+  <header class="z">
+    <div class="breadcrumb"><a href="index-ml.html">ഹോം</a><span>›</span><span>പഠിക്കുക</span></div>
+    <div class="eyebrow">കണ്ട് പഠിക്കൂ</div>
+    <h1><em>ആശയങ്ങൾ</em> മനസ്സിലാക്കൂ</h1>
+    <p>ഏറ്റവും പ്രധാനപ്പെട്ട ആശയങ്ങളെക്കുറിച്ചുള്ള പത്ത് ഹ്രസ്വ വീഡിയോകൾ — ദീർഘകാല നിക്ഷേപം, വൈവിധ്യവൽക്കരണം, ഓഹരികൾക്കായുള്ള ശരീഅത്ത് സ്ക്രീനിംഗ് എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്നിവ. ഓരോ ടൈലും YouTube-ൽ വീഡിയോ തുറക്കുന്നു. (വീഡിയോകൾ പ്രധാനമായും ഇംഗ്ലീഷിലാണ്.)</p>
+  </header>
+
+  <div class="wrap z">
+    <div class="grid">
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=XDV8VuCYwLQ" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/XDV8VuCYwLQ/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g2">ദീർഘകാല നിക്ഷേപം</span>
+          <h3>കോമ്പൗണ്ടിംഗിന്റെ ശക്തി</h3>
+          <p>കോമ്പൗണ്ടിംഗിന്റെ ഹ്രസ്വവും വ്യക്തവുമായ ഉദാഹരണം — ദീർഘകാലം നിക്ഷേപം തുടരുന്നത് സമ്പത്തിനെ നേർരേഖയിലല്ല, കുതിച്ചുയരുന്ന വേഗത്തിൽ വളരാൻ എങ്ങനെ സഹായിക്കുന്നു.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=mstCtDxrWkw" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/mstCtDxrWkw/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g3">വൈവിധ്യവൽക്കരണം</span>
+          <h3>വൈവിധ്യവൽക്കരണം: എല്ലാ മുട്ടകളും ഒരു കൊട്ടയിൽ വയ്ക്കരുത്</h3>
+          <p>പണം പല നിക്ഷേപങ്ങളിലായി വിതരണം ചെയ്യുന്നത് റിസ്ക് കുറയ്ക്കുന്നത് എന്തുകൊണ്ട് — വൈവിധ്യവൽക്കരണത്തിന്റെ ക്ലാസിക് ആശയം തുടക്കക്കാർക്കായി ലളിതമായി വിശദീകരിക്കുന്നു.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=5_98Tdpz7gc" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/5_98Tdpz7gc/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g3">വൈവിധ്യവൽക്കരണം</span>
+          <h3>ആഗോള ETF-കളിൽ എന്തുകൊണ്ട് നിക്ഷേപിക്കുന്നു — വൈവിധ്യവൽക്കരണം</h3>
+          <p>ഒരൊറ്റ ലളിതമായ ETF എങ്ങനെ ഒറ്റയടിക്ക് നിരവധി കമ്പനികളിലും രാജ്യങ്ങളിലുമായി തൽക്ഷണ വൈവിധ്യവൽക്കരണം നൽകുന്നു.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=TiHynlBEMVc" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/TiHynlBEMVc/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g4">ഓഹരി സ്ക്രീനിംഗ്</span>
+          <h3>ശരീഅത്ത് അനുസൃതത്വത്തിനായി ഓഹരികൾ എങ്ങനെ സ്ക്രീൻ ചെയ്യാം</h3>
+          <p>AAOIFI-സർട്ടിഫൈഡ് പണ്ഡിതൻ ഒരു ഓഹരി ശരീഅത്ത് അനുസൃതമാണോ എന്ന് വിലയിരുത്താൻ ഉപയോഗിക്കുന്ന ബിസിനസ്, സാമ്പത്തിക സ്ക്രീനുകൾ വിശദീകരിക്കുന്നു.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=ae2Fk1332kQ" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/ae2Fk1332kQ/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g4">ഓഹരി സ്ക്രീനിംഗ്</span>
+          <h3>ഒരു ഓഹരി ഹലാൽ ആണോ എന്ന് 3 ഘട്ടങ്ങളിൽ അറിയാം</h3>
+          <p>വാങ്ങുന്നതിന് മുമ്പ് ഒരു ഓഹരി ഹലാൽ ആണോ എന്ന് പരിശോധിക്കാനുള്ള വേഗമേറിയ മൂന്ന്-ഘട്ട രീതി — എളുപ്പമുള്ള ഒരു മാനസിക ചെക്ക്ലിസ്റ്റ്.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=jqY2URdUDso" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/jqY2URdUDso/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">ഹലാൽ നിക്ഷേപം</span>
+          <h3>തുടക്കക്കാർക്കായുള്ള ഘട്ടം ഘട്ടമായുള്ള ഹലാൽ നിക്ഷേപ ഗൈഡ്</h3>
+          <p>ഹലാൽ നിക്ഷേപത്തിന്റെ അടിസ്ഥാനങ്ങൾ ഉൾക്കൊള്ളുന്ന സംക്ഷിപ്ത കോഴ്സ് — തത്വങ്ങൾ, പ്രധാന ആസ്തി തരങ്ങൾ, എങ്ങനെ യഥാർത്ഥത്തിൽ ആരംഭിക്കാം എന്നിവ.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=ezJR2ZBgE8c" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/ezJR2ZBgE8c/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">തത്വങ്ങൾ</span>
+          <h3>തുടക്കക്കാർക്കായുള്ള ഹലാൽ നിക്ഷേപം</h3>
+          <p>പുതുതായി വരുന്നവർക്കായി ഹലാൽ നിക്ഷേപത്തിന്റെ അടിസ്ഥാനങ്ങളിലേക്കുള്ള വ്യക്തമായ ആമുഖം — എന്ത് അനുവദനീയം, എന്ത് ഒഴിവാക്കണം, അതിന്റെ കാരണങ്ങൾ.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=0P66-5VM--o" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/0P66-5VM--o/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g2">പോർട്ട്ഫോളിയോ നിർമ്മാണം</span>
+          <h3>ഒരു ഹലാൽ പോർട്ട്ഫോളിയോ എങ്ങനെ നിർമ്മിക്കാം</h3>
+          <p>ഒരു ഹലാൽ പോർട്ട്ഫോളിയോ നിർമ്മിക്കുന്നതിനെക്കുറിച്ചുള്ള ഘട്ടം ഘട്ടമായുള്ള സെഷൻ: സേവിംഗ്സ് ലക്ഷ്യങ്ങൾ നിശ്ചയിക്കൽ, ആസ്തികൾ തിരഞ്ഞെടുക്കൽ, അച്ചടക്കമുള്ള പ്രതിമാസ നിക്ഷേപം.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=vwlHRKlHNjI" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/vwlHRKlHNjI/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">തുടക്കം കുറിക്കാൻ</span>
+          <h3>ഒരു മുസ്ലിം എന്ന നിലയിൽ എങ്ങനെ നിക്ഷേപിക്കാം (തുടക്കക്കാർക്കുള്ള ഗൈഡ്)</h3>
+          <p>ഒരു മുസ്ലിം എന്ന നിലയിൽ നിക്ഷേപിക്കുന്നതിനെക്കുറിച്ചുള്ള തുടക്ക ഗൈഡ് — എന്തിന് നിക്ഷേപിക്കണം, എന്തിൽ നിക്ഷേപിക്കണം, ശരീഅത്ത് അനുസൃത ETF-കൾ ഈ യാത്ര എങ്ങനെ ലളിതമാക്കുന്നു.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+      <a class="vtile" href="https://www.youtube.com/watch?v=5_X5sENoe4E" target="_blank" rel="noopener">
+        <div class="thumb"><img src="https://img.youtube.com/vi/5_X5sENoe4E/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg');"><span class="play">▶</span></div>
+        <div class="vbody"><span class="vtag g1">തുടക്കം കുറിക്കാൻ</span>
+          <h3>നിങ്ങളുടെ ആദ്യ തുക എങ്ങനെ നിക്ഷേപിക്കാം — ഹലാൽ രീതിയിൽ</h3>
+          <p>ആദ്യത്തെ ഒരു തുക ഹലാൽ രീതിയിൽ നിക്ഷേപിക്കുന്നതിനെക്കുറിച്ചുള്ള പ്രായോഗിക വീക്ഷണം — ശരിയായ ഉൽപ്പന്നങ്ങൾ തിരഞ്ഞെടുക്കുന്നത് മുതൽ നിക്ഷേപം യഥാർത്ഥത്തിൽ നടത്തുന്നത് വരെ.</p>
+          <span class="vsrc">▶ YouTube-ൽ കാണുക</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="disclaimer z">
+    <div class="disclaimer-box">
+      <strong>⚠️ ശ്രദ്ധിക്കുക</strong>
+      ഈ വീഡിയോകൾ അതത് സ്രഷ്ടാക്കൾ YouTube-ൽ ഹോസ്റ്റ് ചെയ്തവയാണ്, വിദ്യാഭ്യാസ സൗകര്യത്തിനായി ഇവിടെ ലിങ്ക് ചെയ്തിരിക്കുന്നു. ഞങ്ങൾ അവ ഉടമസ്ഥമാക്കുകയോ ശുപാർശ ചെയ്യുകയോ ചെയ്യുന്നില്ല; അവ സാമ്പത്തിക അല്ലെങ്കിൽ ശരീഅത്ത് ഉപദേശമല്ല. പലതും പൊതുവായ (അല്ലെങ്കിൽ ഇന്ത്യക്ക് പുറത്തുള്ള) വിശദീകരണങ്ങളാണ്, മാത്രമല്ല വീഡിയോകൾ പ്രധാനമായും ഇംഗ്ലീഷിലാണ് — പ്രവർത്തിക്കുന്നതിന് മുമ്പ് ഓരോ ആശയവും നിങ്ങളുടെ സാഹചര്യത്തിനും ഇന്ത്യൻ നിയമങ്ങൾക്കും എങ്ങനെ ബാധകമാകുന്നു എന്ന് എപ്പോഴും ഉറപ്പാക്കുക.
+    </div>
+  </div>
+
+  <footer class="z">
+    <p>ധാർമിക നിക്ഷേപം · <a href="index-ml.html">ഹോമിലേക്ക് മടങ്ങുക</a></p>
+  </footer>
+
+</body>
+</html>

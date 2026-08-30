@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ധാർമിക നിക്ഷേപം · ഹോം</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Serif+Malayalam:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-deep:    #080d16;
+      --bg-card:    #0e1624;
+      --bg-card-2:  #131d2e;
+      --gold:       #c9a84c;
+      --gold-light: #e2c87a;
+      --green:      #1a7a4a;
+      --green-light:#22a363;
+      --text-main:  #eae6da;
+      --text-muted: #8a9bb4;
+      --border:     rgba(201,168,76,0.18);
+      --border-soft:rgba(255,255,255,0.07);
+      --radius:     14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', 'Noto Sans Malayalam', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.8;
+      font-size: 16px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% -5%, rgba(201,168,76,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 90% 100%, rgba(26,122,74,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 40% at 5% 90%, rgba(201,168,76,0.05) 0%, transparent 60%);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none; z-index: 0;
+      mask-image: radial-gradient(ellipse 75% 75% at 50% 40%, black 10%, transparent 85%);
+    }
+
+    .lang-toggle {
+      position: absolute; top: 16px; right: 18px; z-index: 20;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; font-size: 0.82rem; font-weight: 700;
+      color: var(--gold); border: 1px solid var(--border); border-radius: 50px;
+      background: rgba(8,13,22,0.6); backdrop-filter: blur(6px); text-decoration: none;
+    }
+    .lang-toggle:hover { background: rgba(201,168,76,0.14); border-color: var(--gold); }
+
+    .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 5%; }
+
+    header { text-align: center; padding: 74px 5% 18px; position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.74rem; font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--green-light);
+      background: rgba(26,122,74,0.15);
+      border: 1px solid rgba(26,122,74,0.3);
+      padding: 5px 16px; border-radius: 50px; margin-bottom: 22px;
+    }
+    header h1 {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: clamp(2rem, 5.2vw, 3.4rem);
+      font-weight: 600; line-height: 1.25; color: var(--text-main);
+      margin-bottom: 16px;
+    }
+    header h1 em { font-style: normal; color: var(--gold); }
+    header p {
+      max-width: 640px; margin: 0 auto;
+      color: var(--text-muted); font-size: 1.02rem;
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 20px;
+      padding: 40px 0 24px;
+    }
+
+    .tile {
+      position: relative;
+      display: flex; flex-direction: column;
+      background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-card-2) 100%);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 28px 24px 24px;
+      text-decoration: none; color: inherit;
+      overflow: hidden;
+      transform: translateY(0) scale(1);
+      transition: transform 0.32s cubic-bezier(.2,.8,.2,1), box-shadow 0.32s ease, border-color 0.32s ease;
+      will-change: transform;
+      animation: rise 0.6s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .tile::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0; transition: opacity 0.32s ease;
+    }
+    .tile:hover, .tile.is-popped {
+      transform: translateY(-12px) scale(1.045);
+      box-shadow: 0 26px 55px -14px rgba(0,0,0,0.75), 0 0 0 1px rgba(201,168,76,0.55);
+      border-color: var(--gold);
+      z-index: 3;
+    }
+    .tile:hover::before, .tile.is-popped::before { opacity: 1; }
+
+    .tile-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.7rem; margin-bottom: 18px;
+      transition: transform 0.32s cubic-bezier(.2,.8,.2,1), background 0.32s;
+    }
+    .tile:hover .tile-icon, .tile.is-popped .tile-icon {
+      transform: scale(1.08) rotate(-3deg);
+      background: rgba(201,168,76,0.18);
+    }
+
+    .tile h3 {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--text-main); line-height: 1.4; margin-bottom: 10px;
+    }
+
+    .tile-desc {
+      font-size: 0.9rem; color: var(--text-muted);
+      max-height: 0; opacity: 0; overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.35s ease, margin 0.35s ease;
+      margin-bottom: 0;
+    }
+    .tile:hover .tile-desc, .tile.is-popped .tile-desc {
+      max-height: 200px; opacity: 1; margin-bottom: 16px;
+    }
+
+    .tile-cta {
+      margin-top: auto;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em;
+    }
+    .tile-cta.go    { color: var(--gold); }
+    .tile-cta.soon  { color: var(--text-muted); }
+    .tile-cta .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; flex-shrink: 0;
+    }
+
+    .tile.primary {
+      border-color: rgba(201,168,76,0.4);
+      background: linear-gradient(160deg, #12182a 0%, #161f33 100%);
+    }
+    .tile.primary::before { opacity: 1; }
+    .tile.primary .tile-icon { background: rgba(201,168,76,0.16); }
+
+    .tile-hint {
+      font-size: 0.86rem; color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .tile:nth-child(1) { animation-delay: 0.02s; }
+    .tile:nth-child(2) { animation-delay: 0.07s; }
+    .tile:nth-child(3) { animation-delay: 0.12s; }
+    .tile:nth-child(4) { animation-delay: 0.17s; }
+    .tile:nth-child(5) { animation-delay: 0.22s; }
+    .tile:nth-child(6) { animation-delay: 0.27s; }
+    .tile:nth-child(7) { animation-delay: 0.32s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border-soft);
+      margin-top: 36px; padding: 26px 5% 40px;
+      text-align: center;
+    }
+    footer p { font-size: 0.8rem; color: var(--text-muted); max-width: 720px; margin: 0 auto 6px; line-height: 1.8; }
+    footer .tip { font-size: 0.76rem; color: rgba(138,155,180,0.7); }
+    .site-disclaimer { max-width: 780px; margin: 0 auto 18px; padding: 16px 20px; background: rgba(201,168,76,0.05); border: 1px solid var(--border); border-radius: 10px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.85; text-align: left; }
+    .site-disclaimer .d-head { display: block; color: var(--gold); font-weight: 700; font-size: 0.84rem; margin-bottom: 6px; }
+    .site-disclaimer strong { color: var(--text-main); }
+
+    @media (max-width: 600px) {
+      header { padding: 60px 5% 8px; }
+      .tiles { gap: 16px; padding: 30px 0 18px; }
+      .tile { padding: 24px 20px 20px; }
+      .tile-desc { max-height: 200px; opacity: 1; margin-bottom: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tile { animation: none; }
+      .tile, .tile-icon, .tile-desc { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="index.html" class="lang-toggle" aria-label="English">🌐 English</a>
+
+  <header>
+    <div class="eyebrow">ഗൾഫിലെ NRI നിക്ഷേപകർക്കായി</div>
+    <h1>ധാർമിക നിക്ഷേപം — <em>വ്യക്തതയോടെ</em></h1>
+    <p>ശരീഅത്ത് അനുസൃതമായി നിക്ഷേപിക്കാനുള്ള വഴികൾ കണ്ടെത്തുക, ധാർമിക നിക്ഷേപത്തിന്റെ അടിസ്ഥാന തത്വങ്ങൾ പഠിക്കുക, സംശയങ്ങൾക്ക് ഉത്തരം കണ്ടെത്തുക — എല്ലാം ഒരിടത്ത്. തുടങ്ങാൻ ഒരു ടൈൽ തിരഞ്ഞെടുക്കുക.</p>
+  </header>
+
+  <div class="wrap">
+    <div class="tiles">
+
+      <!-- 1. India (LIVE) -->
+      <a href="main-ml.html" class="tile primary">
+        <div class="tile-icon">🇮🇳</div>
+        <h3>ഇന്ത്യയിലെ ധാർമിക നിക്ഷേപം</h3>
+        <div class="tile-hint">ഓഹരികൾ, മ്യൂച്വൽ ഫണ്ടുകൾ, ETF-കൾ, GIFT സിറ്റി എന്നിവയും മറ്റും — സമ്പൂർണ്ണ ഇന്ത്യാ ഗൈഡ്.</div>
+        <div class="tile-desc">ഇന്ത്യയിലെ ശരീഅത്ത് അനുസൃത നിക്ഷേപ മാർഗ്ഗങ്ങളുടെ സമ്പൂർണ്ണ വിവരണം: നേരിട്ടുള്ള ഓഹരികൾ, ധാർമിക മ്യൂച്വൽ ഫണ്ടുകൾ, മറ്റ് ഫണ്ടുകൾ, ബിസിനസ് നിക്ഷേപങ്ങൾ, പ്ലാറ്റ്ഫോമുകൾ, റിസ്കുകൾ, ഒരു മാതൃകാ പോർട്ട്ഫോളിയോ എന്നിവ.</div>
+        <span class="tile-cta go"><span class="dot"></span>വിശദമായി അറിയുക →</span>
+      </a>
+
+      <!-- 2. Other Markets -->
+      <a href="#" class="tile">
+        <div class="tile-icon">🌍</div>
+        <h3>മറ്റ് വിപണികളിലെ ധാർമിക നിക്ഷേപം</h3>
+        <div class="tile-desc">ഇന്ത്യക്ക് പുറത്തുള്ള ശരീഅത്ത് അനുസൃത നിക്ഷേപം — ആഗോള ഓഹരികൾ, യുഎസ് ലിസ്റ്റഡ് ഇസ്ലാമിക് ETF-കൾ, GCC വിപണികൾ, അന്താരാഷ്ട്ര ഫണ്ടുകൾ.</div>
+        <span class="tile-cta soon"><span class="dot"></span>ഉടൻ വരുന്നു</span>
+      </a>
+
+      <!-- 3. Learn -->
+      <a href="learn-ml.html" class="tile">
+        <div class="tile-icon">📚</div>
+        <h3>പഠിക്കുക</h3>
+        <div class="tile-desc">അടിസ്ഥാന ഗൈഡുകളും വിശദീകരണങ്ങളും — മ്യൂച്വൽ ഫണ്ടുകൾ എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്നത് മുതൽ SIP-കൾ, റിസ്ക്, വൈവിധ്യവൽക്കരണം, ദീർഘകാല പദ്ധതി രൂപീകരണം വരെ.</div>
+        <span class="tile-cta go"><span class="dot"></span>കണ്ട് പഠിക്കുക →</span>
+      </a>
+
+      <!-- 4. Ask Your Questions -->
+      <a href="ask-ml.html" class="tile">
+        <div class="tile-icon">💬</div>
+        <h3>നിങ്ങളുടെ ചോദ്യങ്ങൾ ചോദിക്കുക</h3>
+        <div class="tile-desc">ധാർമിക അല്ലെങ്കിൽ ശരീഅത്ത് അനുസൃത നിക്ഷേപത്തെക്കുറിച്ച് പ്രത്യേക സംശയമുണ്ടോ? അത് സമർപ്പിക്കുക, ലളിതമായ ഭാഷയിൽ വ്യക്തമായ ഉത്തരം നേടുക.</div>
+        <span class="tile-cta go"><span class="dot"></span>ഒരു ചോദ്യം ചോദിക്കുക →</span>
+      </a>
+
+      <!-- 5. What is Shariah-Based Investing -->
+      <a href="what-is-shariah-investing-ml.html" class="tile">
+        <div class="tile-icon">☪️</div>
+        <h3>ശരീഅത്ത് അധിഷ്ഠിത നിക്ഷേപം എന്നാൽ എന്ത്</h3>
+        <div class="tile-desc">മൂലധന വിപണികളിലെ ശരീഅത്ത് നിക്ഷേപത്തെക്കുറിച്ചുള്ള ലളിതമായ ആമുഖം — അതിന്റെ അടിസ്ഥാന തത്വങ്ങൾ, സ്ക്രീനിംഗ് എങ്ങനെ പ്രവർത്തിക്കുന്നു, ഉൾപ്പെട്ട ഉപകരണങ്ങൾ എന്നിവ.</div>
+        <span class="tile-cta go"><span class="dot"></span>അടിസ്ഥാനങ്ങൾ പഠിക്കുക →</span>
+      </a>
+
+      <!-- 6. FAQs -->
+      <a href="faqs-ml.html" class="tile">
+        <div class="tile-icon">❓</div>
+        <h3>പതിവ് ചോദ്യങ്ങൾ</h3>
+        <div class="tile-desc">ഗൾഫിലെ NRI നിക്ഷേപകരിൽ നിന്നുള്ള ഏറ്റവും സാധാരണമായ ചോദ്യങ്ങൾക്കുള്ള പെട്ടെന്നുള്ള ഉത്തരങ്ങൾ — അക്കൗണ്ടുകൾ, KYC, നികുതികൾ, റിപാട്രിയേഷൻ എന്നിവയും മറ്റും.</div>
+        <span class="tile-cta go"><span class="dot"></span>പതിവ് ചോദ്യങ്ങൾ കാണുക →</span>
+      </a>
+
+      <!-- 7. Curated Articles -->
+      <a href="curated-articles-ml.html" class="tile">
+        <div class="tile-icon">📰</div>
+        <h3>തിരഞ്ഞെടുത്ത ലേഖനങ്ങൾ</h3>
+        <div class="tile-desc">ധാർമിക നിക്ഷേപം, ഫണ്ട് അവലോകനങ്ങൾ, വിപണി കുറിപ്പുകൾ, ഇസ്ലാമിക് ഫിനാൻസ് എന്നിവയെക്കുറിച്ചുള്ള തിരഞ്ഞെടുത്ത വായനാ പട്ടിക — പതിവായി പുതുക്കുന്നു.</div>
+        <span class="tile-cta go"><span class="dot"></span>ലേഖനങ്ങൾ വായിക്കുക →</span>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="site-disclaimer">
+      <strong class="d-head">⚠️ പ്രധാന നിരാകരണം (Disclaimer)</strong>
+      ഈ വെബ്സൈറ്റ് <strong>പ്രധാനമായും വിദ്യാഭ്യാസപരവും വിവരപരവുമായ ആവശ്യങ്ങൾക്കുള്ളതാണ്</strong>. ഞങ്ങൾ SEBI-രജിസ്റ്റർ ചെയ്ത ഇൻവെസ്റ്റ്മെന്റ് അഡ്വൈസർമാരോ (RIA) റിസർച്ച് അനലിസ്റ്റുകളോ (RA) <strong>അല്ല</strong>. ഈ സൈറ്റിലുള്ള ഒന്നും നിക്ഷേപ, സാമ്പത്തിക, നിയമ, നികുതി അല്ലെങ്കിൽ ശരീഅത്ത് ഉപദേശമോ, ഏതെങ്കിലും സെക്യൂരിറ്റി വാങ്ങാനോ വിൽക്കാനോ ഉള്ള ശുപാർശയോ അല്ല. സെക്യൂരിറ്റികളിലും മ്യൂച്വൽ ഫണ്ടുകളിലുമുള്ള നിക്ഷേപങ്ങൾ വിപണി റിസ്കിന് വിധേയമാണ് — എല്ലാ സ്കീം സംബന്ധമായ രേഖകളും ശ്രദ്ധയോടെ വായിക്കുക, ഏതെങ്കിലും നിക്ഷേപ തീരുമാനമെടുക്കുന്നതിന് മുമ്പ് SEBI-രജിസ്റ്റർ ചെയ്ത ഒരു അഡ്വൈസറെയും യോഗ്യതയുള്ള ശരീഅത്ത് അതോറിറ്റിയെയും സമീപിക്കുക. NRI നിക്ഷേപകർ അവരുടെ താമസ രാജ്യത്ത് ബാധകമായ നികുതി, നിയന്ത്രണ നിയമങ്ങൾ പരിശോധിക്കണം.
+    </div>
+    <p>ധാർമിക നിക്ഷേപം · ഗൾഫിലെ NRI നിക്ഷേപകർക്കായി രൂപകൽപ്പന ചെയ്തത്.</p>
+    <p class="tip">സൂചന: കൂടുതൽ വായിക്കാൻ ഒരു ടൈലിന് മുകളിൽ ഹോവർ ചെയ്യുക അല്ലെങ്കിൽ ടാപ്പ് ചെയ്യുക.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.tile').forEach(function (tile) {
+      tile.addEventListener('click', function (e) {
+        var href = tile.getAttribute('href');
+        if (!href || href === '#') {
+          e.preventDefault();
+          document.querySelectorAll('.tile.is-popped').forEach(function (t) {
+            if (t !== tile) t.classList.remove('is-popped');
+          });
+          tile.classList.toggle('is-popped');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

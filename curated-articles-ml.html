@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>തിരഞ്ഞെടുത്ത ലേഖനങ്ങൾ · ധാർമിക നിക്ഷേപം</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Serif+Malayalam:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg-deep:#080d16; --bg-card:#0e1624; --bg-card-2:#131d2e;
+      --gold:#c9a84c; --gold-light:#e2c87a; --green:#1a7a4a; --green-light:#22a363;
+      --text-main:#eae6da; --text-muted:#8a9bb4;
+      --border:rgba(201,168,76,0.18); --border-soft:rgba(255,255,255,0.07); --radius:14px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Nunito','Noto Sans Malayalam',sans-serif;background:var(--bg-deep);color:var(--text-main);line-height:1.8;font-size:16px;min-height:100vh;position:relative;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background:
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(201,168,76,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 90% 100%, rgba(26,122,74,0.07) 0%, transparent 60%);
+      pointer-events:none;z-index:0;}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,13,22,0.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:16px;}
+    .nav-brand{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:1.15rem;color:var(--gold);text-decoration:none;white-space:nowrap;}
+    .nav-links{display:flex;gap:4px;list-style:none;flex-wrap:wrap;justify-content:flex-end;}
+    .nav-links a{display:block;padding:8px 12px;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-radius:6px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06);}
+    .lang-toggle{color:var(--gold) !important;border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);}
+    .lang-toggle:hover{background:rgba(201,168,76,0.16) !important;}
+
+    header{text-align:center;padding:66px 5% 14px;position:relative;z-index:1;}
+    .breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .breadcrumb span{opacity:.5;}
+    .eyebrow{display:inline-block;font-size:0.74rem;font-weight:700;letter-spacing:0.08em;color:var(--green-light);background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.3);padding:5px 16px;border-radius:50px;margin-bottom:18px;}
+    header h1{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:600;line-height:1.3;margin-bottom:14px;}
+    header h1 em{font-style:normal;color:var(--gold);}
+    header p{max-width:640px;margin:0 auto;color:var(--text-muted);font-size:1rem;}
+
+    .wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:0 5%;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding:36px 0 24px;}
+
+    .card{position:relative;display:flex;flex-direction:column;background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);
+      border:1px solid var(--border-soft);border-radius:var(--radius);padding:26px 24px 22px;text-decoration:none;color:inherit;overflow:hidden;
+      transform:translateY(0);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s;}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+    .card:hover{transform:translateY(-10px);box-shadow:0 24px 50px -14px rgba(0,0,0,.72),0 0 0 1px rgba(201,168,76,0.5);border-color:var(--gold);}
+    .card:hover::before{opacity:1;}
+
+    .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+    .card-num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:rgba(201,168,76,0.4);line-height:1;}
+    .tag{font-size:0.66rem;font-weight:700;letter-spacing:0.02em;padding:4px 10px;border-radius:4px;}
+    .tag-general{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.22);}
+    .tag-india{background:rgba(26,122,74,0.15);color:var(--green-light);border:1px solid rgba(26,122,74,0.28);}
+    .tag-avenue{background:rgba(168,85,247,0.12);color:#c4b5fd;border:1px solid rgba(168,85,247,0.25);}
+    .tag-funds{background:rgba(59,130,246,0.12);color:#93c5fd;border:1px solid rgba(59,130,246,0.25);}
+    .tag-stocks{background:rgba(249,115,22,0.12);color:#fdba74;border:1px solid rgba(249,115,22,0.25);}
+
+    .card h3{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:1.25rem;font-weight:600;line-height:1.4;color:var(--text-main);margin-bottom:8px;}
+    .card .src{font-size:0.78rem;font-weight:700;color:var(--gold);letter-spacing:0.02em;margin-bottom:10px;}
+    .card p{font-size:0.9rem;color:var(--text-muted);line-height:1.75;margin-bottom:16px;}
+    .card .cta{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:700;letter-spacing:0.02em;color:var(--gold);}
+
+    footer{position:relative;z-index:1;border-top:1px solid var(--border-soft);margin-top:30px;padding:24px 5% 40px;text-align:center;}
+    footer p{font-size:0.8rem;color:var(--text-muted);max-width:780px;margin:0 auto;line-height:1.8;}
+
+    @media(max-width:600px){header{padding:46px 5% 8px;}.grid{gap:16px;}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index-ml.html" class="nav-brand">ധാർമിക നിക്ഷേപം</a>
+    <ul class="nav-links">
+      <li><a href="index-ml.html">ഹോം</a></li>
+      <li><a href="main-ml.html">ഇന്ത്യ</a></li>
+      <li><a href="learn-ml.html">പഠിക്കുക</a></li>
+      <li><a href="faqs-ml.html">പതിവ് ചോദ്യങ്ങൾ</a></li>
+      <li><a href="curated-articles.html" class="lang-toggle">🌐 English</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="breadcrumb"><a href="index-ml.html">ഹോം</a><span>›</span><span>തിരഞ്ഞെടുത്ത ലേഖനങ്ങൾ</span></div>
+    <div class="eyebrow">വായനാ പട്ടിക</div>
+    <h1>തിരഞ്ഞെടുത്ത <em>ലേഖനങ്ങൾ</em></h1>
+    <p>ശരീഅത്ത് അധിഷ്ഠിത നിക്ഷേപത്തെക്കുറിച്ചുള്ള തിരഞ്ഞെടുത്ത ലേഖനങ്ങൾ — പൊതുവായ തത്വങ്ങൾ, ഇന്ത്യയിൽ ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു, ലഭ്യമായ വിവിധ മാർഗ്ഗങ്ങൾ എന്നിവ. ഓരോന്നും പ്രസാധകന്റെ സൈറ്റിൽ പുതിയ ടാബിൽ തുറക്കുന്നു. (ലേഖനങ്ങൾ ഇംഗ്ലീഷിലാണ്.)</p>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+
+      <a class="card" href="https://paperfree.com/en/magazine/shariah-compliant-investment" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">01</span><span class="tag tag-general">പൊതുവായത്</span></div>
+        <h3>ശരീഅത്ത് അനുസൃത നിക്ഷേപത്തിനുള്ള സമ്പൂർണ്ണ ഗൈഡ്</h3>
+        <div class="src">Paperfree</div>
+        <p>ഹലാൽ നിക്ഷേപത്തിന്റെ വിശാലമായ അവലോകനം — പലിശയും നിഷിദ്ധ മേഖലകളും ഒഴിവാക്കുന്ന അടിസ്ഥാന തത്വങ്ങൾ, സ്ക്രീനിംഗ് എങ്ങനെ പ്രവർത്തിക്കുന്നു, അനുസൃത ഉൽപ്പന്നങ്ങളുടെ ലോകം എന്തുകൊണ്ട് വളരുന്നു എന്നിവ.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://blog.zoya.finance/halal-investing-101/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">02</span><span class="tag tag-general">തുടക്കക്കാർ</span></div>
+        <h3>ഹലാൽ നിക്ഷേപം 101: സമ്പൂർണ്ണ തുടക്കക്കാരുടെ ഗൈഡ്</h3>
+        <div class="src">Zoya</div>
+        <p>പുതുതായി വരുന്നവർക്കുള്ള അടിസ്ഥാനങ്ങൾ: ഒരു ഓഹരി ഹലാൽ ആക്കുന്നത് എന്ത്, 5% നിയമം, ബിസിനസ് പ്രവർത്തനത്തിലും സാമ്പത്തിക അനുപാതങ്ങളിലുമുള്ള സ്ക്രീനിംഗ്, ഓഹരികൾക്ക് പുറമെ ഏതൊക്കെ ഓപ്ഷനുകൾ ഉണ്ട് എന്നിവ.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://www.policybazaar.com/funds/articles/shariah-compliant-mutual-funds/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">03</span><span class="tag tag-general">തത്വങ്ങൾ</span></div>
+        <h3>ശരീഅത്ത് അനുസൃത മ്യൂച്വൽ ഫണ്ട് സ്കീമുകൾ എന്നാൽ എന്ത്?</h3>
+        <div class="src">Policybazaar</div>
+        <p>2010-ൽ S&amp;P ശരീഅത്ത് സൂചികകളിലൂടെ ശരീഅത്ത് നിക്ഷേപം ഇന്ത്യയിൽ എത്തിയത് എങ്ങനെ, അനുസൃത ഫണ്ടുകളെ രൂപപ്പെടുത്തുന്ന അടിസ്ഥാന നിയമങ്ങൾ — പലിശ (riba) ഇല്ല, ഗരാർ ഇല്ല, മൈസിർ ഇല്ല — എന്നിവയെക്കുറിച്ചുള്ള പശ്ചാത്തലം.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://upstox.com/learning-center/mutual-funds/shariah-compliant-mutual-funds-in-india-advantages-disadvantages-process/article-836/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">04</span><span class="tag tag-funds">ഇന്ത്യ · ഫണ്ടുകൾ</span></div>
+        <h3>ഇന്ത്യയിലെ ശരീഅത്ത് അനുസൃത മ്യൂച്വൽ ഫണ്ടുകൾ: എങ്ങനെ പ്രവർത്തിക്കുന്നു</h3>
+        <div class="src">Upstox</div>
+        <p>ഹലാൽ ഫണ്ടുകൾ ഹോൾഡിംഗുകൾ എങ്ങനെ സ്ക്രീൻ ചെയ്യുന്നു, ആർക്കൊക്കെ നിക്ഷേപിക്കാം, ഉൾപ്പെട്ട പ്രധാന റിസ്കുകൾ, എങ്ങനെ ആരംഭിക്കാം എന്നിവ ഉൾക്കൊള്ളുന്ന ഇന്ത്യ-കേന്ദ്രീകൃത വിശദീകരണം.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://www.fundsindia.com/academy/shariah-compliant-mutual-funds-available-schemes-in-india/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">05</span><span class="tag tag-funds">ഇന്ത്യ · ഫണ്ടുകൾ</span></div>
+        <h3>ഇന്ത്യയിലെ ശരീഅത്ത് അനുസൃത മ്യൂച്വൽ ഫണ്ടുകളും സ്കീമുകളും</h3>
+        <div class="src">FundsIndia</div>
+        <p>ടാറ്റ എത്തിക്കൽ ഫണ്ട് പോലുള്ള സ്കീമുകൾ പരിശോധിക്കുന്നു, ഒരു SIP ഹലാൽ ആകാമോ എന്ന് ചോദിക്കുന്നു, ഒരു ഫണ്ട് യഥാർത്ഥത്തിൽ ശരീഅത്ത് മാർഗ്ഗനിർദ്ദേശങ്ങൾ പാലിക്കുന്നുണ്ടോ എന്ന് എങ്ങനെ ഉറപ്പാക്കാം എന്നും വിശദീകരിക്കുന്നു.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://greenportfolio.co/invest/smallcase/halal-investing-guide-shariah" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">06</span><span class="tag tag-india">ഇന്ത്യ</span></div>
+        <h3>ഇന്ത്യയിലെ ശരീഅത്ത് നിക്ഷേപത്തിനുള്ള സമ്പൂർണ്ണ ഗൈഡ്</h3>
+        <div class="src">Green Portfolio</div>
+        <p>സാധാരണയായി അനുസൃതമായ മേഖലകൾ, ഉപയോഗിക്കേണ്ട സ്ക്രീനിംഗ് ഉപകരണങ്ങൾ, സാധാരണ മിഥ്യാധാരണകൾ, സ്മോൾകേസുകൾ ഉൾപ്പെടെ ഇന്ത്യയിൽ ലഭ്യമായ ഹലാൽ ഉൽപ്പന്നങ്ങളുടെ ശ്രേണി എന്നിവ ഉൾക്കൊള്ളുന്നു.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://tradersunion.com/islamic-investing/halal-investment-options/in-india/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">07</span><span class="tag tag-avenue">മാർഗ്ഗങ്ങൾ</span></div>
+        <h3>ഇന്ത്യയിലെ മികച്ച ഹലാൽ നിക്ഷേപ ഓപ്ഷനുകൾ</h3>
+        <div class="src">Traders Union</div>
+        <p>ഇന്ത്യൻ നിക്ഷേപകർക്ക് തുറന്നിരിക്കുന്ന മാർഗ്ഗങ്ങളുടെ ഒരു സർവേ — ഇസ്ലാമിക് മ്യൂച്വൽ ഫണ്ടുകൾ, ശരീഅത്ത് ഓഹരികൾ, സുകൂക്ക്, സ്വർണ്ണം, റിയൽ എസ്റ്റേറ്റ്, ഇസ്ലാമിക് ETF-കൾ — ഒപ്പം ഓരോന്നും ഏതിന് അനുയോജ്യമെന്നും.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://barakahinsider.com/the-definitive-guide-to-halal-investing-in-india/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">08</span><span class="tag tag-avenue">ഇന്ത്യ · NRI</span></div>
+        <h3>ഇന്ത്യയിലെ ഹലാൽ നിക്ഷേപത്തിനുള്ള ആധികാരിക ഗൈഡ്</h3>
+        <div class="src">Barakah Insider</div>
+        <p>റെസിഡന്റുകൾക്കും NRI-കൾക്കുമായി റിയൽ എസ്റ്റേറ്റ്, സ്വർണ്ണം, ഓഹരികൾ എന്നിവയിലുടനീളമുള്ള പ്രായോഗിക ഗൈഡ് — മാതൃകാ അലോക്കേഷനുകളും 'ഹലാൽ' എന്ന് വിളിക്കുന്ന തട്ടിപ്പുകളെക്കുറിച്ചുള്ള വ്യക്തമായ മുന്നറിയിപ്പുകളും സഹിതം.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://blog.islamicly.com/halal-investing-guide/beginners-guide-to-halal-etfs-and-islamic-finance/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">09</span><span class="tag tag-avenue">മാർഗ്ഗങ്ങൾ · ETF</span></div>
+        <h3>ഹലാൽ ETF-കളും ഇസ്ലാമിക് ഫിനാൻസും: തുടക്കക്കാരുടെ ഗൈഡ്</h3>
+        <div class="src">Islamicly</div>
+        <p>ശരീഅത്ത് അനുസൃത ETF-കൾ, അവയുടെ ചെലവുകൾ മ്യൂച്വൽ ഫണ്ടുകളുമായി എങ്ങനെ താരതമ്യം ചെയ്യുന്നു, ഒരു ഹലാൽ പോർട്ട്ഫോളിയോയ്ക്കായി ഒന്ന് തിരഞ്ഞെടുക്കുമ്പോൾ എന്ത് നോക്കണം എന്നിവ വിശദീകരിക്കുന്നു.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+      <a class="card" href="https://academy.musaffa.com/15-halal-stocks-in-india-by-market-capitalization/" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-num">10</span><span class="tag tag-stocks">ഇന്ത്യ · ഓഹരികൾ</span></div>
+        <h3>ഇന്ത്യയിലെ മികച്ച ഹലാൽ ഓഹരികൾ (മാർക്കറ്റ് ക്യാപ് അനുസരിച്ച്)</h3>
+        <div class="src">Musaffa Academy</div>
+        <p>ഇന്ത്യയിൽ ഹലാൽ ഓഹരി തിരഞ്ഞെടുപ്പ് പ്രായോഗികമായി എങ്ങനെ കാണപ്പെടുന്നു എന്നതിന്റെ ഒരു ഉദാഹരണം, ഏതൊക്കെ ഉപകരണങ്ങൾ ഒഴിവാക്കണം എന്നതിനെക്കുറിച്ചുള്ള ഓർമ്മപ്പെടുത്തലും അതിന്റെ കാരണവും സഹിതം.</p>
+        <span class="cta">ലേഖനം വായിക്കുക →</span>
+      </a>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>തിരഞ്ഞെടുത്ത ലേഖനങ്ങൾ · ധാർമിക നിക്ഷേപം. ലിങ്കുകൾ മൂന്നാം കക്ഷി പ്രസാധകരിലേക്ക് നയിക്കുന്നു; അവരുടെ ഉള്ളടക്കം ഞങ്ങൾ നിയന്ത്രിക്കുകയോ ശുപാർശ ചെയ്യുകയോ ചെയ്യുന്നില്ല. വിദ്യാഭ്യാസ ആവശ്യങ്ങൾക്ക് മാത്രം — സാമ്പത്തിക, നിയമ, അല്ലെങ്കിൽ ശരീഅത്ത് ഉപദേശമല്ല.</p>
+  </footer>
+</body>
+</html>
