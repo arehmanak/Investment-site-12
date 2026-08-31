@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>പതിവ് ചോദ്യങ്ങൾ · ധാർമിക നിക്ഷേപം</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Serif+Malayalam:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg-deep:#080d16; --bg-card:#0e1624; --bg-card-2:#131d2e;
+      --gold:#c9a84c; --gold-light:#e2c87a; --green:#1a7a4a; --green-light:#22a363;
+      --text-main:#eae6da; --text-muted:#8a9bb4;
+      --border:rgba(201,168,76,0.18); --border-soft:rgba(255,255,255,0.07); --radius:12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Nunito','Noto Sans Malayalam',sans-serif;background:var(--bg-deep);color:var(--text-main);line-height:1.85;font-size:16px;min-height:100vh;position:relative;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background:
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(201,168,76,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 45% at 90% 100%, rgba(26,122,74,0.07) 0%, transparent 60%);
+      pointer-events:none;z-index:0;}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,13,22,0.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:16px;}
+    .nav-brand{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:1.15rem;color:var(--gold);text-decoration:none;white-space:nowrap;}
+    .nav-links{display:flex;gap:4px;list-style:none;flex-wrap:wrap;}
+    .nav-links a{display:block;padding:8px 12px;font-size:0.82rem;font-weight:600;color:var(--text-muted);text-decoration:none;border-radius:6px;transition:color .2s,background .2s;}
+    .nav-links a:hover{color:var(--gold);background:rgba(201,168,76,0.06);}
+
+    header{text-align:center;padding:66px 5% 14px;position:relative;z-index:1;}
+    .breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;flex-wrap:wrap;justify-content:center;}
+    .breadcrumb a{color:var(--gold);text-decoration:none;}
+    .breadcrumb a:hover{text-decoration:underline;}
+    .breadcrumb span{opacity:.5;}
+    .eyebrow{display:inline-block;font-size:0.74rem;font-weight:700;letter-spacing:0.08em;color:var(--green-light);background:rgba(26,122,74,0.15);border:1px solid rgba(26,122,74,0.3);padding:5px 16px;border-radius:50px;margin-bottom:18px;}
+    header h1{font-family:'Cormorant Garamond','Noto Serif Malayalam',serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:600;line-height:1.3;margin-bottom:14px;}
+    header h1 em{font-style:normal;color:var(--gold);}
+    header p{max-width:640px;margin:0 auto;color:var(--text-muted);font-size:1rem;}
+
+    .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 5%;}
+
+    .cat{padding:34px 0 6px;}
+    .cat-label{font-size:0.74rem;font-weight:700;letter-spacing:0.06em;color:var(--gold);margin-bottom:14px;}
+
+    .faq{border:1px solid var(--border-soft);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%);transition:border-color .25s;}
+    .faq.open{border-color:var(--border);}
+    .faq-q{display:flex;align-items:flex-start;gap:14px;cursor:pointer;padding:16px 20px;user-select:none;outline:none;}
+    .faq-q:focus-visible{outline:1px solid var(--gold);outline-offset:-2px;}
+    .faq-q .qmark{flex-shrink:0;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--gold);line-height:1.6;}
+    .faq-q h3{flex:1;font-size:1rem;font-weight:600;color:var(--text-main);line-height:1.6;}
+    .faq-ind{flex-shrink:0;position:relative;width:22px;height:22px;border:1px solid var(--border);border-radius:50%;margin-top:4px;transition:background .25s,border-color .25s;}
+    .faq-ind::before,.faq-ind::after{content:'';position:absolute;top:50%;left:50%;background:var(--gold);transition:opacity .25s,transform .25s;}
+    .faq-ind::before{width:9px;height:2px;transform:translate(-50%,-50%);}
+    .faq-ind::after{width:2px;height:9px;transform:translate(-50%,-50%);}
+    .faq.open .faq-ind{background:rgba(201,168,76,0.14);border-color:var(--gold);}
+    .faq.open .faq-ind::after{opacity:0;transform:translate(-50%,-50%) rotate(90deg);}
+
+    .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;}
+    .faq-a-in{overflow:hidden;min-height:0;}
+    .faq.open .faq-a{grid-template-rows:1fr;}
+    .faq-a p{padding:0 20px 18px 48px;font-size:0.92rem;color:var(--text-muted);line-height:1.9;}
+
+    .disclaimer{position:relative;z-index:1;max-width:820px;margin:26px auto 0;padding:0 5%;}
+    .disclaimer-box{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius);padding:18px 22px;font-size:0.84rem;color:var(--text-muted);line-height:1.9;}
+    .disclaimer-box strong{color:var(--gold);display:block;margin-bottom:5px;font-size:0.76rem;letter-spacing:0.04em;}
+
+    footer{position:relative;z-index:1;border-top:1px solid var(--border-soft);margin-top:30px;padding:24px 5% 40px;text-align:center;}
+    footer p{font-size:0.8rem;color:var(--text-muted);max-width:760px;margin:0 auto;line-height:1.8;}
+
+    @media(max-width:600px){header{padding:46px 5% 8px;}.faq-a p{padding-left:20px;}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index-ml.html" class="nav-brand">ധാർമിക നിക്ഷേപം</a>
+    <ul class="nav-links">
+      <li><a href="index-ml.html">ഹോം</a></li>
+      <li><a href="main-ml.html">ഇന്ത്യ</a></li>
+      <li><a href="curated-articles-ml.html">ലേഖനങ്ങൾ</a></li>
+      <li><a href="learn-ml.html">പഠിക്കുക</a></li>
+      <li><a href="faqs.html" style="color:var(--gold);border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);">🌐 English</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="breadcrumb"><a href="index-ml.html">ഹോം</a><span>›</span><span>പതിവ് ചോദ്യങ്ങൾ</span></div>
+    <div class="eyebrow">ചോദ്യങ്ങളും ഉത്തരങ്ങളും</div>
+    <h1>പതിവായി ചോദിക്കുന്ന <em>ചോദ്യങ്ങൾ</em></h1>
+    <p>ശരീഅത്ത് അനുവർത്തനം, ഇന്ത്യയിലെ ഹലാൽ നിക്ഷേപം, ഇന്ത്യൻ ഓഹരി വിപണി എന്നിവയെക്കുറിച്ച് പുതിയ നിക്ഷേപകരിൽ നിന്നുള്ള മുപ്പതോളം സാധാരണ ചോദ്യങ്ങൾ. ഉത്തരം കാണാൻ ഏതെങ്കിലും ചോദ്യത്തിൽ ടാപ്പ് ചെയ്യുക.</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- CATEGORY A -->
+    <div class="cat"><div class="cat-label">ശരീഅത്ത് / ഹലാൽ നിക്ഷേപം — അടിസ്ഥാനങ്ങൾ</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ശരീഅത്ത് അനുസൃത (ഹലാൽ) നിക്ഷേപം എന്നാൽ എന്ത്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഇസ്ലാമിക നിയമപ്രകാരം അനുവദനീയമായ രീതികളിൽ മാത്രം നിക്ഷേപിക്കുക എന്നാണ് ഇതിനർത്ഥം: പലിശ (റിബ), അമിതമായ അനിശ്ചിതത്വം (ഗറർ), ചൂതാട്ടം (മൈസിർ) എന്നിവ ഒഴിവാക്കുക, നിരോധിത മേഖലകളിലെ ബിസിനസുകളിൽ നിന്ന് അകന്നു നിൽക്കുക. വരുമാനം പണത്തിൽ നിന്നല്ല, മറിച്ച് യഥാർത്ഥവും ഉൽപ്പാദനക്ഷമവുമായ സാമ്പത്തിക പ്രവർത്തനത്തിൽ നിന്നും പങ്കിട്ട റിസ്കിൽ നിന്നും വരുമെന്ന് പ്രതീക്ഷിക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഓഹരി വിപണിയിൽ നിക്ഷേപിക്കുന്നത് ഹലാലാണോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>അതാകാം. ഒരു ഓഹരി ഒരു യഥാർത്ഥ ബിസിനസിന്റെ ഭാഗിക ഉടമസ്ഥതയാണ്, അത് അനുവദനീയമാണ് — കമ്പനിയുടെ പ്രധാന പ്രവർത്തനം അനുവദനീയമായിരിക്കുകയും അത് സാമ്പത്തിക സ്ക്രീനുകൾ കടക്കുകയും ചെയ്യുന്നിടത്തോളം. വിപണി തന്നെ ഒരു വേദി മാത്രമാണ്; ഓരോ കമ്പനിയെയും വെവ്വേറെ വിലയിരുത്തണം.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>റിബ എന്നാൽ എന്ത്, എന്തുകൊണ്ട് അത് നിരോധിച്ചിരിക്കുന്നു?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>റിബ എന്നാൽ പലിശയാണ് — യഥാർത്ഥ റിസ്ക് പങ്കിടാതെയോ മൂല്യം ചേർക്കാതെയോ വായ്പ നൽകിയ പണത്തിന്മേലുള്ള ഉറപ്പുള്ള വർധനവ്. ഇസ്ലാം ഇതിനെ അനീതിയായി കണക്കാക്കുന്നു, ഇത് പലിശ നൽകുന്ന ബോണ്ടുകൾ, പരമ്പരാഗത ഫിക്സഡ് ഡിപ്പോസിറ്റുകൾ, സാധാരണ സേവിംഗ്സ് അക്കൗണ്ട് പലിശ എന്നിവയെ ഒഴിവാക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഗററും മൈസിറും എന്താണ് അർത്ഥമാക്കുന്നത്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഗറർ എന്നാൽ ഒരു കരാറിലെ അമിതമായ അനിശ്ചിതത്വമോ അവ്യക്തതയോ ആണ്; മൈസിർ എന്നാൽ ചൂതാട്ടമോ ശുദ്ധമായ ഊഹക്കച്ചവടമോ ആണ്. രണ്ടും ഒഴിവാക്കപ്പെടുന്നു, അതുകൊണ്ടാണ് സങ്കീർണ്ണമായ ഡെറിവേറ്റീവുകൾ, വാതുവെപ്പ് ഉൽപ്പന്നങ്ങൾ, പരമ്പരാഗത ഇൻഷുറൻസ് ഘടനകൾ എന്നിവ പൊതുവെ ഒഴിവാക്കുന്നത്.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഏതൊക്കെ ബിസിനസ് മേഖലകൾ ഒഴിവാക്കപ്പെടുന്നു?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>സാധാരണയായി ഒഴിവാക്കുന്നവ: പരമ്പരാഗത ബാങ്കിംഗും വായ്പയും, ഇൻഷുറൻസ്, മദ്യം, പുകയില, പന്നിയിറച്ചി, ചൂതാട്ടവും കാസിനോകളും, മുതിർന്നവർക്കുള്ള വിനോദം, ആയുധങ്ങൾ — ചിലപ്പോൾ സിനിമയും സംഗീതവും. കൃത്യമായ പട്ടിക ഉപയോഗിക്കുന്ന സ്ക്രീനിംഗ് മാനദണ്ഡത്തെ ആശ്രയിച്ചിരിക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഒരു ഓഹരി സ്ക്രീൻ ചെയ്യാൻ ഏതൊക്കെ സാമ്പത്തിക അനുപാതങ്ങൾ ഉപയോഗിക്കുന്നു?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ബിസിനസ് പരിശോധനയ്ക്ക് പുറമെ, പണ്ഡിതന്മാർ സാമ്പത്തിക പരിധികൾ പ്രയോഗിക്കുന്നു. സാധാരണ AAOIFI-ശൈലിയിലുള്ള പരിധികൾ: പലിശ-അധിഷ്ഠിത കടം മാർക്കറ്റ് ക്യാപിന്റെ ഏകദേശം 30–33%-ത്തിന് താഴെ (ചില മാനദണ്ഡങ്ങൾ ആസ്തിയുടെ 25% ഉപയോഗിക്കുന്നു), പണവും പലിശ-അധിഷ്ഠിത സെക്യൂരിറ്റികളും ഏകദേശം മൂന്നിലൊന്നിന് താഴെ, അനുവദനീയമല്ലാത്ത വരുമാനം മൊത്തം വരുമാനത്തിന്റെ 5%-ത്തിന് താഴെ.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>വരുമാനത്തിന്റെ "ശുദ്ധീകരണം" എന്നാൽ എന്ത്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു കമ്പനി ചെറിയ അളവിൽ ആകസ്മികമായ അനുവദനീയമല്ലാത്ത വരുമാനം (ഉദാഹരണത്തിന്, അതിന്റെ പണത്തിന്മേലുള്ള പലിശ) നേടിയാൽ, നിങ്ങളുടെ വരുമാനത്തിന്റെ അതിനനുസൃതമായ ഭാഗം അശുദ്ധമായി കണക്കാക്കുന്നു. പ്രതിഫലം പ്രതീക്ഷിക്കാതെ ആ ഭാഗം ദാനം ചെയ്യുന്നതാണ് ശുദ്ധീകരണം. സ്ക്രീനിംഗ് ആപ്പുകളും ചില ഫണ്ടുകളും ഓഹരി ഒന്നിന്റെ തുക കണക്കാക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഈ രീതിയിൽ നിക്ഷേപിക്കാൻ ഞാൻ മുസ്ലിം ആയിരിക്കണോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>വേണ്ട. ആർക്കും ശരീഅത്ത് അനുസൃത ഉൽപ്പന്നങ്ങൾ ഉപയോഗിക്കാം. പല മുസ്ലിംകളല്ലാത്തവരും ഇവയെ ധാർമികമോ സാമൂഹികമായി ഉത്തരവാദിത്തമുള്ളതോ ആയ നിക്ഷേപമായി തിരഞ്ഞെടുക്കുന്നു, കാരണം സ്ക്രീനുകൾ സ്വാഭാവികമായും അമിത കടമുള്ള കമ്പനികളെയും ദോഷകരമായ മേഖലകളെയും ഒഴിവാക്കുന്നു.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY B -->
+    <div class="cat"><div class="cat-label">ഇന്ത്യയിലെ ശരീഅത്ത് അധിഷ്ഠിത നിക്ഷേപം</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഇന്ത്യയിൽ ഏതൊക്കെ ഹലാൽ നിക്ഷേപ മാർഗ്ഗങ്ങൾ ഉണ്ട്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ശരീഅത്ത് അനുസൃത ഇക്വിറ്റി മ്യൂച്വൽ ഫണ്ടുകൾ, സ്ക്രീൻ ചെയ്ത നേരിട്ടുള്ള ഓഹരികൾ, ഒരു ശരീഅത്ത് ഇൻഡെക്സ്-ഫണ്ട് മാർഗ്ഗം, സ്മോൾകേസുകൾ, സ്വർണ്ണം, റിയൽ എസ്റ്റേറ്റ്, കൂടാതെ — കൂടുതലും ആഗോള പ്ലാറ്റ്ഫോമുകൾ വഴി — സുകൂക്ക്. ഓരോ ഓപ്ഷനും പ്രതിബദ്ധത കാണിക്കുന്നതിന് മുമ്പ് അതിന്റേതായ അനുവർത്തന പരിശോധന ആവശ്യമാണ്.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഇന്ത്യയിൽ ഏതൊക്കെ ശരീഅത്ത് അനുസൃത മ്യൂച്വൽ ഫണ്ടുകൾ ലഭ്യമാണ്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>പ്രധാനവയിൽ ടാറ്റ എത്തിക്കൽ ഫണ്ട് (ആക്ടീവ്, 1996 മുതൽ), ടോറസ് എത്തിക്കൽ ഫണ്ട് (ആക്ടീവ്, 2009 മുതൽ), ക്വാണ്ടം എത്തിക്കൽ ഫണ്ട് (2024 മുതൽ), UTI Nifty500 ശരീഅത്ത് ഇൻഡെക്സ് ഫണ്ട് (പാസീവ്) എന്നിവ ഉൾപ്പെടുന്നു. ലഭ്യതയും വിശദാംശങ്ങളും മാറാവുന്നതിനാൽ, നിക്ഷേപിക്കുന്നതിന് മുമ്പ് നിലവിലെ സ്ഥിതി പരിശോധിക്കുക.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഒരു ആക്ടീവ് എത്തിക്കൽ ഫണ്ടും ശരീഅത്ത് ഇൻഡെക്സ് ഫണ്ടും തമ്മിലുള്ള വ്യത്യാസം എന്താണ്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു ആക്ടീവ് എത്തിക്കൽ ഫണ്ടിന് ഒരു ബെഞ്ച്മാർക്കിനെ മറികടക്കാൻ ലക്ഷ്യമിട്ട് സ്ക്രീൻ ചെയ്ത ഓഹരികൾ തിരഞ്ഞെടുക്കുന്ന ഒരു മാനേജർ ഉണ്ട് — ഉയർന്ന ചെലവും കുറച്ച് മാനേജർ റിസ്കും. ഒരു ശരീഅത്ത് ഇൻഡെക്സ് ഫണ്ട് Nifty 500 ശരീഅത്ത് പോലുള്ള ഒരു സ്ക്രീൻ ചെയ്ത സൂചികയെ നിഷ്ക്രിയമായി പിന്തുടരുന്നു, കുറഞ്ഞ ചെലവിലും ഓഹരി-തിരഞ്ഞെടുപ്പ് റിസ്ക് ഇല്ലാതെയും.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഇന്ത്യയിൽ ശരീഅത്ത് അനുസൃത ETF-കൾ ഉണ്ടോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>വർഷങ്ങളായി ഇന്ത്യയിൽ ശരീഅത്ത് സൂചികയും ETF-ശൈലിയിലുള്ള ഓപ്ഷനുകളും ഉണ്ടായിരുന്നു, പുതിയ പാസീവ് ഇൻഡെക്സ് ഫണ്ടുകൾ ശരീഅത്ത് സൂചികകളെ പിന്തുടരുന്നു. ഒരു പ്രത്യേക ഉൽപ്പന്നം നിലവിൽ സജീവമാണെന്ന് എപ്പോഴും സ്ഥിരീകരിക്കുക, ആശ്രയിക്കുന്നതിന് മുമ്പ് അതിന്റെ ലിക്വിഡിറ്റിയും ട്രാക്കിംഗും പരിശോധിക്കുക.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>സ്മോൾകേസുകൾ എന്താണ്, ഹലാൽ ആയവ ഉണ്ടോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു തീമിനെ അടിസ്ഥാനമാക്കി തയ്യാറാക്കിയ ഓഹരികളുടെ ഒരു കൂട്ടമാണ് സ്മോൾകേസ്. ചിലത് ശരീഅത്ത് അനുവർത്തനത്തിനായി സ്ക്രീൻ ചെയ്യപ്പെടുന്നു — നിരോധിത മേഖലകളും ഉയർന്ന കടമുള്ള കമ്പനികളും ഒഴിവാക്കി. ആര് ബാസ്കറ്റ് സ്ക്രീൻ ചെയ്യുന്നു, ഏത് മാനദണ്ഡത്തിനെതിരെ, എത്ര തവണ അവലോകനം ചെയ്യുന്നു എന്ന് പരിശോധിക്കുക.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഇന്ത്യയിൽ ഹലാൽ രീതിയിൽ സ്വർണ്ണത്തിൽ നിക്ഷേപിക്കാമോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>അതെ. ഭൗതിക സ്വർണ്ണവും സ്ക്രീൻ ചെയ്ത, ആസ്തി-അധിഷ്ഠിത രൂപങ്ങളിൽ സൂക്ഷിക്കുന്ന സ്വർണ്ണവും പൊതുവെ അനുവദനീയമാണ്, ചില ആപ്പുകൾ ഭൗതിക ലോഹത്താൽ പിന്തുണയ്ക്കുന്ന ഡിജിറ്റൽ സ്വർണ്ണം വാഗ്ദാനം ചെയ്യുന്നു. പലിശ-അധിഷ്ഠിതമോ ശുദ്ധമായി ഊഹക്കച്ചവടപരമോ ആയ സ്വർണ്ണ ഉൽപ്പന്നങ്ങൾ ഒഴിവാക്കുക, കൈവശം വയ്ക്കുന്നതിനെക്കുറിച്ചുള്ള നിയമങ്ങൾ പാലിക്കുക.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഇന്ത്യയിൽ റിയൽ എസ്റ്റേറ്റ് — അല്ലെങ്കിൽ REIT-കൾ — ഹലാലാണോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>വാടകയ്ക്കോ മൂല്യവർധനവിനോ വേണ്ടിയുള്ള വസ്തുവിന്റെ നേരിട്ടുള്ള ഉടമസ്ഥത, പലിശ ഉപയോഗിച്ച് ധനസഹായം നൽകിയിട്ടില്ലെങ്കിൽ പൊതുവെ അനുവദനീയമാണ്. പലിശ-ഭാരമുള്ള ഘടനകളും അനുവദനീയമല്ലാത്ത വാടകക്കാരും ഒഴിവാക്കുന്നെങ്കിൽ REIT-കളും ചില വസ്തു പ്ലാറ്റ്ഫോമുകളും യോഗ്യമായേക്കാം — ഇവയ്ക്ക് ഓരോന്നായി അവലോകനം ആവശ്യമാണ്.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>സുകൂക്ക് (ഇസ്ലാമിക് ബോണ്ടുകൾ) ഇന്ത്യയിൽ ലഭ്യമാണോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>സുകൂക്ക് എന്നത് പലിശയ്ക്ക് പകരം യഥാർത്ഥ ആസ്തികളിൽ നിന്ന് വരുമാനം നൽകുന്ന ആസ്തി-അധിഷ്ഠിത സർട്ടിഫിക്കറ്റുകളാണ്. അവ ഇന്ത്യയിൽ ആഭ്യന്തരമായി ഇതുവരെ വ്യാപകമായി പുറത്തിറക്കിയിട്ടില്ല, അതിനാൽ ഇന്ത്യൻ നിക്ഷേപകർ സാധാരണയായി ആഗോള ഫണ്ടുകൾ അല്ലെങ്കിൽ പ്ലാറ്റ്ഫോമുകൾ വഴി അവ ആക്സസ് ചെയ്യുന്നു — പലപ്പോഴും USD-യിൽ, ഇത് കറൻസി പരിഗണനകൾ കൂട്ടിച്ചേർക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഒരു ഓഹരി ശരീഅത്ത് അനുസൃതമാണെന്ന് എങ്ങനെ പരിശോധിക്കാം?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>Islamicly, Zoya അല്ലെങ്കിൽ Musaffa പോലുള്ള ഒരു സ്ക്രീനിംഗ് ഉപകരണം ഉപയോഗിക്കുക. അവ ബിസിനസ് പ്രവർത്തനവും സാമ്പത്തിക അനുപാതങ്ങളും പരിശോധിച്ച് പതിവായി പുതുക്കുന്ന ഒരു അനുവദനീയ/അനുവദനീയമല്ലാത്ത സ്ഥിതി നൽകുന്നു. അതിർത്തി കേസുകൾ കമ്പനിയുടെ ഫയലിംഗുകൾ സൂക്ഷ്മമായി പരിശോധിക്കുന്നത് നല്ലതാണ്.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY C -->
+    <div class="cat"><div class="cat-label">ഇന്ത്യൻ ഓഹരി വിപണി — പുതിയ നിക്ഷേപകർക്കുള്ള അടിസ്ഥാനങ്ങൾ</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>NSE, BSE, സെൻസെക്സ്, നിഫ്റ്റി എന്നിവ എന്താണ് അർത്ഥമാക്കുന്നത്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>NSE-യും BSE-യും ഇന്ത്യയുടെ രണ്ട് പ്രധാന ഓഹരി എക്സ്ചേഞ്ചുകളാണ്. സെൻസെക്സ് (30 BSE കമ്പനികൾ), നിഫ്റ്റി 50 (50 NSE കമ്പനികൾ) എന്നിവ വിപണിയുടെ മൊത്തത്തിലുള്ള ദിശ ട്രാക്ക് ചെയ്യുന്ന ബെഞ്ച്മാർക്ക് സൂചികകളാണ്.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഡീമാറ്റ്, ട്രേഡിംഗ് അക്കൗണ്ട് എന്നാൽ എന്ത്, എനിക്ക് അത് ആവശ്യമുണ്ടോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു ഡീമാറ്റ് അക്കൗണ്ട് നിങ്ങളുടെ ഓഹരികൾ ഇലക്ട്രോണിക് രൂപത്തിൽ സൂക്ഷിക്കുന്നു, ഒരു ട്രേഡിംഗ് അക്കൗണ്ട് വാങ്ങൽ-വിൽപ്പന ഓർഡറുകൾ നൽകാൻ ഉപയോഗിക്കുന്നു — ഇവ സാധാരണയായി ഒരു ബ്രോക്കറുമായി ഒരുമിച്ച് തുറക്കുന്നു. മ്യൂച്വൽ ഫണ്ടുകൾക്ക് ഡീമാറ്റ് ആവശ്യമില്ലാതെ ഫണ്ട് ഹൗസ് വഴിയോ ഒരു പ്ലാറ്റ്ഫോം വഴിയോ നേരിട്ട് നിക്ഷേപിക്കാം.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>SEBI എന്നാൽ എന്ത്, അത് നിക്ഷേപകരെ എങ്ങനെ സംരക്ഷിക്കുന്നു?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>SEBI (സെക്യൂരിറ്റീസ് ആൻഡ് എക്സ്ചേഞ്ച് ബോർഡ് ഓഫ് ഇന്ത്യ) ആണ് വിപണി നിയന്ത്രകൻ. ഇത് എക്സ്ചേഞ്ചുകൾ, ബ്രോക്കർമാർ, മ്യൂച്വൽ ഫണ്ടുകൾ എന്നിവയ്ക്ക് നിയമങ്ങൾ നിശ്ചയിക്കുന്നു, വെളിപ്പെടുത്തൽ നടപ്പാക്കുന്നു, പരാതി സംവിധാനങ്ങൾ നടത്തുന്നു — എല്ലാം വിപണി നീതിയുക്തമായി നിലനിർത്താനും നിക്ഷേപകരെ സംരക്ഷിക്കാനും ലക്ഷ്യമിട്ട്.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>SIP എന്നാൽ എന്ത്, അത് എങ്ങനെ പ്രവർത്തിക്കുന്നു?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു സിസ്റ്റമാറ്റിക് ഇൻവെസ്റ്റ്മെന്റ് പ്ലാൻ ഒരു നിശ്ചിത തുക പതിവായി — സാധാരണയായി മാസംതോറും — ഒരു ഫണ്ടിലേക്ക് നിക്ഷേപിക്കുന്നു. ഇത് നിങ്ങളുടെ പ്രവേശനം വിപണിയുടെ ഉയർച്ചകളിലും താഴ്ചകളിലും വ്യാപിപ്പിക്കുന്നു (റുപ്പീ-കോസ്റ്റ് ആവറേജിംഗ്), അച്ചടക്കം വളർത്തുന്നു. പല ഫണ്ടുകളും ₹100–₹500 വരെ കുറഞ്ഞ തുകയിൽ SIP അനുവദിക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ലാർജ്-, മിഡ്-, സ്മോൾ-ക്യാപ് തമ്മിലുള്ള വ്യത്യാസം എന്താണ്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ലാർജ്-ക്യാപ് എന്നാൽ ഏറ്റവും വലുതും സ്ഥാപിതവുമായ കമ്പനികളാണ്, അവ കൂടുതൽ സ്ഥിരതയുള്ളവയാണ്. മിഡ്-, സ്മോൾ-ക്യാപുകൾ ഉയർന്ന വളർച്ചാ സാധ്യതയുള്ള, എന്നാൽ കൂടുതൽ ചാഞ്ചാട്ടമുള്ള ചെറിയ കമ്പനികളാണ്. സ്ഥിരതയും വളർച്ചയും സന്തുലിതമാക്കാൻ പല നിക്ഷേപകരും ഒരു മിശ്രിതം കൈവശം വയ്ക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഇന്ത്യയിൽ ഇക്വിറ്റി നിക്ഷേപങ്ങൾ എങ്ങനെ നികുതി ചുമത്തുന്നു?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു പൊതു മാർഗ്ഗനിർദ്ദേശം മാത്രമായി: ഒരു വർഷത്തിനപ്പുറം കൈവശം വച്ച ലിസ്റ്റഡ് ഇക്വിറ്റി അല്ലെങ്കിൽ ഇക്വിറ്റി ഫണ്ടുകളിലെ ലാഭം ദീർഘകാലമായി കണക്കാക്കി കുറഞ്ഞ നിരക്കിൽ നികുതി ചുമത്തുന്നു, ഒരു വർഷത്തിനുള്ളിലെ ലാഭം ഹ്രസ്വകാലമായി ഉയർന്ന നിരക്കിൽ നികുതി ചുമത്തുന്നു. കൃത്യമായ നിരക്കുകൾ, ഇളവുകൾ, NRI പരിഗണന എന്നിവ കാലക്രമേണ മാറുന്നു — നിലവിലെ നിയമങ്ങൾ ഒരു നികുതി വിദഗ്ധനുമായി സ്ഥിരീകരിക്കുക.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>തുടങ്ങാൻ എനിക്ക് എത്ര പണം വേണം?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>വളരെ കുറച്ച്. പല SIP-കളും മാസം ₹100–₹500-ൽ ആരംഭിക്കുന്നു, ഫ്രാക്ഷണൽ അല്ലെങ്കിൽ ക്യൂറേറ്റഡ് ബാസ്കറ്റുകൾ പ്രവേശനം കൂടുതൽ താഴ്ത്തുന്നു. ചെറുതായി തുടങ്ങി സ്ഥിരതയോടെ തുടരുന്നത് പ്രാരംഭ തുകയേക്കാൾ വളരെ പ്രധാനമാണ്.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY D -->
+    <div class="cat"><div class="cat-label">ഗൾഫിലെ NRI നിക്ഷേപകർക്കായി</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഗൾഫിലെ NRI-കൾക്ക് ഇന്ത്യൻ മ്യൂച്വൽ ഫണ്ടുകളിൽ നിക്ഷേപിക്കാമോ?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>അതെ. UAE, സൗദി അറേബ്യ, കുവൈറ്റ്, ഖത്തർ, ഒമാൻ, ബഹ്‌റൈൻ എന്നിവിടങ്ങളിലെ NRI-കൾക്ക്, സാധാരണയായി ഒരു NRE അല്ലെങ്കിൽ NRO അക്കൗണ്ട് തുറന്ന് KYC പൂർത്തിയാക്കിയ ശേഷം, ഇന്ത്യൻ മ്യൂച്വൽ ഫണ്ടുകളിൽ നിക്ഷേപിക്കാം. ഫണ്ട് ഹൗസുകൾ, ഡിസ്കൗണ്ട് ബ്രോക്കർമാർ, ഫുൾ-സർവീസ് ബ്രോക്കർമാർ, വിതരണക്കാർ എന്നിവ മാർഗ്ഗങ്ങളിൽ ഉൾപ്പെടുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>NRE, NRO അക്കൗണ്ട് തമ്മിലുള്ള വ്യത്യാസം എന്താണ്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു NRE അക്കൗണ്ട് രൂപയിലേക്ക് മാറ്റിയ വിദേശ വരുമാനം സൂക്ഷിക്കുന്നു, അത് പൂർണ്ണമായി റിപാട്രിയബിൾ ആണ്. ഒരു NRO അക്കൗണ്ട് പ്രധാനമായും ഇന്ത്യയ്ക്കുള്ളിൽ നേടിയ വരുമാനത്തിനുള്ളതാണ്, അതിന് റിപാട്രിയേഷൻ പരിധികളുണ്ട്. രണ്ടും നിക്ഷേപങ്ങൾക്ക് ധനസഹായം നൽകാം, വ്യത്യസ്ത നികുതി, റിപാട്രിയേഷൻ പരിഗണനയോടെ.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>USA/കാനഡ NRI-കൾക്ക് നിയന്ത്രണങ്ങൾ നേരിടേണ്ടിവരുന്നത് എന്തുകൊണ്ട്, ഗൾഫ് NRI-കൾക്ക് സാധാരണയായി ഇല്ലാത്തതും?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>USA-യിലും കാനഡയിലുമുള്ള NRI-കൾ FATCA റിപ്പോർട്ടിംഗ് ബാധ്യതകൾ ട്രിഗർ ചെയ്യുന്നു, പല ഇന്ത്യൻ ഫണ്ട് ഹൗസുകളും അവയെ പിന്തുണയ്ക്കാൻ തിരഞ്ഞെടുക്കാത്തതിനാൽ ആ നിക്ഷേപകരെ പലപ്പോഴും നിയന്ത്രിക്കുന്നു. ഗൾഫിലെ NRI-കൾ പൊതുവെ ഈ തടസ്സം നേരിടുന്നില്ല.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>GIFT സിറ്റി എന്നാൽ എന്ത്, NRI-കൾക്ക് അത് പ്രധാനമായിരിക്കുന്നത് എന്തുകൊണ്ട്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>GIFT സിറ്റി ഇന്ത്യയുടെ ഇന്റർനാഷണൽ ഫിനാൻഷ്യൽ സർവീസസ് സെന്റർ ആണ്. ഇത് ആഗോള, NRI നിക്ഷേപകർക്ക് ഒരു USD-അധിഷ്ഠിത, പലപ്പോഴും നികുതി-കാര്യക്ഷമമായ ചട്ടക്കൂടിലൂടെ ലളിതമായ അനുവർത്തനത്തോടെ ഇന്ത്യ-ബന്ധിത ഉൽപ്പന്നങ്ങൾ ആക്സസ് ചെയ്യാൻ അനുവദിക്കുന്നു — നേരിട്ടുള്ള ആഭ്യന്തര മാർഗ്ഗത്തിന് ഒരു ബദൽ.</p></div></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY E -->
+    <div class="cat"><div class="cat-label">എങ്ങനെ തുടങ്ങാം &amp; റിസ്ക്</div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഘട്ടം ഘട്ടമായി ഞാൻ യഥാർത്ഥത്തിൽ എങ്ങനെ തുടങ്ങും?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഒരു ലളിതമായ വഴി: (1) നിങ്ങൾ NRI ആണെങ്കിൽ ഒരു NRE/NRO അക്കൗണ്ട് തുറക്കുക; (2) മ്യൂച്വൽ-ഫണ്ട് KYC പൂർത്തിയാക്കുക; (3) ഒരു മാർഗ്ഗം തിരഞ്ഞെടുക്കുക — ഫണ്ട് ഹൗസ്, ഡിസ്കൗണ്ട് ബ്രോക്കർ, ഫുൾ-സർവീസ് ബ്രോക്കർ അല്ലെങ്കിൽ വിതരണക്കാരൻ; (4) ഒന്നോ രണ്ടോ സ്ക്രീൻ ചെയ്ത അല്ലെങ്കിൽ എത്തിക്കൽ ഫണ്ടുകൾ തിരഞ്ഞെടുക്കുക; (5) ഒരു ചെറിയ മാസ SIP ആരംഭിക്കുക; (6) ദീർഘകാലത്തേക്ക് നിക്ഷേപം നിലനിർത്തുക, വർഷത്തിൽ ഒന്നോ രണ്ടോ തവണ അവലോകനം ചെയ്യുക.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ആക്ടീവ് ഫണ്ട്, ഇൻഡെക്സ് ഫണ്ട്, അല്ലെങ്കിൽ നേരിട്ടുള്ള ഓഹരികൾ — ഒരു തുടക്കക്കാരൻ എവിടെ തുടങ്ങണം?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>പല തുടക്കക്കാരും ഒന്നോ രണ്ടോ സ്ക്രീൻ ചെയ്ത മ്യൂച്വൽ ഫണ്ടുകൾ അല്ലെങ്കിൽ ഒരു ശരീഅത്ത് ഇൻഡെക്സ് ഫണ്ട് ഉപയോഗിച്ച് തുടങ്ങുന്നു, അവിടെ ഒരു മാനേജറോ സൂചികയോ അനുവർത്തനവും വൈവിധ്യവൽക്കരണവും കൈകാര്യം ചെയ്യുന്നു. ഒരു സ്ക്രീനിംഗ് ഉപകരണം ഉപയോഗിക്കാനും ഒരു കമ്പനിയുടെ അടിസ്ഥാനങ്ങൾ വായിക്കാനും സൗകര്യമായ ശേഷം നേരിട്ടുള്ള ഓഹരികളും ക്യൂറേറ്റഡ് ബാസ്കറ്റുകളും പിന്നീട് ചേർക്കാം.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>എത്ര തവണ ഞാൻ എന്റെ പോർട്ട്ഫോളിയോ പരിശോധിക്കുകയോ റീബാലൻസ് ചെയ്യുകയോ വേണം?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ദീർഘകാല നിക്ഷേപകർക്ക്, വർഷത്തിൽ ഒന്നോ രണ്ടോ തവണ സാധാരണയായി മതി — കൈവശമുള്ളവ ഇപ്പോഴും അനുവദനീയമാണെന്നും നിങ്ങളുടെ മിശ്രിതം ഇപ്പോഴും ലക്ഷ്യങ്ങൾക്ക് അനുയോജ്യമാണെന്നും സ്ഥിരീകരിക്കാൻ. ഓരോ ഹ്രസ്വകാല വിപണി ചലനത്തോടും പ്രതികരിക്കുന്നത് ഗുണത്തേക്കാളേറെ ദോഷം ചെയ്യുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഞാൻ കൈവശം വച്ചിരിക്കുന്ന ഒരു ഓഹരി അനുവദനീയമല്ലാതായാൽ എന്ത് സംഭവിക്കും?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>അനുവർത്തനം സ്ഥിരമല്ല — ഒരു കമ്പനിയുടെ കടമോ വരുമാന മിശ്രിതമോ മാറാം. ഒരു കൈവശം സ്ക്രീൻ പരാജയപ്പെട്ടാൽ, സാധാരണ മാർഗ്ഗനിർദ്ദേശം അത് ന്യായമായ സമയത്തിനുള്ളിൽ ഒഴിവാക്കുകയും ലാഭത്തിന്റെ അനുവദനീയമല്ലാത്ത ഭാഗം ശുദ്ധീകരിക്കുകയും ചെയ്യുക എന്നതാണ്. ഒരു ഫണ്ടിൽ, മാനേജറോ സൂചികയോ ഇത് നിങ്ങൾക്കായി ചെയ്യുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>ഞാൻ മനസ്സിലാക്കേണ്ട പ്രധാന റിസ്കുകൾ എന്തൊക്കെയാണ്?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>പ്രധാനവ: വിപണി ചാഞ്ചാട്ടം (ഓഹരികൾ ഹ്രസ്വകാലത്തിൽ 20–30% വരെ താഴാം), കറൻസി റിസ്ക് (റിട്ടേണുകൾ INR-ൽ ആണ്, നിങ്ങൾ AED അല്ലെങ്കിൽ USD-ൽ ചെലവഴിക്കുന്നു), ചെറിയ ഫണ്ടുകളിലോ ഓഹരികളിലോ ഉള്ള കേന്ദ്രീകരണ, ലിക്വിഡിറ്റി റിസ്ക്, ഒരു കൈവശം ശരീഅത്ത് പദവി നഷ്ടപ്പെട്ടാൽ അനുവർത്തന റിസ്ക്. ഒരു നീണ്ട കാലയളവും നല്ല വൈവിധ്യവൽക്കരണവും ഇവയെല്ലാം കൈകാര്യം ചെയ്യാൻ സഹായിക്കുന്നു.</p></div></div>
+      </div>
+
+      <div class="faq"><div class="faq-q" tabindex="0" role="button" aria-expanded="false"><span class="qmark">Q</span><h3>"ഹലാൽ" നിക്ഷേപ തട്ടിപ്പുകൾ എങ്ങനെ ഒഴിവാക്കാം?</h3><span class="faq-ind"></span></div>
+        <div class="faq-a"><div class="faq-a-in"><p>ഹലാൽ എന്ന പേരിൽ നിശ്ചിതമോ അസാധാരണമായി ഉയർന്നതോ ആയ "ഉറപ്പുള്ള" റിട്ടേണുകൾ വാഗ്ദാനം ചെയ്യുന്ന പദ്ധതികളെ വളരെ ജാഗ്രതയോടെ കാണുക — യഥാർത്ഥ നിക്ഷേപം യഥാർത്ഥ റിസ്ക് പങ്കിടുന്നു. SEBI-രജിസ്റ്റർ ചെയ്ത ഉൽപ്പന്നങ്ങളും പ്ലാറ്റ്ഫോമുകളും തിരഞ്ഞെടുക്കുക, നിങ്ങൾക്ക് പൂർണ്ണമായി മനസ്സിലാകാത്ത ഒന്നും ഒഴിവാക്കുക, സംശയമുണ്ടെങ്കിൽ ഒരു SEBI-രജിസ്റ്റർ ചെയ്ത അഡ്വൈസറെയോ യോഗ്യതയുള്ള പണ്ഡിതനെയോ സമീപിക്കുക.</p></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="disclaimer">
+    <div class="disclaimer-box">
+      <strong>⚠️ നിരാകരണം (Disclaimer)</strong>
+      ഈ ഉത്തരങ്ങൾ പൊതുവായതും വിദ്യാഭ്യാസ ആവശ്യങ്ങൾക്ക് മാത്രമുള്ളതുമാണ് — അവ സാമ്പത്തിക, നിയമ, നികുതി അല്ലെങ്കിൽ ശരീഅത്ത് ഉപദേശമല്ല. നിയമങ്ങൾ, ഉൽപ്പന്നങ്ങൾ, കണക്കുകൾ എന്നിവ കാലക്രമേണ മാറുന്നു. നിങ്ങളുടെ പ്രത്യേക സാഹചര്യത്തിന്, യോഗ്യതയുള്ള ഒരു സാമ്പത്തിക അഡ്വൈസറെയും ഒരു നികുതി വിദഗ്ധനെയും അറിവുള്ള ഒരു ശരീഅത്ത് പണ്ഡിതനെയും സമീപിക്കുക.
+    </div>
+  </div>
+
+  <footer>
+    <p>പതിവ് ചോദ്യങ്ങൾ · ധാർമിക നിക്ഷേപം · ഗൾഫിലെ NRI നിക്ഷേപകർക്കായി.</p>
+  </footer>
+
+  <script>
+    (function () {
+      document.querySelectorAll('.faq-q').forEach(function (q) {
+        var item = q.parentElement;
+        function toggle() {
+          var open = item.classList.toggle('open');
+          q.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        q.addEventListener('click', toggle);
+        q.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); toggle(); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
