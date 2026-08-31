@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ഇന്ത്യയിലെ ധാർമിക നിക്ഷേപം · ധാർമിക നിക്ഷേപം</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Noto+Serif+Malayalam:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-deep:    #080d16;
+      --bg-card:    #0e1624;
+      --bg-card-2:  #131d2e;
+      --gold:       #c9a84c;
+      --gold-light: #e2c87a;
+      --green:      #1a7a4a;
+      --green-light:#22a363;
+      --text-main:  #eae6da;
+      --text-muted: #8a9bb4;
+      --border:     rgba(201,168,76,0.18);
+      --border-soft:rgba(255,255,255,0.07);
+      --radius:     10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', 'Noto Sans Malayalam', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-main);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    /* ── NAV ─────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,13,22,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 58px;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: 1.05rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      display: block;
+      padding: 18px 12px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ────────────────────────────── */
+    .hero {
+      padding: 88px 5% 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 85% 85%, rgba(26,122,74,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* geometric halftone pattern, very subtle */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(201,168,76,0.06) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%);
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      background: rgba(26,122,74,0.15);
+      border: 1px solid rgba(26,122,74,0.3);
+      padding: 5px 16px;
+      border-radius: 50px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: clamp(2.1rem, 5.5vw, 3.8rem);
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.18;
+      max-width: 820px;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      max-width: 640px;
+      margin: 0 auto 38px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: var(--bg-card);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── SECTION WRAPPER ─────────────────── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 56px 5%;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .section h2 {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    .section > p {
+      color: var(--text-muted);
+      font-size: 0.97rem;
+      max-width: 700px;
+      margin-bottom: 32px;
+    }
+
+    /* ── OVERVIEW BULLETS ────────────────── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .overview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.25s;
+    }
+    .overview-card:hover { border-color: var(--border); }
+
+    .overview-card .ov-icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .overview-card h3 {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .overview-card p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── CATEGORY HEADER ─────────────────── */
+    .cat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .cat-title-group { display: flex; flex-direction: column; gap: 4px; }
+
+    .cat-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .cat-title {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .cat-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-bottom: 18px;
+    }
+
+    .learn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 7px 14px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .learn-link:hover {
+      background: rgba(201,168,76,0.08);
+      border-color: var(--gold);
+    }
+
+    /* ── PRODUCT GRID ────────────────────── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .product-card {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .product-card:hover {
+      border-color: rgba(201,168,76,0.22);
+      transform: translateY(-2px);
+    }
+    a.product-card { text-decoration: none; color: inherit; display: block; cursor: pointer; }
+    a.product-card:hover { border-color: var(--gold); }
+    a.product-card .list-link { display: inline-block; margin-top: 11px; font-size: 0.76rem; font-weight: 700; color: var(--gold); }
+    a.product-card:hover .list-link { text-decoration: underline; }
+    .product-card .card-site-link { display: inline-block; margin-top: 12px; font-size: 0.78rem; font-weight: 700; color: var(--gold); text-decoration: none; }
+    .product-card .card-site-link:hover { text-decoration: underline; }
+    .product-card .card-site-link + .card-site-link { margin-left: 16px; }
+    .product-card .pms-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; line-height: 1.55; }
+    .product-card .pms-sub strong { color: var(--text-main); }
+    .product-card .pms-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; padding: 9px 12px; background: rgba(249,115,22,0.07); border-left: 3px solid #fdba74; border-radius: 0 7px 7px 0; line-height: 1.55; }
+    .product-card .pms-note strong { color: #fdba74; }
+    .product-card .pms-ul { margin: 7px 0 0; padding-left: 18px; }
+    .product-card .pms-ul li { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 3px; }
+    .product-card .pms-ul li::marker { color: var(--gold); }
+
+    .product-card .p-icon {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .product-card h4 {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .product-card p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .product-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .tag-tool    { background: rgba(26,122,74,0.15); color: var(--green-light); border: 1px solid rgba(26,122,74,0.25); }
+    .tag-fund    { background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.2); }
+    .tag-index   { background: rgba(59,130,246,0.1); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+    .tag-alt     { background: rgba(168,85,247,0.1); color: #c4b5fd; border: 1px solid rgba(168,85,247,0.2); }
+    .tag-gateway { background: rgba(249,115,22,0.1); color: #fdba74; border: 1px solid rgba(249,115,22,0.2); }
+    .tag-income  { background: rgba(96,165,250,0.1); color: #93c5fd; border: 1px solid rgba(96,165,250,0.2); }
+    .product-tag + .product-tag { margin-left: 6px; }
+
+    /* ── SEPARATOR BETWEEN CATEGORIES ───── */
+    .cat-block {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .cat-block:last-child { border-bottom: none; }
+
+    /* ── PLATFORM CARDS ──────────────────── */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .platform-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.25s;
+    }
+    .platform-card:hover { border-color: var(--border); }
+
+    .platform-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .platform-body h3 {
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+
+    .platform-body p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── SHARIAH STEPS ───────────────────── */
+    .shariah-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 24px;
+    }
+
+    .shariah-step {
+      display: flex;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .shariah-step:last-child { border-bottom: none; }
+
+    .shariah-dot {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      margin-top: 2px;
+    }
+
+    .shariah-step h3 {
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .shariah-step p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RISKS ───────────────────────────── */
+    .risks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .risk-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      border-left: 3px solid rgba(201,168,76,0.35);
+    }
+
+    .risk-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .risk-card p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── APPROACH ────────────────────────── */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .approach-card {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 26px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+    .approach-card:hover { border-color: var(--border); }
+
+    .approach-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .approach-card.beginner::before     { background: var(--green-light); }
+    .approach-card.intermediate::before { background: var(--gold); }
+    .approach-card.advanced::before     { background: #f87171; }
+
+    .approach-level {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .approach-card.beginner     .approach-level { color: var(--green-light); }
+    .approach-card.intermediate .approach-level { color: var(--gold); }
+    .approach-card.advanced     .approach-level { color: #f87171; }
+
+    .approach-card h3 {
+      font-family: 'Cormorant Garamond', 'Noto Serif Malayalam', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .approach-card p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── PORTFOLIO ALLOCATION ────────────── */
+    .alloc-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 28px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .alloc-wrapper { grid-template-columns: 1fr; }
+    }
+
+    .alloc-bars { display: flex; flex-direction: column; gap: 14px; }
+
+    .alloc-row { display: flex; flex-direction: column; gap: 6px; }
+
+    .alloc-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .alloc-label span:first-child { color: var(--text-main); }
+    .alloc-label span:last-child  { color: var(--text-muted); }
+
+    .bar-track {
+      height: 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    /* donut chart */
+    .donut-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .donut-wrap svg { overflow: visible; }
+
+    .donut-label {
+      text-align: center;
+    }
+
+    .donut-label p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .alloc-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── DISCLAIMER ──────────────────────── */
+    .disclaimer {
+      max-width: 960px;
+      margin: 0 auto 16px;
+      padding: 16px 5%;
+    }
+
+    .disclaimer-box {
+      background: rgba(201,168,76,0.05);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      font-size: 0.79rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .disclaimer-box strong {
+      color: var(--gold);
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.73rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ──────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 26px 5%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    footer p { font-size: 0.78rem; color: var(--text-muted); }
+
+    footer a {
+      font-size: 0.78rem;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ──────────────────────── */
+    @media (max-width: 600px) {
+      nav { padding: 0 4%; }
+      .hero { padding: 56px 4% 48px; }
+      .section { padding: 40px 4%; }
+    }
+  
+    /* ── COLLAPSIBLE SECTIONS ────────────── */
+    .collapsible > .sec-head {
+      position: relative;
+      cursor: pointer;
+      padding-right: 42px;
+      user-select: none;
+      outline: none;
+    }
+    .collapsible > .sec-head:focus-visible {
+      outline: 1px solid var(--gold);
+      outline-offset: 5px;
+      border-radius: 6px;
+    }
+    .collapsible > .sec-head h2 { transition: color 0.25s ease; }
+    .collapsible:hover > .sec-head h2,
+    .collapsible.open  > .sec-head h2 { color: var(--gold-light); }
+
+    .sec-ind {
+      position: absolute; top: 2px; right: 2px;
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1px solid var(--border);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .sec-ind::before, .sec-ind::after {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      background: var(--gold);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .sec-ind::before { width: 11px; height: 2px; transform: translate(-50%, -50%); }
+    .sec-ind::after  { width: 2px; height: 11px; transform: translate(-50%, -50%); }
+    .collapsible:hover > .sec-head .sec-ind,
+    .collapsible.open  > .sec-head .sec-ind {
+      background: rgba(201,168,76,0.14);
+      border-color: var(--gold);
+    }
+    .collapsible:hover > .sec-head .sec-ind::after,
+    .collapsible.open  > .sec-head .sec-ind::after {
+      opacity: 0; transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .sec-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows 0.45s cubic-bezier(.2,.8,.2,1), opacity 0.4s ease;
+    }
+    .sec-body-in { overflow: hidden; min-height: 0; }
+    .collapsible:hover > .sec-body,
+    .collapsible.open  > .sec-body {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sec-body { transition: opacity 0.2s ease; }
+      .sec-ind::before, .sec-ind::after { transition: none; }
+    }
+  
+    /* life-stage allocation profiles */
+    .life-stages { margin-top: 36px; }
+    .ls-title { font-family:'Cormorant Garamond','Noto Serif Malayalam',serif; font-size:1.4rem; font-weight:600; color:var(--text-main); margin-bottom:6px; }
+    .ls-note { font-size:0.84rem; color:var(--text-muted); max-width:740px; margin-bottom:18px; line-height:1.65; }
+    .stage-legend { display:flex; flex-wrap:wrap; gap:9px 18px; margin-bottom:22px; padding:14px 16px; background:var(--bg-card); border:1px solid var(--border-soft); border-radius:10px; }
+    .ls-leg { font-size:0.76rem; color:var(--text-muted); display:flex; align-items:center; gap:7px; }
+    .stage-legend i, .stage-alloc i { width:10px; height:10px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .stage-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .stage-card { background:linear-gradient(160deg,var(--bg-card) 0%,var(--bg-card-2) 100%); border:1px solid var(--border-soft); border-radius:var(--radius); padding:20px; transition:border-color .25s, transform .2s; }
+    .stage-card:hover { border-color:var(--border); transform:translateY(-2px); }
+    .stage-head { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .stage-head h4 { font-family:'Cormorant Garamond','Noto Serif Malayalam',serif; font-size:1.18rem; font-weight:600; color:var(--text-main); display:flex; align-items:center; gap:8px; }
+    .stage-age { font-size:0.68rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--gold); background:rgba(201,168,76,0.1); border:1px solid var(--border); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+    .stage-sub { font-size:0.82rem; color:var(--text-muted); margin:3px 0 14px; }
+    .stage-bar { display:flex; height:14px; border-radius:7px; overflow:hidden; margin-bottom:11px; background:#1a2336; }
+    .stage-bar span { display:block; height:100%; }
+    .stage-alloc { display:flex; flex-wrap:wrap; gap:6px 13px; margin-bottom:8px; }
+    .stage-alloc span { font-size:0.74rem; color:var(--text-muted); display:flex; align-items:center; gap:6px; }
+    .stage-card h5 { font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin:12px 0 4px; }
+    .stage-card p { font-size:0.85rem; color:var(--text-muted); line-height:1.6; }
+    @media(max-width:760px){ .stage-grid{ grid-template-columns:1fr; } }
+      .ls-ccd { font-size:0.78rem; color:var(--text-muted); line-height:1.65; margin:-10px 0 22px; padding:11px 15px; background:rgba(96,165,250,0.06); border-left:3px solid #60a5fa; border-radius:0 8px 8px 0; }
+    .ls-ccd strong { color:var(--text-main); }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index-ml.html" class="nav-brand">ധാർമിക നിക്ഷേപം · ഇന്ത്യ</a>
+    <ul class="nav-links">
+      <li><a href="#overview">അവലോകനം</a></li>
+      <li><a href="#stocks">ഓഹരികൾ</a></li>
+      <li><a href="#funds">മ്യൂച്വൽ ഫണ്ടുകൾ</a></li>
+      <li><a href="#other-funds">മറ്റ് ഫണ്ടുകൾ</a></li>
+      <li><a href="#business">ബിസിനസ് നിക്ഷേപങ്ങൾ</a></li>
+      <li><a href="#platforms">പ്ലാറ്റ്ഫോമുകൾ</a></li>
+      <li><a href="#risks">റിസ്കുകൾ</a></li>
+      <li><a href="#journey">നിങ്ങളുടെ യാത്ര</a></li>
+      <li><a href="#portfolio">വൈവിധ്യവൽക്കരണം</a></li>
+      <li><a href="main.html" style="color:var(--gold);border:1px solid var(--border);border-radius:50px;background:rgba(201,168,76,0.08);">🌐 English</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">UAE &amp; ഗൾഫ് · NRI നിക്ഷേപകർ</div>
+    <h1>ഇന്ത്യയിലെ ധാർമിക നിക്ഷേപം — <em>ശരീഅത്ത് ബോധത്തോടെ.</em> ലളിതം. ഘടനാപരം.</h1>
+    <p class="hero-sub">
+      വ്യക്തവും ഘടനാപരവുമായ രീതിയിൽ, ശരീഅത്ത് ബോധത്തോടെയുള്ള ഉൽപ്പന്നങ്ങൾ, പ്ലാറ്റ്ഫോമുകൾ, നിക്ഷേപ
+      മാർഗ്ഗങ്ങൾ എന്നിവ വഴി ഇന്ത്യൻ വിപണി അവസരങ്ങളിലേക്ക് പ്രവേശിക്കാൻ ആഗ്രഹിക്കുന്ന UAE-ആസ്ഥാന ധാർമിക നിക്ഷേപകർക്കായി.
+    </p>
+    <div class="pill-row">
+      <span class="pill">🇮🇳 വലിയ ലിസ്റ്റഡ് വിപണി</span>
+      <span class="pill">☪️ മെച്ചപ്പെടുന്ന ഹലാൽ ആവാസവ്യവസ്ഥ</span>
+      <span class="pill">💱 INR കറൻസി എക്സ്പോഷർ</span>
+      <span class="pill">🏙️ GIFT സിറ്റി ആക്സസ് മാർഗ്ഗം</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: MARKET OVERVIEW -->
+  <div class="section collapsible" id="overview">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">വിപണി അവലോകനം</div>
+    <h2>ഒരു നിക്ഷേപ കേന്ദ്രമായി ഇന്ത്യ</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      മെച്ചപ്പെടുന്ന ശരീഅത്ത് സ്ക്രീനിംഗ് ഉപകരണങ്ങൾ, ശക്തമായ ദീർഘകാല വളർച്ചാ ഘടകങ്ങൾ, UAE-ആസ്ഥാന നിക്ഷേപകർക്കുള്ള
+      ഒന്നിലധികം ആക്സസ് മാർഗ്ഗങ്ങൾ എന്നിവയോടെ ഇന്ത്യ ആഴമേറിയതും വളരുന്നതുമായ ഒരു ലിസ്റ്റഡ് വിപണി വാഗ്ദാനം ചെയ്യുന്നു.
+    </p>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="ov-icon">📊</div>
+        <h3>വലിയ ലിസ്റ്റഡ് വിപണി</h3>
+        <p>മേഖലകളിലും മാർക്കറ്റ് ക്യാപുകളിലുമായി NSE, BSE എന്നിവയിൽ ലിസ്റ്റ് ചെയ്ത ആയിരക്കണക്കിന് കമ്പനികൾ, വളരുന്ന ശരീഅത്ത്-സ്ക്രീൻ ചെയ്ത ഉപവിഭാഗങ്ങളോടെ.</p>
+      </div>
+      <div class="overview-card">
+        <div class="ov-icon">👥</div>
+        <h3>ആഴത്തിലുള്ള വിപണി പങ്കാളിത്തം</h3>
+        <p>ശക്തമായ റീട്ടെയിൽ, സ്ഥാപന നിക്ഷേപക അടിത്തറ, വിശാലമായ ഓഹരികളിൽ ലിക്വിഡിറ്റിയും വില കണ്ടെത്തലും നൽകുന്നു.</p>
+      </div>
+      <div class="overview-card">
+        <div class="ov-icon">☪️</div>
+        <h3>മെച്ചപ്പെടുന്ന ഹലാൽ ആവാസവ്യവസ്ഥ</h3>
+        <p>മുസ്ലിം നിക്ഷേപകർക്കായി രൂപകൽപ്പന ചെയ്ത ശരീഅത്ത് സ്ക്രീനിംഗ് ഉപകരണങ്ങൾ, എത്തിക്കൽ ഫണ്ടുകൾ, ഘടനാപരമായ ഉൽപ്പന്നങ്ങൾ എന്നിവയുടെ വർധിച്ചുവരുന്ന ലഭ്യത.</p>
+      </div>
+      <div class="overview-card">
+        <div class="ov-icon">🏙️</div>
+        <h3>GIFT സിറ്റി ആക്സസ് മാർഗ്ഗം</h3>
+        <p>USD-അധിഷ്ഠിത, നികുതി-കാര്യക്ഷമമായ ഘടനകളിലൂടെ UAE-ആസ്ഥാന നിക്ഷേപകർക്ക് ഇന്ത്യയിലേക്ക് പ്രവേശിക്കാൻ പ്രാപ്തമാക്കുന്ന ഒരു അന്താരാഷ്ട്ര സാമ്പത്തിക കേന്ദ്രം.</p>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION 2: INVESTMENT OPTIONS -->
+  <div class="section collapsible" id="stocks">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">നേരിട്ടുള്ള ഓഹരികൾ</div>
+    <h2>നേരിട്ടുള്ള ഓഹരി നിക്ഷേപം</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      ശരീഅത്ത് അനുസൃത ഇന്ത്യൻ കമ്പനികളിലെ ഓഹരികൾ നേരിട്ട് സ്വന്തമാക്കുക. നിക്ഷേപിക്കുന്നതിന് മുമ്പ് ഒരു ഓഹരി
+      ഇസ്ലാമിക അനുവർത്തന ഫിൽട്ടറുകൾ കടക്കുന്നുണ്ടോ എന്ന് പരിശോധിക്കാൻ താഴെയുള്ള ഹലാൽ സ്ക്രീനിംഗ് പട്ടികകൾ ഉപയോഗിക്കുക.
+    </p>
+
+    <!-- DIRECT STOCKS -->
+    <div class="cat-block">
+      <div class="cat-header">
+        <div class="cat-title-group">
+          <span class="cat-title">ഇന്ത്യൻ ഓഹരികൾ — നേരിട്ടുള്ള ഓഹരികൾ</span>
+        </div>
+        <a href="#" class="learn-link">കൂടുതൽ അറിയുക →</a>
+      </div>
+      <p class="cat-desc">
+        ദീർഘകാല മൂലധന വളർച്ചയ്ക്കായി ഇന്ത്യൻ കമ്പനികളിലെ ഓഹരികളുടെ നേരിട്ടുള്ള ഉടമസ്ഥത.
+        NSE, BSE എന്നിവയിൽ ലിസ്റ്റ് ചെയ്ത കമ്പനികളിൽ നിക്ഷേപിക്കുക — നിക്ഷേപിക്കുന്നതിന് മുമ്പ് ശരീഅത്ത് സ്ക്രീനിംഗ് ആവശ്യമാണ്.
+      </p>
+      <div class="product-grid">
+        <a class="product-card" href="https://islamicly.com/home/stocks" target="_blank" rel="noopener">
+          <span class="product-tag tag-tool">ഹലാൽ പട്ടിക</span>
+          <div class="p-icon">🔍</div>
+          <h4>Islamicly</h4>
+          <p>ഇന്ത്യൻ, ആഗോള ഓഹരികൾക്കുള്ള കാലികമായ അനുവർത്തന സ്ഥിതിയോടെയുള്ള ശരീഅത്ത് ഇക്വിറ്റി-റിസർച്ച് ആപ്പ്.</p>
+          <span class="list-link">ഹലാൽ ഓഹരി പട്ടിക കാണുക ↗</span>
+        </a>
+        <a class="product-card" href="https://musaffa.com/stock-screener/?country=IN" target="_blank" rel="noopener">
+          <span class="product-tag tag-tool">ഹലാൽ പട്ടിക</span>
+          <div class="p-icon">🧮</div>
+          <h4>Musaffa</h4>
+          <p>AAOIFI-അധിഷ്ഠിത അനുവർത്തന റേറ്റിംഗുകളും സെക്ടർ ഫിൽട്ടറുകളും ഉള്ള ഇന്ത്യൻ ഓഹരികൾക്കുള്ള ഹലാൽ സ്റ്റോക്ക് സ്ക്രീനർ.</p>
+          <span class="list-link">ഹലാൽ ഓഹരി പട്ടിക കാണുക ↗</span>
+        </a>
+        <a class="product-card" href="https://zamzam-capital.com/halal-stocks/" target="_blank" rel="noopener">
+          <span class="product-tag tag-tool">ഹലാൽ പട്ടിക</span>
+          <div class="p-icon">📋</div>
+          <h4>ZamZam Capital</h4>
+          <p>NSE-ലിസ്റ്റഡ് ഓഹരികൾക്കായി സൗജന്യവും പതിവായി പുതുക്കുന്നതുമായ ഹലാൽ സ്റ്റോക്ക്സ് ലിസ്റ്റ് നൽകുന്ന SEBI-രജിസ്റ്റർ ചെയ്ത റിസർച്ച് സ്ഥാപനം.</p>
+          <span class="list-link">ഹലാൽ ഓഹരി പട്ടിക കാണുക ↗</span>
+        </a>
+      </div>
+    </div>
+
+    </div></div><!-- /sec-body -->
+  </div><!-- /section investments -->
+
+  <!-- SECTION: MUTUAL FUNDS -->
+  <div class="section collapsible" id="funds">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">മ്യൂച്വൽ ഫണ്ടുകൾ</div>
+    <h2>മ്യൂച്വൽ ഫണ്ടുകൾ — ശരീഅത്ത് അനുസൃതം</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      വ്യക്തിഗത ഓഹരികൾ തിരഞ്ഞെടുക്കാതെ ധാർമിക എക്സ്പോഷർ ആഗ്രഹിക്കുന്ന നിക്ഷേപകർക്ക് അനുയോജ്യമായ,
+      സ്ക്രീൻ ചെയ്ത ശരീഅത്ത് അനുസൃത ഇന്ത്യൻ ഓഹരികളിൽ മാത്രം നിക്ഷേപിക്കുന്ന പ്രൊഫഷണലായി കൈകാര്യം ചെയ്യുന്ന പോർട്ട്ഫോളിയോകൾ.
+    </p>
+    <div class="product-grid">
+      <a class="product-card" href="mutual-funds-ml.html#tef">
+        <span class="product-tag tag-fund">ആക്ടീവ് ഫണ്ട്</span>
+        <div class="p-icon">🏦</div>
+        <h4>ടാറ്റ എത്തിക്കൽ ഫണ്ട്</h4>
+        <p>സ്ക്രീൻ ചെയ്ത ഇന്ത്യൻ കമ്പനികളിൽ ശ്രദ്ധ കേന്ദ്രീകരിച്ച, 30 വർഷത്തെ ട്രാക്ക് റെക്കോർഡുള്ള സജീവമായി കൈകാര്യം ചെയ്യുന്ന എത്തിക്കൽ ഇക്വിറ്റി ഫണ്ട്.</p>
+        <span class="list-link">ഫണ്ട് വിശദാംശങ്ങൾ കാണുക →</span>
+      </a>
+      <a class="product-card" href="mutual-funds-ml.html#quantum">
+        <span class="product-tag tag-fund">ആക്ടീവ് ഫണ്ട്</span>
+        <div class="p-icon">⚛️</div>
+        <h4>ക്വാണ്ടം എത്തിക്കൽ ഫണ്ട്</h4>
+        <p>കുറഞ്ഞ ചെലവുള്ള, നേരിട്ടുള്ള മോഡലിലൂടെ അനുവദനീയമായ ഇന്ത്യൻ ഓഹരികളിലേക്ക് വൈവിധ്യമാർന്ന എക്സ്പോഷർ നൽകുന്ന എത്തിക്കൽ ഫണ്ട്.</p>
+        <span class="list-link">ഫണ്ട് വിശദാംശങ്ങൾ കാണുക →</span>
+      </a>
+      <a class="product-card" href="mutual-funds-ml.html#taurus">
+        <span class="product-tag tag-fund">ആക്ടീവ് ഫണ്ട്</span>
+        <div class="p-icon">🏛️</div>
+        <h4>ടോറസ് എത്തിക്കൽ ഫണ്ട്</h4>
+        <p>പ്രൊഫഷണലായി കൈകാര്യം ചെയ്യുന്ന ഇക്വിറ്റി എക്സ്പോഷർ തേടുന്ന നിക്ഷേപകർക്കുള്ള ശരീഅത്ത്-അധിഷ്ഠിത മ്യൂച്വൽ ഫണ്ട്.</p>
+        <span class="list-link">ഫണ്ട് വിശദാംശങ്ങൾ കാണുക →</span>
+      </a>
+      <a class="product-card" href="mutual-funds-ml.html#uti">
+        <span class="product-tag tag-index">ഇൻഡെക്സ് ഫണ്ട്</span>
+        <div class="p-icon">📊</div>
+        <h4>UTI NIFTY 500 ശരീഅത്ത് ഇൻഡെക്സ് ഫണ്ട്</h4>
+        <p>കുറഞ്ഞ ചെലവിൽ സ്ക്രീൻ ചെയ്ത ശരീഅത്ത് അനുസൃത ഇക്വിറ്റി വിപണിയെ നിഷ്ക്രിയമായി പിന്തുടരുന്ന ഇൻഡെക്സ്-അധിഷ്ഠിത ഫണ്ട്.</p>
+        <span class="list-link">ഫണ്ട് വിശദാംശങ്ങൾ കാണുക →</span>
+      </a>
+    </div>
+    <p style="margin-top:18px;"><a href="mutual-funds-ml.html" class="learn-link">എല്ലാ ഫണ്ടുകളും കാണുക →</a></p>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION: OTHER FUNDS -->
+  <div class="section collapsible" id="other-funds">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">മറ്റ് ഫണ്ടുകൾ</div>
+    <h2>ETF-കൾ, ഗോൾഡ് ETF-കൾ, REIT-കൾ, InvIT-കൾ, സ്മോൾകേസുകൾ &amp; PMS</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      സജീവമായി കൈകാര്യം ചെയ്യുന്ന മ്യൂച്വൽ ഫണ്ടുകൾക്കപ്പുറം, ഈ എക്സ്ചേഞ്ച്-ട്രേഡഡ്, ക്യൂറേറ്റഡ് വാഹനങ്ങൾ
+      വൈവിധ്യമാർന്നതോ തീമാറ്റിക്കോ ആയ എക്സ്പോഷർ നൽകുന്നു. ശരീഅത്ത് അനുവർത്തനത്തിനായി ഓരോന്നും വെവ്വേറെ
+      അവലോകനം ചെയ്യണം — ഘടനയും അടിസ്ഥാന കൈവശങ്ങളും പ്രധാനമാണ്.
+    </p>
+    <div class="product-grid">
+      <div class="product-card">
+        <span class="product-tag tag-fund">ETF</span>
+        <div class="p-icon">📈</div>
+        <h4>ETF-കൾ — എക്സ്ചേഞ്ച്-ട്രേഡഡ് ഫണ്ടുകൾ</h4>
+        <p>ഒരു ഓഹരി പോലെ, വിപണി സമയത്ത് വാങ്ങാനും വിൽക്കാനുമുള്ള വഴക്കത്തോടെ വൈവിധ്യമാർന്ന എക്സ്പോഷർ നൽകുന്ന എക്സ്ചേഞ്ച്-ലിസ്റ്റഡ് ഫണ്ടുകൾ.</p>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-fund">സ്വർണ്ണം</span>
+        <div class="p-icon">🥇</div>
+        <h4>ഗോൾഡ് ETF-കൾ</h4>
+        <p>എക്സ്ചേഞ്ച് ട്രേഡിംഗിലൂടെ സ്വർണ്ണ എക്സ്പോഷർ നൽകുന്ന ഫണ്ടുകൾ, അനുവർത്തനത്തിനായി ഘടനയും ഭൗതിക-പിന്തുണ അവലോകനവും വിധേയം.</p>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-index">REIT</span>
+        <div class="p-icon">🏢</div>
+        <h4>REIT-കൾ — റിയൽ എസ്റ്റേറ്റ് ഇൻവെസ്റ്റ്മെന്റ് ട്രസ്റ്റുകൾ</h4>
+        <p>വരുമാനം ഉണ്ടാക്കുന്ന റിയൽ എസ്റ്റേറ്റ് സംയോജിപ്പിക്കുന്ന ലിസ്റ്റഡ് ട്രസ്റ്റുകൾ. അനുവർത്തനം വാടകക്കാരുടെ മിശ്രിതത്തെയും പലിശ-അധിഷ്ഠിത ലിവറേജിന്റെ തോതിനെയും ആശ്രയിച്ചിരിക്കുന്നു — ശ്രദ്ധയോടെ അവലോകനം ചെയ്യുക.</p>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-index">InvIT</span>
+        <div class="p-icon">🛣️</div>
+        <h4>InvIT-കൾ — ഇൻഫ്രാസ്ട്രക്ചർ ഇൻവെസ്റ്റ്മെന്റ് ട്രസ്റ്റുകൾ</h4>
+        <p>റോഡുകൾ, വൈദ്യുതി, പൈപ്പ്ലൈനുകൾ പോലുള്ള പ്രവർത്തന ഇൻഫ്രാസ്ട്രക്ചർ ആസ്തികൾ കൈവശം വയ്ക്കുന്ന ലിസ്റ്റഡ് ട്രസ്റ്റുകൾ. നിക്ഷേപിക്കുന്നതിന് മുമ്പ് വരുമാനത്തിനും കട ഘടനയ്ക്കും ശരീഅത്ത് അവലോകനം ആവശ്യമാണ്.</p>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-tool">സ്മോൾകേസ്</span>
+        <div class="p-icon">🌱</div>
+        <h4>ഗ്രീൻ പോർട്ട്ഫോളിയോ സ്മോൾകേസ്</h4>
+        <p>സ്ക്രീൻ ചെയ്ത ഓഹരി തിരഞ്ഞെടുപ്പോടെ സുസ്ഥിരത-ബന്ധിത കമ്പനികളിൽ ശ്രദ്ധ കേന്ദ്രീകരിച്ച തീം-അധിഷ്ഠിത ബാസ്കറ്റ്.</p>
+        <a class="card-site-link" href="https://greenportfolio.smallcase.com/" target="_blank" rel="noopener">സ്മോൾകേസ് സന്ദർശിക്കുക ↗</a>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-tool">സ്മോൾകേസ്</span>
+        <div class="p-icon">🌙</div>
+        <h4>സംസം സ്മോൾകേസ്</h4>
+        <p>കൂടുതൽ ശരീഅത്ത് ബോധമുള്ള നേരിട്ടുള്ള ഓഹരി ബാസ്കറ്റ് തേടുന്ന നിക്ഷേപകർക്കായുള്ള ഒരു ക്യൂറേറ്റഡ് പോർട്ട്ഫോളിയോ.</p>
+        <a class="card-site-link" href="https://zamzamcapital.smallcase.com/" target="_blank" rel="noopener">സ്മോൾകേസ് സന്ദർശിക്കുക ↗</a>
+        <a class="card-site-link" href="https://www.youtube.com/watch?v=3EJOJzjERKI" target="_blank" rel="noopener">വീഡിയോ കാണുക ▶</a>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-index">PMS</span>
+        <div class="p-icon">💼</div>
+        <h4>PMS — പോർട്ട്ഫോളിയോ മാനേജ്മെന്റ് സർവീസസ്</h4>
+        <p>അടിസ്ഥാന ഓഹരികൾ നിങ്ങളുടെ സ്വന്തം ഡീമാറ്റ് അക്കൗണ്ടിൽ നേരിട്ട് സൂക്ഷിക്കുന്ന വ്യക്തിഗതമായ, പ്രൊഫഷണലായി കൈകാര്യം ചെയ്യുന്ന പോർട്ട്ഫോളിയോകൾ. SEBI ഒരു ഉയർന്ന പ്രവേശന പരിധി നിശ്ചയിക്കുന്നു — ₹50 ലക്ഷം കുറഞ്ഞ നിക്ഷേപം — അതിനാൽ ടിക്കറ്റ് വലുപ്പത്തിൽ PMS മ്യൂച്വൽ ഫണ്ടുകൾക്കും സ്മോൾകേസുകൾക്കും വളരെ മുകളിലാണ്.</p>
+        <p class="pms-sub"><strong>ശരീഅത്ത് അനുസൃതം / ധാർമികം എന്ന് വിപണനം ചെയ്യുന്ന ചില PMS:</strong></p>
+        <ul class="pms-ul">
+          <li>Motilal Oswal Ethical Strategy Fund</li>
+          <li>AAA Shariah PMS Plan</li>
+          <li>Phillip Capital Ethical India Fund</li>
+          <li>Green Portfolio Green Ethical Fund</li>
+        </ul>
+        <p class="pms-sub" style="margin-top:8px;">ഓരോന്നും ഇങ്ങനെ വിപണനം ചെയ്യുന്നു — നിലവിലെ അനുവർത്തനവും സാക്ഷ്യപ്പെടുത്തുന്ന അതോറിറ്റിയും സ്വതന്ത്രമായി സ്ഥിരീകരിക്കുക.</p>
+        <p class="pms-note">⚠️ PMS <strong>തുടക്കക്കാർക്കുള്ളതല്ല.</strong> ഇത് പരിചയസമ്പന്നരായ നിക്ഷേപകർക്ക് അനുയോജ്യമാണ്, ഒരു ഇൻവെസ്റ്റ്മെന്റ് അഡ്വൈസറുടെ പിന്തുണയോടെ സമീപിക്കുന്നതാണ് നല്ലത്.</p>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION: BUSINESS INVESTMENTS -->
+  <div class="section collapsible" id="business">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">ബിസിനസ് നിക്ഷേപങ്ങൾ</div>
+    <h2>നേരിട്ടുള്ള ബിസിനസ് &amp; ബദൽ നിക്ഷേപങ്ങൾ</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      ലിസ്റ്റഡ് വിപണികൾക്കപ്പുറം ബിസിനസുകൾ, റിയൽ-എസ്റ്റേറ്റ്-ബന്ധിത സംരംഭങ്ങൾ, ഘടനാപരമായ അവസരങ്ങൾ
+      എന്നിവയിലേക്ക് മൂലധനം എത്തിക്കുന്ന പ്ലാറ്റ്ഫോമുകളും ഉപകരണങ്ങളും. പ്രതിബദ്ധത കാണിക്കുന്നതിന് മുമ്പ്
+      ഇവയ്ക്ക് ശ്രദ്ധാപൂർവ്വമായ ഘടനാ-തല ശരീഅത്ത് അവലോകനം ആവശ്യമാണ്.
+    </p>
+    <div class="product-grid">
+      <div class="product-card">
+        <span class="product-tag tag-alt">NCD / ഘടനാപരം</span><span class="product-tag tag-income">FD ബദൽ</span>
+        <div class="p-icon">📝</div>
+        <h4>റെഹ്ബാർ</h4>
+        <p>പലിശ (റിബ) ഇല്ലാതെ സ്ഥിരവും ഏകദേശം-നിശ്ചിതവുമായ വരുമാനം ആഗ്രഹിക്കുന്ന നിക്ഷേപകർക്ക് ഫിക്സഡ് ഡിപ്പോസിറ്റുകൾക്ക് ഒരു ഹലാൽ ബദൽ. റെഹ്ബാർ നിങ്ങളുടെ മൂലധനം പരിശോധിച്ച ബിസിനസുകളിലേക്ക് ലാഭ-പങ്കിടൽ അടിസ്ഥാനത്തിൽ എത്തിക്കുകയും പതിവ് വരുമാനം നൽകുകയും ചെയ്യുന്നു — എന്നിരുന്നാലും, ഒരു FD പോലെയല്ല, റിട്ടേണുകൾ ഉറപ്പുനൽകുന്നില്ല, അടിസ്ഥാന ഇടപാടുകളെ ആശ്രയിച്ചിരിക്കുന്നു.</p>
+        <a class="card-site-link" href="https://rehbar.co.in/" target="_blank" rel="noopener">സൈറ്റ് സന്ദർശിക്കുക ↗</a>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-alt">ഡിജിറ്റൽ ലെൻഡിംഗ് / അസറ്റ് ഫിനാൻസ്</span><span class="product-tag tag-income">FD ബദൽ</span>
+        <div class="p-icon">🚗</div>
+        <h4>അസറ്റിഫൈ</h4>
+        <p>ഹലാൽ രീതിയിൽ ചെയ്ത ഒരു വരുമാന-അധിഷ്ഠിത, FD-ശൈലിയിലുള്ള ഓപ്ഷൻ: നിങ്ങളുടെ മൂലധനം ധാർമികവും പലിശരഹിതവുമായ വാഹന, ആസ്തി വായ്പകൾക്ക് ധനസഹായം നൽകുന്നു, താരതമ്യേന സ്ഥിരവും പ്രവചിക്കാവുന്നതുമായ റിട്ടേണുകൾ ഉണ്ടാക്കുന്നു. റിബ ഇല്ലാതെ ഫിക്സഡ്-ഡിപ്പോസിറ്റ് പോലുള്ള വരുമാനം തേടുന്നവർക്ക് അനുയോജ്യം — എന്നാൽ, ഒരു FD പോലെയല്ല, റിട്ടേണുകളും മൂലധനവും ഉറപ്പുനൽകുന്നില്ല.</p>
+        <a class="card-site-link" href="https://assetify.in/" target="_blank" rel="noopener">സൈറ്റ് സന്ദർശിക്കുക ↗</a>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-alt">ബദൽ നിക്ഷേപ പ്ലാറ്റ്ഫോം</span>
+        <div class="p-icon">⛰️</div>
+        <h4>മൗണ്ട് ജൂഡി (MtJudi)</h4>
+        <p>ഇന്ത്യയിലെ ശരീഅത്ത് ബോധമുള്ള ബിസിനസ്, നിക്ഷേപ അവസരങ്ങളെ ചുറ്റിപ്പറ്റിയുള്ള ഒരു ധാർമിക നിക്ഷേപ പ്ലാറ്റ്ഫോം.</p>
+        <a class="card-site-link" href="https://mountjudi.com/" target="_blank" rel="noopener">സൈറ്റ് സന്ദർശിക്കുക ↗</a>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION: GIFT CITY -->
+  <div class="section collapsible" id="gift">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">അന്താരാഷ്ട്ര ആക്സസ്</div>
+    <h2>അന്താരാഷ്ട്ര കവാടം — GIFT സിറ്റി</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      അന്താരാഷ്ട്ര വിപണി ഘടനകളിലൂടെ ആഗോള നിക്ഷേപകർക്ക് ഇന്ത്യയിലേക്ക് എളുപ്പത്തിൽ പ്രവേശനം നൽകാൻ രൂപകൽപ്പന ചെയ്ത
+      ഒരു സാമ്പത്തിക കേന്ദ്രം — USD-അധിഷ്ഠിത ആക്സസ്, നികുതി കാര്യക്ഷമത, കൂടുതൽ അന്താരാഷ്ട്ര ചട്ടക്കൂട് എന്നിവ തേടുന്നവർക്ക് ഉപകാരപ്രദം.
+    </p>
+    <div class="product-grid">
+      <div class="product-card">
+        <span class="product-tag tag-gateway">GIFT City</span>
+        <div class="p-icon">🏙️</div>
+        <h4>GIFT സിറ്റി — IFSC</h4>
+        <p>ലളിതമായ അനുവർത്തനത്തോടെ ഇന്ത്യൻ വിപണികളിലേക്ക് NRI-കൾക്ക് നിയന്ത്രിത, USD-അധിഷ്ഠിത മാർഗ്ഗം നൽകുന്ന ഇന്ത്യയുടെ ഇന്റർനാഷണൽ ഫിനാൻഷ്യൽ സർവീസസ് സെന്റർ.</p>
+      </div>
+      <div class="product-card">
+        <span class="product-tag tag-gateway">നികുതി</span>
+        <div class="p-icon">💰</div>
+        <h4>നികുതി കാര്യക്ഷമത</h4>
+        <p>നേരിട്ടുള്ള ആഭ്യന്തര നിക്ഷേപ മാർഗ്ഗങ്ങളുമായി താരതമ്യപ്പെടുത്തുമ്പോൾ GIFT സിറ്റി ഘടനകൾ അന്താരാഷ്ട്ര നിക്ഷേപകർക്ക് അനുകൂലമായ നികുതി പരിഗണന നൽകിയേക്കാം.</p>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION 3: PLATFORMS -->
+  <div class="section collapsible" id="platforms">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">നിക്ഷേപിക്കാനുള്ള പ്ലാറ്റ്ഫോമുകൾ</div>
+    <h2>ഗൾഫിൽ നിന്ന് ഇന്ത്യൻ വിപണികളിലേക്ക് എങ്ങനെ പ്രവേശിക്കാം</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      അക്കൗണ്ട് തരം, നിയന്ത്രണങ്ങൾ, ഇഷ്ടപ്പെട്ട കറൻസി എന്നിവയെ ആശ്രയിച്ച് വിവിധ ആക്സസ് മാർഗ്ഗങ്ങൾ UAE നിക്ഷേപകരെ
+      ഇന്ത്യയിൽ നിക്ഷേപിക്കാൻ സഹായിക്കുന്നു. നിങ്ങളുടെ സാഹചര്യത്തിന് അനുയോജ്യമായ മാർഗ്ഗം തിരഞ്ഞെടുക്കുക.
+    </p>
+    <div class="platform-grid">
+      <div class="platform-card">
+        <div class="platform-icon">🌐</div>
+        <div class="platform-body">
+          <h3>അന്താരാഷ്ട്ര ബ്രോക്കർമാർ</h3>
+          <p>ഇന്ത്യൻ വിപണികളിലേക്ക് പ്രവേശനം നൽകുന്ന ആഗോള വ്യാപ്തിയുള്ള ബ്രോക്കർമാർ — സാധാരണയായി ഇന്ത്യൻ സബ്സിഡിയറി അക്കൗണ്ടുകൾ വഴിയോ GIFT സിറ്റി ഘടനകൾ വഴിയോ.</p>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">🇮🇳</div>
+        <div class="platform-body">
+          <h3>ഇന്ത്യൻ ബ്രോക്കറേജ് അക്കൗണ്ടുകൾ</h3>
+          <p>NRE/NRO അക്കൗണ്ടുകളുള്ള NRI-കൾക്ക് Groww, Zerodha പോലുള്ള പ്ലാറ്റ്ഫോമുകളിലോ AMC വെബ്സൈറ്റുകൾ വഴി നേരിട്ടോ ഇന്ത്യൻ ബ്രോക്കറേജ് അക്കൗണ്ടുകൾ തുറക്കാം.</p>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">🏙️</div>
+        <div class="platform-body">
+          <h3>GIFT സിറ്റി പ്ലാറ്റ്ഫോമുകൾ</h3>
+          <p>GIFT സിറ്റിയുടെ IFSC-നുള്ളിൽ പ്രവർത്തിക്കുന്ന പ്ലാറ്റ്ഫോമുകൾ കൂടുതൽ അന്താരാഷ്ട്രതലത്തിൽ പരിചിതമായ നിയന്ത്രണ ചട്ടക്കൂടോടെ ഇന്ത്യയിലേക്ക് USD-അധിഷ്ഠിത നിക്ഷേപം അനുവദിക്കുന്നു.</p>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon">📲</div>
+        <div class="platform-body">
+          <h3>നേരിട്ടുള്ള AMC പോർട്ടലുകൾ</h3>
+          <p>tatamutualfund.com അല്ലെങ്കിൽ quantumamc.com പോലുള്ള ഫണ്ട് ഹൗസ് വെബ്സൈറ്റുകളിൽ നേരിട്ട് നിക്ഷേപിക്കുക — ബ്രോക്കർ ആവശ്യമില്ല, NRI KYC പലപ്പോഴും ഓൺലൈനായി ചെയ്യാം.</p>
+        </div>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION 4: SHARIAH COMPLIANCE -->
+  <div class="section collapsible" id="compliance">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">ശരീഅത്ത് അനുവർത്തന ചട്ടക്കൂട്</div>
+    <h2>ശരീഅത്ത് സ്ക്രീനിംഗ് എങ്ങനെ പ്രവർത്തിക്കുന്നു</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      ഒരു സ്ക്രീനിംഗ് ചട്ടക്കൂട് നിക്ഷേപകരെ നിരോധിത മേഖലകൾ ഒഴിവാക്കാനും സാമ്പത്തികമായി അനുവർത്തനമില്ലാത്ത
+      കമ്പനികളെ ഫിൽട്ടർ ചെയ്യാനും സഹായിക്കുന്നു. ഓഹരികളും ഫണ്ടുകളും എങ്ങനെ വിലയിരുത്തുന്നു എന്നതിന്റെ ലളിതമായ അവലോകനം ഇതാ.
+    </p>
+    <div class="shariah-steps">
+      <div class="shariah-step">
+        <div class="shariah-dot">🚫</div>
+        <div>
+          <h3>ബിസിനസ് പ്രവർത്തന ഫിൽട്ടർ</h3>
+          <p>കമ്പനിയുടെ പ്രധാന ബിസിനസ് അവലോകനം ചെയ്ത് നിരോധിത വ്യവസായങ്ങൾ ഒഴിവാക്കുക — മദ്യം, പുകയില, പന്നിയിറച്ചി, ചൂതാട്ടം, പരമ്പരാഗത ബാങ്കിംഗ്, ഇൻഷുറൻസ്, ആയുധങ്ങൾ എന്നിവ ഉൾപ്പെടെ.</p>
+        </div>
+      </div>
+      <div class="shariah-step">
+        <div class="shariah-dot">📉</div>
+        <div>
+          <h3>കട അനുപാത ഫിൽട്ടർ</h3>
+          <p>കടവും പലിശ-ബന്ധിത സാമ്പത്തിക അനുപാതങ്ങളും പരിശോധിക്കുക. മൊത്തം ആസ്തിയുടെ 25–33%-ത്തിൽ കൂടുതൽ പലിശ-അധിഷ്ഠിത കടമുള്ള കമ്പനികളെ സാധാരണയായി ഒഴിവാക്കുന്നു.</p>
+        </div>
+      </div>
+      <div class="shariah-step">
+        <div class="shariah-dot">🔍</div>
+        <div>
+          <h3>സ്ക്രീനിംഗ് ഉപകരണങ്ങൾ ഉപയോഗിക്കുക</h3>
+          <p>വ്യക്തിഗത ഓഹരികളുടെ പ്രാഥമിക സ്ക്രീനിംഗിനായി <strong style="color:var(--text-main)">Islamicly</strong>, <strong style="color:var(--text-main)">Zoya</strong> പോലുള്ള ഉപകരണങ്ങൾ ഉപയോഗിക്കുക. ഈ ആപ്പുകൾ അനുവർത്തന റേറ്റിംഗുകളും വിശദമായ വിശകലനവും നൽകുന്നു.</p>
+        </div>
+      </div>
+      <div class="shariah-step">
+        <div class="shariah-dot">👁️</div>
+        <div>
+          <h3>അതിർത്തി കേസുകൾക്ക് മാനുവൽ അവലോകനം</h3>
+          <p>അതിർത്തിയിലുള്ള പേരുകൾക്കോ മേഖലകൾക്കോ മാനുവൽ അവലോകനം പ്രയോഗിക്കുക. ചില കമ്പനികൾ ഓട്ടോമേറ്റഡ് സ്ക്രീനുകൾ കടന്നേക്കാം, പക്ഷേ അവയുടെ യഥാർത്ഥ പ്രവർത്തനങ്ങളുടെ ആഴത്തിലുള്ള അവലോകനം ആവശ്യമാണ്.</p>
+        </div>
+      </div>
+      <div class="shariah-step">
+        <div class="shariah-dot">♻️</div>
+        <div>
+          <h3>തുടർച്ചയായ നിരീക്ഷണവും ശുദ്ധീകരണവും</h3>
+          <p>അനുവർത്തനം ഒറ്റത്തവണ പരിശോധനയല്ല. കമ്പനികൾ മാറുന്നതിനനുസരിച്ച് കൈവശമുള്ളവ പതിവായി അവലോകനം ചെയ്യുക. ഏതെങ്കിലും ആകസ്മികമായ അശുദ്ധ വരുമാനത്തിന്, തത്തുല്യമായ ഭാഗം ദാനം ചെയ്യുക (ശുദ്ധീകരണം).</p>
+        </div>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION 5: RISKS -->
+  <div class="section collapsible" id="risks">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">റിസ്കുകൾ</div>
+    <h2>പ്രധാന റിസ്കുകൾ മനസ്സിലാക്കൽ</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      എല്ലാ നിക്ഷേപവും റിസ്ക് വഹിക്കുന്നു. ഇവ മുൻകൂട്ടി മനസ്സിലാക്കുന്നത് അച്ചടക്കത്തോടെയും യാഥാർത്ഥ്യബോധമുള്ള
+      റിട്ടേൺ പ്രതീക്ഷകളോടെയും ശരിയായ സമയ പരിധിയോടെയും നിക്ഷേപിക്കാൻ നിങ്ങളെ സഹായിക്കുന്നു.
+    </p>
+    <div class="risks-grid">
+      <div class="risk-card">
+        <h3>📉 വിപണി ചാഞ്ചാട്ടം</h3>
+        <p>ഇക്വിറ്റി വിപണികൾ ചാഞ്ചാടുന്നു — പ്രത്യേകിച്ച് മിഡ്-ക്യാപ്, സ്മോൾ-ക്യാപ് ഓഹരികൾ. 20–30% ഹ്രസ്വകാല ഇടിവുകൾ സാധാരണമാണ്. ഒരു നീണ്ട നിക്ഷേപ കാലയളവ് (5+ വർഷം) അത്യാവശ്യമാണ്.</p>
+      </div>
+      <div class="risk-card">
+        <h3>💱 കറൻസി റിസ്ക്</h3>
+        <p>നിങ്ങളുടെ റിട്ടേണുകൾ INR-ൽ ആണ്, പക്ഷേ നിങ്ങളുടെ ചെലവുകൾ AED അല്ലെങ്കിൽ USD-ൽ ആണ്. തിരികെ മാറ്റുമ്പോൾ രൂപയുടെ മൂല്യത്തകർച്ച ഫലപ്രദമായ റിട്ടേണുകൾ കുറയ്ക്കുന്നു. INR ശക്തിപ്പെട്ടാൽ ഇത് നിങ്ങൾക്ക് അനുകൂലമായി പ്രവർത്തിക്കുന്നു.</p>
+      </div>
+      <div class="risk-card">
+        <h3>⚖️ നിയന്ത്രണ റിസ്ക്</h3>
+        <p>വിദേശ നിക്ഷേപക പ്രവേശനം, നികുതി ഉടമ്പടികൾ, അല്ലെങ്കിൽ റിപാട്രിയേഷൻ നിയമങ്ങൾ എന്നിവയെ ബാധിക്കുന്ന ഇന്ത്യൻ അല്ലെങ്കിൽ UAE നിയന്ത്രണങ്ങളിലെ മാറ്റങ്ങൾ നിങ്ങളുടെ നിക്ഷേപ തന്ത്രത്തെ ബാധിക്കാം.</p>
+      </div>
+      <div class="risk-card">
+        <h3>💧 ലിക്വിഡിറ്റി റിസ്ക്</h3>
+        <p>ചെറുതോ കുറച്ച് വ്യാപാരം ചെയ്യുന്നതോ ആയ സെക്യൂരിറ്റികൾ ന്യായമായ വിലയ്ക്ക് വേഗത്തിൽ ഒഴിവാക്കാൻ ബുദ്ധിമുട്ടായേക്കാം. വിദഗ്ധ മാർഗ്ഗനിർദ്ദേശം ഇല്ലെങ്കിൽ ലിക്വിഡ് ഫണ്ടുകളിലും നന്നായി വ്യാപാരം ചെയ്യുന്ന ഓഹരികളിലും ഉറച്ചുനിൽക്കുക.</p>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION 6: TOUR JOURNEY -->
+  <div class="section collapsible" id="journey">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">നിങ്ങളുടെ യാത്ര</div>
+    <h2>എവിടെ തുടങ്ങണം — നിങ്ങളുടെ പരിചയത്തിന്റെ അടിസ്ഥാനത്തിൽ</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      ശരിയായ ആരംഭ ബിന്ദു നിങ്ങളുടെ പരിചയം, നിരീക്ഷണത്തിന് നൽകാവുന്ന സമയം, റിസ്കുമായുള്ള നിങ്ങളുടെ സൗകര്യം
+      എന്നിവയെ ആശ്രയിച്ചിരിക്കുന്നു. ലളിതമായി തുടങ്ങി ക്രമേണ സങ്കീർണ്ണത കെട്ടിപ്പടുക്കുക.
+    </p>
+    <div class="approach-grid">
+      <div class="approach-card beginner">
+        <div class="approach-level">🌱 തുടക്കക്കാരൻ</div>
+        <h3>എത്തിക്കൽ മ്യൂച്വൽ ഫണ്ടുകളിൽ തുടങ്ങുക</h3>
+        <p>
+          ഒന്നോ രണ്ടോ ശരീഅത്ത് അനുസൃത മ്യൂച്വൽ ഫണ്ടുകളിൽ (ടാറ്റ എത്തിക്കൽ ഫണ്ട് അല്ലെങ്കിൽ UTI Nifty 500 ശരീഅത്ത് ഇൻഡെക്സ് ഫണ്ട് പോലുള്ളവ) തുടങ്ങുക.
+          ഒരു ചെറിയ പ്രതിമാസ SIP ആണെങ്കിലും സജ്ജീകരിക്കുക. നിങ്ങൾ പഠിക്കുന്ന സമയത്ത് ഫണ്ട് മാനേജർ ജോലി ചെയ്യട്ടെ.
+        </p>
+      </div>
+      <div class="approach-card intermediate">
+        <div class="approach-level">📈 ഇടത്തരം</div>
+        <h3>ഫണ്ടുകളും നേരിട്ടുള്ള ഓഹരികളും സംയോജിപ്പിക്കുക</h3>
+        <p>
+          സൗകര്യമായാൽ, സ്ക്രീൻ ചെയ്ത നേരിട്ടുള്ള ഓഹരികളുടെ ഒരു തിരഞ്ഞെടുത്ത ബാസ്കറ്റ് നിങ്ങളുടെ പോർട്ട്ഫോളിയോയിലേക്ക് ചേർക്കുക.
+          സ്ക്രീൻ ചെയ്യാൻ Islamicly അല്ലെങ്കിൽ Zoya ഉപയോഗിക്കുക, ആദ്യം ഗുണനിലവാരമുള്ള ലാർജ്-ക്യാപ് പേരുകളിൽ ശ്രദ്ധ കേന്ദ്രീകരിക്കുക.
+        </p>
+      </div>
+      <div class="approach-card advanced">
+        <div class="approach-level">🚀 വിദഗ്ധൻ</div>
+        <h3>ബദലുകളോടെ ഒരു നേരിട്ടുള്ള പോർട്ട്ഫോളിയോ കെട്ടിപ്പടുക്കുക</h3>
+        <p>
+          നിങ്ങളുടെ സ്വന്തം ഗവേഷണം ഉപയോഗിച്ച് ഒരു സമഗ്ര നേരിട്ടുള്ള ഓഹരി പോർട്ട്ഫോളിയോ കെട്ടിപ്പടുക്കുക. ഉചിതമായിടത്ത്
+          സ്മോൾകേസുകളോ ധാർമിക ബദൽ നിക്ഷേപങ്ങളോ ചേർക്കുക. വിഹിതം പതിവായി പുനർവിലയിരുത്തുക.
+        </p>
+      </div>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- SECTION 7: PORTFOLIO ALLOCATION -->
+  <div class="section collapsible" id="portfolio">
+    <div class="sec-head" tabindex="0" role="button" aria-expanded="false">
+    <div class="section-label">വൈവിധ്യവൽക്കരണം</div>
+    <h2>വൈവിധ്യവൽക്കരണം — ഭാഗങ്ങൾ എങ്ങനെ സംയോജിപ്പിക്കാം</h2>
+      <span class="sec-ind" aria-hidden="true"></span>
+    </div>
+    <div class="sec-body"><div class="sec-body-in">
+    <p>
+      ഇത് ഒരു ചിത്രീകരണ ആരംഭ ബിന്ദുവാണ്, വ്യക്തിഗത ശുപാർശയല്ല. ശരിയായ മിശ്രിതം നിങ്ങളുടെ ലക്ഷ്യങ്ങൾ,
+      റിസ്ക് സഹിഷ്ണുത, സമയ പരിധി എന്നിവയെ ആശ്രയിച്ചിരിക്കുന്നു. ഓരോ 12 മാസത്തിലും വിഹിതം പുനഃപരിശോധിക്കുക.
+    </p>
+
+    <div class="alloc-wrapper">
+      <div class="alloc-bars">
+        <div class="alloc-row">
+          <div class="alloc-label">
+            <span>മ്യൂച്വൽ ഫണ്ടുകൾ</span>
+            <span>40%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:40%;background:var(--gold);"></div>
+          </div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label">
+            <span>നേരിട്ടുള്ള ഓഹരികൾ</span>
+            <span>30%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:30%;background:var(--green-light);"></div>
+          </div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label">
+            <span>ഗോൾഡ് ETF</span>
+            <span>15%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:15%;background:#f59e0b;"></div>
+          </div>
+        </div>
+        <div class="alloc-row">
+          <div class="alloc-label">
+            <span>ബദലുകൾ</span>
+            <span>15%</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:15%;background:#a78bfa;"></div>
+          </div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-top:12px;line-height:1.6;">
+          ⚠️ ചിത്രീകരണം മാത്രം. സാമ്പത്തിക ഉപദേശമല്ല. നിങ്ങളുടെ സ്വന്തം ലക്ഷ്യങ്ങളും റിസ്ക് സഹിഷ്ണുതയും അടിസ്ഥാനമാക്കി ക്രമീകരിക്കുക.
+        </p>
+      </div>
+
+      <!-- DONUT CHART -->
+      <div class="donut-wrap">
+        <svg viewBox="0 0 160 160" width="190" height="190">
+          <!-- Donut segments: total circumference of r=58 circle = 364.4 -->
+          <!-- 40% MF: 145.76 -->
+          <!-- 30% Stocks: 109.32 -->
+          <!-- 15% Gold: 54.66 -->
+          <!-- 15% Alt: 54.66 -->
+          <!-- offset starts at top (rotate -90deg) -->
+          <circle cx="80" cy="80" r="58" fill="none" stroke="#1a2336" stroke-width="22"/>
+          <!-- Mutual Funds 40% -->
+          <circle cx="80" cy="80" r="58" fill="none"
+            stroke="#c9a84c" stroke-width="22"
+            stroke-dasharray="145.76 218.64"
+            stroke-dashoffset="0"
+            transform="rotate(-90 80 80)"/>
+          <!-- Direct Stocks 30% -->
+          <circle cx="80" cy="80" r="58" fill="none"
+            stroke="#22a363" stroke-width="22"
+            stroke-dasharray="109.32 255.08"
+            stroke-dashoffset="-145.76"
+            transform="rotate(-90 80 80)"/>
+          <!-- Gold ETF 15% -->
+          <circle cx="80" cy="80" r="58" fill="none"
+            stroke="#f59e0b" stroke-width="22"
+            stroke-dasharray="54.66 309.74"
+            stroke-dashoffset="-255.08"
+            transform="rotate(-90 80 80)"/>
+          <!-- Alternatives 15% -->
+          <circle cx="80" cy="80" r="58" fill="none"
+            stroke="#a78bfa" stroke-width="22"
+            stroke-dasharray="54.66 309.74"
+            stroke-dashoffset="-309.74"
+            transform="rotate(-90 80 80)"/>
+          <!-- Centre text -->
+          <text x="80" y="75" text-anchor="middle"
+            font-family="Cormorant Garamond, serif"
+            font-size="22" font-weight="600" fill="#eae6da">100%</text>
+          <text x="80" y="93" text-anchor="middle"
+            font-family="Nunito, 'Noto Sans Malayalam', sans-serif"
+            font-size="8" fill="#8a9bb4" letter-spacing="1">വിഹിതം</text>
+        </svg>
+
+        <div class="alloc-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#c9a84c"></div>മ്യൂച്വൽ ഫണ്ടുകൾ 40%</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#22a363"></div>നേരിട്ടുള്ള ഓഹരികൾ 30%</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>ഗോൾഡ് ETF 15%</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>ബദലുകൾ 15%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="life-stages">
+      <div class="ls-title">ജീവിത ഘട്ടം അനുസരിച്ചുള്ള വിഹിതം</div>
+      <p class="ls-note"><strong style="color:var(--text-main)">ഇവ പ്രാതിനിധ്യ വിഹിതങ്ങൾ മാത്രമാണ്</strong> — വിവിധ പ്രായങ്ങളിലും ജീവിത ഘട്ടങ്ങളിലും ഒരു നിക്ഷേപ മിശ്രിതം എങ്ങനെ <em>മാറ്റാം</em> എന്ന് ഇവ കാണിക്കുന്നു, ഏതെങ്കിലും വ്യക്തി വ്യക്തിപരമായി എന്ത് കൈവശം വയ്ക്കണം എന്നല്ല. ഇവ <strong style="color:var(--text-main)">നിക്ഷേപ ശുപാർശകളല്ല</strong>; നിങ്ങളുടെ യഥാർത്ഥ വിഹിതം തീരുമാനിക്കാൻ യോഗ്യതയുള്ള ഒരു ഇൻവെസ്റ്റ്മെന്റ് അഡ്വൈസറെ സമീപിക്കുക. (നിങ്ങൾ ഇതിനകം ഉയർന്ന ചെലവുള്ള കടം തീർത്തിട്ടുണ്ടെന്നും ഒരു എമർജൻസി ഫണ്ട് ഉണ്ടെന്നും കുടുംബ തകാഫുൽ ഉണ്ടെന്നും ഇവ അനുമാനിക്കുന്നു.)</p>
+      <div class="stage-legend">
+        <div class="ls-leg"><i style="background:#c9a84c"></i>മ്യൂച്വൽ ഫണ്ടുകൾ / ഓഹരികൾ</div>
+        <div class="ls-leg"><i style="background:#22a363"></i>FD ബദലുകൾ</div>
+        <div class="ls-leg"><i style="background:#f59e0b"></i>സ്വർണ്ണം</div>
+        <div class="ls-leg"><i style="background:#a78bfa"></i>REIT-കൾ / ബദലുകൾ</div>
+        <div class="ls-leg"><i style="background:#60a5fa"></i>പണം (പലിശരഹിതം)</div>
+      </div>
+      <p class="ls-ccd"><strong>ഇവിടെ “FD ബദലുകൾ” എന്നാൽ എന്ത്:</strong> ശരീഅത്ത് അനുസൃത CCD-കൾ / NCD-കൾ (നിർബന്ധിത-പരിവർത്തന, നോൺ-കൺവേർട്ടിബിൾ ഡിബഞ്ചറുകൾ) — കോർപ്പറേറ്റ് ബോണ്ടുകൾക്ക് സമാനമായ ഉപകരണങ്ങൾ, താരതമ്യേന നിശ്ചിതവും മുൻകൂട്ടി സമ്മതിച്ചതുമായ റിട്ടേണുകൾ നൽകാൻ ലക്ഷ്യമിടുന്നു, മ്യൂച്വൽ ഫണ്ടുകളോ ഓഹരികളോ പോലെയല്ല ഇവ <strong>വിപണിയുമായി ബന്ധിതമല്ല</strong>.</p>
+      <div class="stage-grid">
+
+        <div class="stage-card">
+          <div class="stage-head">
+            <h4>🌱 യുവ പ്രൊഫഷണൽ</h4>
+            <span class="stage-age">30 വയസ്സിന് താഴെ</span>
+          </div>
+          <div class="stage-sub">പുതുതായി വിവാഹിതർ · ഇതുവരെ കുട്ടികളില്ല</div>
+          <div class="stage-bar">
+            <span style="width:80%;background:#c9a84c"></span>
+            <span style="width:5%;background:#22a363"></span>
+            <span style="width:5%;background:#f59e0b"></span>
+            <span style="width:10%;background:#60a5fa"></span>
+          </div>
+          <div class="stage-alloc">
+            <span><i style="background:#c9a84c"></i>മ്യൂച്വൽ ഫണ്ട്/ഓഹരികൾ 80%</span>
+            <span><i style="background:#22a363"></i>FD ബദലുകൾ 5%</span>
+            <span><i style="background:#f59e0b"></i>സ്വർണ്ണം 5%</span>
+            <span><i style="background:#60a5fa"></i>പണം 10%</span>
+          </div>
+          <h5>ശ്രദ്ധ</h5>
+          <p>ശരീഅത്ത് ഇക്വിറ്റി ഫണ്ടുകളിലേക്ക് പ്രതിമാസ SIP-കൾ ഓട്ടോമേറ്റ് ചെയ്യുക, 6 മാസത്തെ എമർജൻസി ഫണ്ട് ഉണ്ടാക്കുക, നേരത്തെ കുടുംബ തകാഫുൽ എടുക്കുക, ജീവിതശൈലി പണപ്പെരുപ്പം ഒഴിവാക്കുക.</p>
+          <h5>എന്തുകൊണ്ട്</h5>
+          <p>കോമ്പൗണ്ട് ചെയ്യാൻ ദശാബ്ദങ്ങളും ആശ്രിതരില്ലാത്തതും ഇക്വിറ്റി ചാഞ്ചാട്ടങ്ങളോട് ഏറ്റവും ഉയർന്ന സഹിഷ്ണുത നൽകുന്നു — സമയം നിർണ്ണയിക്കുന്നതിനേക്കാൾ വിപണിയിലെ സമയമാണ് പ്രധാനം, അതിനാൽ ഇപ്പോഴത്തെ ചാഞ്ചാട്ടം നിങ്ങൾക്ക് അനുകൂലമായി പ്രവർത്തിക്കുന്നു.</p>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-head">
+            <h4>👨‍👩‍👧 യുവ കുടുംബം</h4>
+            <span class="stage-age">30 – 40 വയസ്സ്</span>
+          </div>
+          <div class="stage-sub">ചെറിയ കുട്ടികളുള്ള വിവാഹിതർ</div>
+          <div class="stage-bar">
+            <span style="width:70%;background:#c9a84c"></span>
+            <span style="width:10%;background:#22a363"></span>
+            <span style="width:5%;background:#f59e0b"></span>
+            <span style="width:5%;background:#a78bfa"></span>
+            <span style="width:10%;background:#60a5fa"></span>
+          </div>
+          <div class="stage-alloc">
+            <span><i style="background:#c9a84c"></i>മ്യൂച്വൽ ഫണ്ട്/ഓഹരികൾ 70%</span>
+            <span><i style="background:#22a363"></i>FD ബദലുകൾ 10%</span>
+            <span><i style="background:#f59e0b"></i>സ്വർണ്ണം 5%</span>
+            <span><i style="background:#a78bfa"></i>ബദൽ 5%</span>
+            <span><i style="background:#60a5fa"></i>പണം 10%</span>
+          </div>
+          <h5>ശ്രദ്ധ</h5>
+          <p>വരുമാനം കൂടുന്നതിനനുസരിച്ച് SIP-കൾ വർധിപ്പിക്കുക, കുട്ടികളുടെ വിദ്യാഭ്യാസത്തിനായി ഒരു പ്രത്യേക ലക്ഷ്യം തുറക്കുക, തകാഫുളും എമർജൻസി ഫണ്ടും നിറച്ചു വയ്ക്കുക, പ്രസക്തമെങ്കിൽ ആദ്യ വീട് ആസൂത്രണം ചെയ്യുക.</p>
+          <h5>എന്തുകൊണ്ട്</h5>
+          <p>മിക്ക ലക്ഷ്യങ്ങളും ഇപ്പോഴും 15+ വർഷം അകലെയാണ്, അതിനാൽ ഇക്വിറ്റി പ്രബലമായി തുടരുന്നു — എന്നാൽ പുതിയ ആശ്രിതർ സംരക്ഷണവും വേർതിരിച്ച വിദ്യാഭ്യാസ ഫണ്ടും റിട്ടേണുകൾ പോലെ പ്രധാനമാക്കുന്നു.</p>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-head">
+            <h4>📈 മധ്യ-കരിയർ</h4>
+            <span class="stage-age">40 – 50 വയസ്സ്</span>
+          </div>
+          <div class="stage-sub">കുട്ടികൾ ഹൈസ്കൂളിൽ · റിട്ടയർമെന്റ് ആസൂത്രണം തുടങ്ങുന്നു</div>
+          <div class="stage-bar">
+            <span style="width:55%;background:#c9a84c"></span>
+            <span style="width:20%;background:#22a363"></span>
+            <span style="width:10%;background:#f59e0b"></span>
+            <span style="width:10%;background:#a78bfa"></span>
+            <span style="width:5%;background:#60a5fa"></span>
+          </div>
+          <div class="stage-alloc">
+            <span><i style="background:#c9a84c"></i>മ്യൂച്വൽ ഫണ്ട്/ഓഹരികൾ 55%</span>
+            <span><i style="background:#22a363"></i>FD ബദലുകൾ 20%</span>
+            <span><i style="background:#f59e0b"></i>സ്വർണ്ണം 10%</span>
+            <span><i style="background:#a78bfa"></i>ബദൽ 10%</span>
+            <span><i style="background:#60a5fa"></i>പണം 5%</span>
+          </div>
+          <h5>ശ്രദ്ധ</h5>
+          <p>ഏറ്റവും കൂടുതൽ വരുമാനമുള്ള വർഷങ്ങളിൽ റിട്ടയർമെന്റ് വിഹിതം പരമാവധിയാക്കുക, അടുത്ത കാലത്തെ കോളേജ് പണം FD ബദലുകൾ / പണത്തിലേക്ക് മാറ്റാൻ തുടങ്ങുക, ഒറ്റ-ഓഹരി കേന്ദ്രീകരണം കുറയ്ക്കുക, ചെലവേറിയ കടം തീർക്കുക.</p>
+          <h5>എന്തുകൊണ്ട്</h5>
+          <p>വിദ്യാഭ്യാസ ബില്ലുകൾ അടുത്തിരിക്കുമ്പോൾ റിട്ടയർമെന്റ് 15–20 വർഷം അകലെയാണ് — ഉടൻ ആവശ്യമുള്ള പണം സ്ഥിരതയിലേക്ക് മാറുന്നു, അതേസമയം ഇക്വിറ്റി ഇപ്പോഴും ദീർഘകാല റിട്ടയർമെന്റ് ലക്ഷ്യത്തിന് ശക്തി പകരുന്നു.</p>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-head">
+            <h4>🎓 കോളേജ് വർഷങ്ങൾ</h4>
+            <span class="stage-age">50 – 60 വയസ്സ്</span>
+          </div>
+          <div class="stage-sub">കുട്ടികൾ കോളേജിലേക്ക്</div>
+          <div class="stage-bar">
+            <span style="width:40%;background:#c9a84c"></span>
+            <span style="width:30%;background:#22a363"></span>
+            <span style="width:10%;background:#f59e0b"></span>
+            <span style="width:10%;background:#a78bfa"></span>
+            <span style="width:10%;background:#60a5fa"></span>
+          </div>
+          <div class="stage-alloc">
+            <span><i style="background:#c9a84c"></i>മ്യൂച്വൽ ഫണ്ട്/ഓഹരികൾ 40%</span>
+            <span><i style="background:#22a363"></i>FD ബദലുകൾ 30%</span>
+            <span><i style="background:#f59e0b"></i>സ്വർണ്ണം 10%</span>
+            <span><i style="background:#a78bfa"></i>ബദൽ 10%</span>
+            <span><i style="background:#60a5fa"></i>പണം 10%</span>
+          </div>
+          <h5>ശ്രദ്ധ</h5>
+          <p>കോളേജ് ഫീസ് ഇക്വിറ്റിക്ക് പകരം പണം / FD ബദലുകളിൽ സൂക്ഷിക്കുക, മിശ്രിതം ക്രമേണ ഡീ-റിസ്ക് ചെയ്യുക, റിട്ടയർമെന്റ് കോർപസ് കെട്ടിപ്പടുക്കുന്നത് തുടരുക, കടരഹിതമായി വിരമിക്കാൻ ലക്ഷ്യമിടുക.</p>
+          <h5>എന്തുകൊണ്ട്</h5>
+          <p>വലിയ ഹ്രസ്വകാല ചെലവുകളും കുറഞ്ഞ സമയവും അർത്ഥമാക്കുന്നത് ഒരു വിപണി ഇടിവ് ശരിക്കും ദോഷം ചെയ്യാമെന്നാണ് — ആസന്നമായ ലക്ഷ്യങ്ങൾക്കായി മൂലധനം സംരക്ഷിക്കുന്നതിന് മുൻഗണന, പണപ്പെരുപ്പത്തിനെതിരെ ഒരു വളർച്ചാ ഭാഗവും.</p>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-head">
+            <h4>🌙 വിരമിക്കലിനോട് അടുത്ത്</h4>
+            <span class="stage-age">60+ വയസ്സ്</span>
+          </div>
+          <div class="stage-sub">കുട്ടികളുടെ വിവാഹം · വിരമിക്കൽ അടുത്ത്</div>
+          <div class="stage-bar">
+            <span style="width:25%;background:#c9a84c"></span>
+            <span style="width:45%;background:#22a363"></span>
+            <span style="width:10%;background:#f59e0b"></span>
+            <span style="width:5%;background:#a78bfa"></span>
+            <span style="width:15%;background:#60a5fa"></span>
+          </div>
+          <div class="stage-alloc">
+            <span><i style="background:#c9a84c"></i>മ്യൂച്വൽ ഫണ്ട്/ഓഹരികൾ 25%</span>
+            <span><i style="background:#22a363"></i>FD ബദലുകൾ 45%</span>
+            <span><i style="background:#f59e0b"></i>സ്വർണ്ണം 10%</span>
+            <span><i style="background:#a78bfa"></i>ബദൽ 5%</span>
+            <span><i style="background:#60a5fa"></i>പണം 15%</span>
+          </div>
+          <h5>ശ്രദ്ധ</h5>
+          <p>വരുമാനത്തിനായി FD ബദലുകളിലേക്കും ഡിവിഡന്റ് നൽകുന്ന ശരീഅത്ത് ഫണ്ടുകളിലേക്കും ചായുക, 1–2 വർഷത്തെ ചെലവുകൾ പണമായി സൂക്ഷിക്കുക, നേരത്തെ മാറ്റിവച്ച പണത്തിൽ നിന്ന് വിവാഹങ്ങൾക്ക് ധനസഹായം നൽകുക, എസ്റ്റേറ്റ് ആസൂത്രണവും (വസിയ്യത്ത്) സകാത്ത് അവലോകനവും പൂർത്തിയാക്കുക.</p>
+          <h5>എന്തുകൊണ്ട്</h5>
+          <p>ജോലി സമ്പത്ത് വളർത്തുന്നതിൽ നിന്ന് അത് വിശ്വസനീയമായി ഉപയോഗിക്കുന്നതിലേക്ക് മാറുന്നു — എന്നിട്ടും 20+ വർഷം നീണ്ടുനിൽക്കുന്ന ഒരു റിട്ടയർമെന്റിന് കുറച്ച് ഇക്വിറ്റി ആവശ്യമാണ്, അങ്ങനെ പണപ്പെരുപ്പം വാങ്ങൽ ശേഷിയെ ഇല്ലാതാക്കില്ല.</p>
+        </div>
+
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-muted);margin-top:16px;line-height:1.6;">⚠️ ചിത്രീകരണത്തിനായി മാത്രം കാണിച്ചിരിക്കുന്ന പ്രാതിനിധ്യ വിഹിതങ്ങൾ — <strong style="color:var(--text-main)">നിക്ഷേപ ഉപദേശമോ ശുപാർശയോ അല്ല</strong>. നിങ്ങളുടെ യഥാർത്ഥ മിശ്രിതം നിങ്ങളുടെ ലക്ഷ്യങ്ങൾ, ആശ്രിതർ, വരുമാന സ്ഥിരത, റിസ്ക് സഹിഷ്ണുത എന്നിവയെ ആശ്രയിച്ചിരിക്കുന്നു; തീരുമാനിക്കുന്നതിന് മുമ്പ് SEBI-രജിസ്റ്റർ ചെയ്ത ഒരു ഇൻവെസ്റ്റ്മെന്റ് അഡ്വൈസറെ സമീപിക്കുക.</p>
+    </div>
+    </div></div><!-- /sec-body -->
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="disclaimer-box">
+      <strong>⚠️ നിരാകരണം (Disclaimer)</strong>
+      ഈ വെബ്സൈറ്റ് വിദ്യാഭ്യാസ, വിവര ആവശ്യങ്ങൾക്ക് മാത്രമുള്ളതാണ്. ഇത് സാമ്പത്തിക, നിയമ, അല്ലെങ്കിൽ ശരീഅത്ത്
+      ഉപദേശം അല്ല. മ്യൂച്വൽ ഫണ്ട്, ഇക്വിറ്റി നിക്ഷേപങ്ങൾ വിപണി റിസ്കുകൾക്ക് വിധേയമാണ് — നിക്ഷേപിക്കുന്നതിന്
+      മുമ്പ് സ്കീം സംബന്ധിയായ എല്ലാ രേഖകളും ശ്രദ്ധയോടെ വായിക്കുക. മുൻകാല പ്രകടനം ഭാവി റിട്ടേണുകളുടെ സൂചനയല്ല.
+      NRI നിക്ഷേപകർ യോഗ്യതയുള്ള ഒരു സാമ്പത്തിക ഉപദേഷ്ടാവിനെ സമീപിക്കുകയും അവരുടെ താമസ രാജ്യത്തിന് ബാധകമായ
+      ഏറ്റവും പുതിയ നികുതി, നിയന്ത്രണ ആവശ്യകതകൾ പരിശോധിക്കുകയും വേണം.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>ഇന്ത്യയിലെ ധാർമിക നിക്ഷേപം · ഗൾഫിലെ NRI നിക്ഷേപകർക്കായി</p>
+    <a href="mutual-funds-ml.html">മ്യൂച്വൽ ഫണ്ടുകൾ വിശദമായി →</a>
+  </footer>
+
+  <script>
+    (function () {
+      function setExpanded(sec, val) {
+        sec.classList.toggle('open', val);
+        var head = sec.querySelector(':scope > .sec-head');
+        if (head) head.setAttribute('aria-expanded', val ? 'true' : 'false');
+      }
+      function openTarget(hash) {
+        if (!hash || hash === '#') return;
+        var el;
+        try { el = document.querySelector(hash); } catch (e) { return; }
+        if (!el) return;
+        var sec = el.closest('.collapsible');
+        if (sec) setExpanded(sec, true);
+        setTimeout(function () {
+          try { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+        }, 90);
+      }
+      document.querySelectorAll('.collapsible > .sec-head').forEach(function (head) {
+        var sec = head.parentElement;
+        head.addEventListener('click', function () {
+          setExpanded(sec, !sec.classList.contains('open'));
+        });
+        head.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            setExpanded(sec, !sec.classList.contains('open'));
+          }
+        });
+      });
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function () { openTarget(a.getAttribute('href')); });
+      });
+      window.addEventListener('load', function () { if (location.hash) openTarget(location.hash); });
+    })();
+  </script>
+</body>
+</html>
